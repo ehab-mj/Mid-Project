@@ -1,5 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../layout/Layout';
+import DJProfilePage from '../Pages/DJProfilePage';
+import DJDashboard from '../Components/Main/DJpages/DJDashboard';
+import HomePage from '../Pages/HomePage';
 
 
 export const router = createBrowserRouter([
@@ -13,16 +16,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: "dj/:id",
-                element: <DjProfilePage />
+                element: <DJProfilePage />
             },
             {
                 path: "dj-dashboard",
-                element: <DJDashboardPage />
+                element: <DJDashboard />
             },
-            // {
-            //     path: "*",
-            //     element: NotFound
-            // },
         ],
     },
 ]);
