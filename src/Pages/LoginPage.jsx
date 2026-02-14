@@ -1,9 +1,10 @@
-import React from 'react'
+import LoginModal from "../Forms/LoginModal";
 
 export default function LoginPage() {
+
     return (
         <div>
-            <h1>Login</h1>
+            <LoginModal />
         </div>
     )
 }

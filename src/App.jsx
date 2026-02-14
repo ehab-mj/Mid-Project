@@ -1,13 +1,14 @@
-import { useState } from 'react'
 import './App.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router/Router'
+import { AuthProvider } from './context/Context'
 
 function App() {
-
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   )
 }
