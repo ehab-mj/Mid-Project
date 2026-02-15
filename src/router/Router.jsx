@@ -5,6 +5,7 @@ import DJDashboard from '../Components/Main/DJpages/DJDashboard';
 import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import ServicesPage from '../Pages/ServicesPage';
+import UserProfilePage from '../Pages/UserProfilePage';
 
 
 export const router = createBrowserRouter([
@@ -17,8 +18,13 @@ export const router = createBrowserRouter([
                 element: <HomePage />
             },
             {
-                path: "dj/:id",
+                // path: "dj/:id",
+                path: "/djprofile",
                 element: <DJProfilePage />
+            },
+            {
+                path: "/profile",
+                element: <UserProfilePage />
             },
             {
                 path: "/login",

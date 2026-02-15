@@ -29,14 +29,12 @@
     font-weight: 600;
 }
 
-/* active card like photo */
 .user-type.active {
     border-color: #8b5cf6;
     background: #fbf7ff;
     box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.14);
 }
 
-/* hover */
 .user-type:hover {
     border-color: #cbd5e1;
 }
