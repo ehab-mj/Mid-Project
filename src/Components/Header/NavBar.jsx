@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './css/NavBar.css';
 import Search from './Search';
 import { useContext, useState } from 'react';
@@ -9,9 +9,11 @@ import UserNavProfile from './UserNavProfile';
 export default function NavBar() {
     const { logout, login, AuthUser } = useContext(AuthContext)
     const [open, setOpen] = useState(false);
+    const goHome = useNavigate();
 
     function handleLogout() {
         logout();
+        goHome("/");
     }
 
     function handleLogin(newUser) {
