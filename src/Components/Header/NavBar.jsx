@@ -4,11 +4,20 @@ import Search from './Search';
 import { useContext, useState } from 'react';
 import LoginModal from '../../Forms/LoginModal';
 import { AuthContext } from '../../context/Context';
+import UserNavProfile from './UserNavProfile';
 
 export default function NavBar() {
-    const { user, logout } = useContext(AuthContext)
+    const { logout, login, AuthUser } = useContext(AuthContext)
     const [open, setOpen] = useState(false);
 
+    function handleLogout() {
+        logout();
+    }
+
+    function handleLogin(newUser) {
+        login(newUser)
+        setOpen(false);
+    }
     return (
         <>
             <nav className="nav-bar">
@@ -19,20 +28,31 @@ export default function NavBar() {
                     <Link className="services" to="/services">All Services</Link>
                 </div>
 
-                <Search />
+                {/* <Search /> */}
 
-                <button
-                    className='login'
-                    onClick={() => setOpen(true)}
-                >
-                    Login
-                </button>
+                <div>
+                    {AuthUser ? (
+                        <UserNavProfile
+                            user={AuthUser}
+                            logout={handleLogout}
+                        />
+                    ) : (
+                        <button
+                            className='login'
+                            onClick={() =>
+                                setOpen(true)}
+                        >
+                            Login
+                        </button>
+                    )}
+                </div >
             </nav>
 
 
             {open && (
                 <LoginModal
                     onClose={() => setOpen(false)}
+                    onLogin={handleLogin}
                 />
             )}
         </>

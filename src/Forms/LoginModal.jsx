@@ -4,17 +4,24 @@ import './css/LoginModal.css';
 import Modal from './Modal';
 import './css/UserType.css'
 
-export default function LoginModal({ onClose, onSubmit }) {
+export default function LoginModal({ onClose, onLogin }) {
     const { login } = useContext(AuthContext);
     const [mode, setMode] = useState("login");
-    const [type, setType] = useState("user");
+    const [role, setRole] = useState("user");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSubmit({ name, email, password, mode, type });
+        const user = {
+            id: `user ${Date.now()}`,
+            name: name || (role === "dj" ? "DJ" : "User"),
+            email: email || `${role}@gmail.com`,
+            role,
+        }
+        console.log(user);
+        onLogin(user)
         onClose();
     }
 
@@ -42,9 +49,9 @@ export default function LoginModal({ onClose, onSubmit }) {
                     <div className='type-container'>
                         <button
                             type='button'
-                            className={`user-type ${type === "user" ? "active" : ""}`}
+                            className={`user-type ${role === "user" ? "active" : ""}`}
                             onClick={() =>
-                                setType("user")
+                                setRole("user")
                             }
                         >
                             <h4>Regular User</h4>
@@ -53,9 +60,9 @@ export default function LoginModal({ onClose, onSubmit }) {
 
                         <button
                             type='button'
-                            className={`user-type ${type === "dj" ? "active" : ""}`}
+                            className={`user-type ${role === "dj" ? "active" : ""}`}
                             onClick={() =>
-                                setType("dj")
+                                setRole("dj")
                             }
                         >
                             <h4>DJ/Business</h4>
@@ -70,7 +77,7 @@ export default function LoginModal({ onClose, onSubmit }) {
                         onClick={() =>
                             setMode(mode === "login" ? "register" : "login")
                         }>
-                        {mode === "login" ? "register" : "login"}
+                        {mode === "login" ? "Register" : "Login"}
                     </button>
 
                     <h3 className='log-reg-title'>
@@ -124,7 +131,8 @@ export default function LoginModal({ onClose, onSubmit }) {
                             type='submit'
                             id='submit'
                         >
-                            {type === "user" ? "Continue as Regular User" : "Continue as DJ/Business"}
+                            Continue as {role ===
+                                "user" ? "Regular User" : " DJ/Business"}
                         </button>
                     </form>
 
