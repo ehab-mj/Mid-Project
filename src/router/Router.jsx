@@ -6,6 +6,7 @@ import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import ServicesPage from '../Pages/ServicesPage';
 import UserProfilePage from '../Pages/UserProfilePage';
+import { SafeRoute } from '../auth/Role';
 
 
 export const router = createBrowserRouter([
@@ -20,11 +21,17 @@ export const router = createBrowserRouter([
             {
                 // path: "dj/:id",
                 path: "/djprofile",
-                element: <DJProfilePage />
+                element:
+                    <SafeRoute allow="dj">
+                        <DJProfilePage />
+                    </SafeRoute>
             },
             {
                 path: "/profile",
-                element: <UserProfilePage />
+                element:
+                    <SafeRoute allow="user">
+                        <UserProfilePage />
+                    </SafeRoute>
             },
             {
                 path: "/login",
@@ -36,7 +43,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: "dj-dashboard",
-                element: <DJDashboard />
+                element:
+                    <SafeRoute allow="dj">
+                        <DJDashboard />
+                    </SafeRoute>
             },
         ],
     },
