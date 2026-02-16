@@ -4,6 +4,7 @@ import { setCurrentUser } from "../auth/Role";
 import { Logout } from "../auth/Logout";
 
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
