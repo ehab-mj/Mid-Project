@@ -28,6 +28,7 @@ export default function LoginModal({ onClose, onLogin }) {
     const [mode, setMode] = useState("login");
     const [role, setRole] = useState("user");
     const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("");
@@ -88,7 +89,7 @@ export default function LoginModal({ onClose, onLogin }) {
                 firestoreData = {
                     name: name || (role === "dj" ? "DJ" : "User"),
                     email: freshUser.email,
-                    phone: "",
+                    phone: phone,
                     profileImage: "",
                     role: role,
                     createdAt: new Date().toISOString()
@@ -98,14 +99,14 @@ export default function LoginModal({ onClose, onLogin }) {
                 await addDoc(collection(db, "Users"), firestoreData);
             }
 
-            // Create user object with combined Firebase Auth + Firestore data
-            // Put ...firestoreData first so specific properties can override it
+            // Create user object - using Firestore data only (Name, Email, Phone, Role)
+            // During login: get data from Firestore
+            // During registration: use the data we just saved to Firestore
             const user = {
-                ...firestoreData,
                 id: freshUser.uid,
-                // استخدام بيانات Firestore إذا وجدت، وإلا استخدام بيانات Auth
-                name: firestoreData?.name || freshUser.displayName || name || (role === "dj" ? "DJ" : "User"),
-                email: freshUser.email,
+                // Get all user data from Firestore
+                name: firestoreData?.name || (role === "dj" ? "DJ" : "User"),
+                email: firestoreData?.email || freshUser.email,
                 phone: firestoreData?.phone || "",
                 profileImage: firestoreData?.profileImage || "",
                 role: firestoreData?.role || role,
@@ -181,9 +182,10 @@ export default function LoginModal({ onClose, onLogin }) {
                         {mode === "login" ? "Welcome Back" : "Create an account"}
                     </h3>
 
-                    {/* Inputs */}
-                    <form onSubmit={handleSubmit}>
+                        {/* Inputs */}
+                        <form onSubmit={handleSubmit}>
                         {mode === "register" && (
+                            <>
                             <label className='label'>
                                 Name
                                 <input
@@ -194,6 +196,18 @@ export default function LoginModal({ onClose, onLogin }) {
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </label>
+
+                            <label className='label'>
+                                Phone
+                                <input
+                                    id='phone-input'
+                                    type="tel"
+                                    placeholder='Enter your phone number'
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                />
+                            </label>
+                            </>
                         )}
 
                         <label className='label'>
