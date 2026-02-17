@@ -6,8 +6,6 @@ export default function UserProfilePage() {
     return (
         <div>
             <h1>My Event Bookings</h1>
-           
-        
         </div>
     )
 }
