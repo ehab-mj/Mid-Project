@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
+import CardsList from "../Cards/CardsList";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -34,6 +35,7 @@ export default function UsersList() {
           <hr />
         </div>
       ))}
+      <CardsList />
     </div>
   );
 }

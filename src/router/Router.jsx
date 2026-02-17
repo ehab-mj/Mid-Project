@@ -7,6 +7,7 @@ import LoginPage from '../Pages/LoginPage';
 import ServicesPage from '../Pages/ServicesPage';
 import UserProfilePage from '../Pages/UserProfilePage';
 import { SafeRoute } from '../auth/Role';
+import CardPage from '../Pages/CardPage';
 
 
 export const router = createBrowserRouter([
@@ -47,6 +48,11 @@ export const router = createBrowserRouter([
                     <SafeRoute allow="dj">
                         <DJDashboard />
                     </SafeRoute>
+            },
+            {
+                path: "/cards",
+                element:
+                    <CardPage />
             },
         ],
     },
