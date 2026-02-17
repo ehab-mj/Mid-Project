@@ -4,25 +4,122 @@ import './css/LoginModal.css';
 import Modal from './Modal';
 import './css/UserType.css'
 
+// Import Firebase auth functions
+import { 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    updateProfile,
+    reload 
+} from "firebase/auth";
+import { auth, db } from "../firebase/config";
+
+// Import Firestore functions
+import { 
+    collection, 
+    query, 
+    where, 
+    getDocs,
+    addDoc 
+} from "firebase/firestore";
+
 export default function LoginModal({ onClose, onLogin }) {
-    const { login } = useContext(AuthContext);
+    // Using AuthContext - login is passed via onLogin prop
+    useContext(AuthContext);
     const [mode, setMode] = useState("login");
     const [role, setRole] = useState("user");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState("");
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        const user = {
-            id: `user ${Date.now()}`,
-            name: name || (role === "dj" ? "DJ" : "User"),
-            email: email || `${role}@gmail.com`,
-            role,
+    // دالة لجلب بيانات المستخدم من Firestore
+    const getFirestoreUserData = async (userEmail) => {
+        try {
+            const usersRef = collection(db, "Users");
+            const q = query(usersRef, where("email", "==", userEmail));
+            const querySnapshot = await getDocs(q);
+            
+            if (!querySnapshot.empty) {
+                const docSnap = querySnapshot.docs[0];
+                return { id: docSnap.id, ...docSnap.data() };
+            }
+            return null;
+        } catch (error) {
+            console.error("خطأ في جلب بيانات Firestore:", error);
+            return null;
         }
-        console.log(user);
-        onLogin(user)
-        onClose();
+    };
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setError("");
+
+        try {
+            let firebaseUser;
+            
+            if (mode === "login") {
+                // Login with Firebase
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                firebaseUser = userCredential.user;
+            } else {
+                // Register with Firebase
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                firebaseUser = userCredential.user;
+                
+                // Update the user's display name
+                await updateProfile(firebaseUser, {
+                    displayName: name || (role === "dj" ? "DJ" : "User")
+                });
+                
+                // Reload user to get updated displayName
+                await reload(firebaseUser);
+            }
+
+            // Get fresh user from auth to ensure we have the latest data
+            const freshUser = auth.currentUser;
+
+            // جلب بيانات المستخدم من Firestore
+            let firestoreData = null;
+            if (mode === "login") {
+                // في حالة الدخول، نبحث بالميل
+                firestoreData = await getFirestoreUserData(freshUser.email);
+            } else {
+            // في حالة التسجيل، ننشئ مستند جديد في Firestore
+                firestoreData = {
+                    name: name || (role === "dj" ? "DJ" : "User"),
+                    email: freshUser.email,
+                    phone: "",
+                    profileImage: "",
+                    role: role,
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Save user to Firestore
+                await addDoc(collection(db, "Users"), firestoreData);
+            }
+
+            // Create user object with combined Firebase Auth + Firestore data
+            // Put ...firestoreData first so specific properties can override it
+            const user = {
+                ...firestoreData,
+                id: freshUser.uid,
+                // استخدام بيانات Firestore إذا وجدت، وإلا استخدام بيانات Auth
+                name: firestoreData?.name || freshUser.displayName || name || (role === "dj" ? "DJ" : "User"),
+                email: freshUser.email,
+                phone: firestoreData?.phone || "",
+                profileImage: firestoreData?.profileImage || "",
+                role: firestoreData?.role || role,
+            }
+            
+            console.log("Firebase User:", user);
+            console.log("Firestore Data:", firestoreData);
+            onLogin(user)
+            onClose();
+            
+        } catch (err) {
+            console.error("Firebase Auth Error:", err.message);
+            setError(err.message);
+        }
     }
 
     return (
@@ -125,6 +222,12 @@ export default function LoginModal({ onClose, onLogin }) {
                             />
                         </label>
 
+                        {/* Error Message Display */}
+                        {error && (
+                            <p style={{ color: 'red', textAlign: 'center', margin: '10px 0' }}>
+                                {error}
+                            </p>
+                        )}
 
                         {/* Submit */}
                         <button
