@@ -5,7 +5,9 @@ export default function UserProfilePage() {
     const { AuthUser } = useContext(AuthContext)
     return (
         <div>
-            <h1>{`${AuthUser.name} Profile`}</h1>
+            <h1>My Event Bookings</h1>
+           
+        
         </div>
     )
 }

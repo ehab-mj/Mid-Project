@@ -14,12 +14,11 @@ export default function UserNavProfile({ user, logout }) {
                     👤
                 </Link>
 
-                <span id="nav-user-name">
-                    {user.name || user.email}
-                    <span id="nav-user-role">
-                        ({user.role})
+                <div className="nav-user-info">
+                    <span id="nav-user-name">
+                        <strong></strong> {user.name}
                     </span>
-                </span>
+                </div>
             </div>
 
             <button

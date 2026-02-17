@@ -9,6 +9,7 @@ export default function DJProfilePage() {
             <h1>DJ Profile</h1>
             <p>{`${AuthUser.role} Profile`}</p>
             <Link to="/dj-dashboard">Go to Dashboard</Link>
+            
         </div>
     )
 }
