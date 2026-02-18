@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { addDoc, collection, getDocs, query, Timestamp, where } from "firebase/firestore";
 import { db } from "../../../../firebase/config";
 import { AuthContext } from "../../../../context/Context";
@@ -8,6 +8,7 @@ import '../css/CreateBooking.css'
 import DjSelectStep from "../../../../Forms/DjSelectStep";
 import DecorationStep from "../../../../Forms/DecorationStep";
 import VenueStep from "../../../../Forms/VenueStep";
+import PackageCard from "../../../../Cards/PackageCard";
 
 export default function CreateBooking() {
     const { AuthUser } = useContext(AuthContext);
@@ -60,6 +61,12 @@ export default function CreateBooking() {
         if (AuthUser && isRegular) fetchDJs();
     }, [AuthUser, isRegular]);
 
+    const computedTotal = useMemo(() => {
+        const venueCost = Number(form.venuePricePerHour || 0) * Number(form.durationHours || 0);
+        const decorCost = Number(form.decorationPrice || 0);
+        return venueCost + decorCost; // you can add DJ price later if you want
+    }, [form.venuePricePerHour, form.durationHours, form.decorationPrice]);
+
     function nextFromStep1() {
         setError("");
         setSuccess("");
@@ -80,13 +87,36 @@ export default function CreateBooking() {
         if (step === 4) {
             if (!form.venueId) return setError("Choose a venue.");
         }
-        setStep((s) => Math.min(s + 1, 4));
+        setStep((s) => Math.min(s + 1, 5));
+    }
+
+
+
+    function editServices() {
+        // go back to DJ step (like screenshot “Edit Services”)
+        setStep(2);
     }
 
     function goBack() {
         setError("");
         setSuccess("");
         setStep((s) => Math.max(s - 1, 1));
+    }
+
+    function removeService(type) {
+        setError("");
+        setSuccess("");
+
+        if (type === "dj") setDjEmail("");
+        if (type === "decor") update({ decorationId: "", decorationName: "", decorationPrice: 0 });
+        if (type === "venue") update({
+            venueId: "",
+            venueName: "",
+            venueLocation: "",
+            venueCapacity: 0,
+            venueAmenities: [],
+            venuePricePerHour: 0,
+        });
     }
 
     const submitBooking = async () => {
@@ -105,10 +135,6 @@ export default function CreateBooking() {
             if (Number.isNaN(dateObj.getTime())) {
                 return setError("Invalid date/time.");
             }
-
-            const totalPrice =
-                Number(form.decorationPrice || 0) +
-                Number(form.venuePricePerHour || 0) * Number(form.durationHours || 0);
 
             const bookingData = {
                 eventType: form.eventType,
@@ -135,7 +161,7 @@ export default function CreateBooking() {
                     pricePerHour: Number(form.venuePricePerHour || 0),
                 },
 
-                totalPrice,
+                totalPrice: computedTotal,
                 status: "pending",
 
                 userId: AuthUser.email,
@@ -224,24 +250,57 @@ export default function CreateBooking() {
                         }
                     />
                 )}
+
+                {step === 5 && (
+                    <PackageCard
+                        form={form}
+                        djEmail={djEmail}
+                        total={computedTotal}
+                        onRemove={removeService}
+                        onNotesChange={(notes) => update({ notes })}
+                    />
+                )}
             </div>
 
             {error && <p className="cb-error">{error}</p>}
             {success && <p className="cb-success">{success}</p>}
 
             <div className="cb-actions">
-                <button className="cb-back" onClick={goBack} type="button" disabled={step === 1}>
+                <button
+                    className="cb-back"
+                    onClick={goBack}
+                    type="button"
+                    disabled={step === 1}
+                >
                     Back
                 </button>
 
-                {step < 4 ? (
-                    <button className="cb-continue" onClick={nextFromStep1} type="button">
-                        Next →
+                {step < 5 ? (
+                    <button
+                        className="cb-continue"
+                        onClick={nextFromStep1}
+                        type="button"
+                    >
+                        {step === 4 ? "Review Package →" : "Next →"}
                     </button>
                 ) : (
-                    <button className="cb-continue" onClick={submitBooking} type="button">
-                        Send Booking →
-                    </button>
+                    <>
+                        <button
+                            className="cb-edit"
+                            onClick={editServices}
+                            type="button"
+                        >
+                            Edit Services
+                        </button>
+
+                        <button
+                            className="cb-continue"
+                            onClick={submitBooking}
+                            type="button"
+                        >
+                            Send Booking →
+                        </button>
+                    </>
                 )}
             </div>
         </div>

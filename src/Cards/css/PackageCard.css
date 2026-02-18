@@ -1,0 +1,156 @@
+.rp {
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.rp-header {
+    background: linear-gradient(90deg, #7c3aed, #5b21b6);
+    color: #fff;
+    padding: 18px 18px;
+}
+
+.rp-header-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.rp-header-sub {
+    opacity: .9;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.rp-body {
+    padding: 16px;
+    background: #fff;
+}
+
+.rp-box {
+    background: #f7f7fb;
+    border: 1px solid #edf0f5;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.rp-box-title {
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.rp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.rp-grid span {
+    color: #6b7280;
+    margin-right: 6px;
+}
+
+.rp-section-title {
+    font-weight: 900;
+    margin: 14px 0 10px;
+}
+
+.rp-service {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.rp-service.venue {
+    background: #ecfdf5;
+}
+
+.rp-service.dj {
+    background: #f5f3ff;
+}
+
+.rp-service.decor {
+    background: #fdf2f8;
+}
+
+.rp-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.rp-service-body {
+    flex: 1;
+}
+
+.rp-service-title {
+    font-weight: 900;
+}
+
+.rp-service-sub {
+    margin-top: 4px;
+    color: #6b7280;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.rp-trash {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.rp-notes {
+    width: 100%;
+    min-height: 90px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    outline: none;
+    resize: vertical;
+}
+
+.rp-total {
+    margin-top: 14px;
+    background: #eef2ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.rp-total-title {
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.rp-total-sub {
+    color: #6b7280;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.rp-total-price {
+    font-weight: 900;
+    color: #7c3aed;
+    font-size: 22px;
+}
+
+@media (max-width: 750px) {
+    .rp-grid {
+        grid-template-columns: 1fr;
+    }
+}

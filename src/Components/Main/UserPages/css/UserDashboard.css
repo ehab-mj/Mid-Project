@@ -13,18 +13,21 @@
     font-size: 30px;
     margin: 0 0 6px;
     font-weight: 900;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .ud-sub {
     margin: 0;
     color: #6b7280;
     font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .ud-error {
     color: #dc2626;
     font-weight: 700;
     margin: 12px 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* Stats */
@@ -33,6 +36,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
     margin-top: 16px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-stat {
@@ -45,6 +49,7 @@
     justify-content: space-between;
     align-items: center;
     min-height: 78px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-stat-label {
@@ -57,6 +62,7 @@
     font-size: 22px;
     font-weight: 900;
     margin-top: 6px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-stat-icon {
@@ -85,7 +91,6 @@
     color: #7c3aed;
 }
 
-/* Banner */
 .ud-banner {
     margin-top: 18px;
     background: linear-gradient(90deg, #7c3aed, #5b21b6);
@@ -101,12 +106,14 @@
 .ud-banner h3 {
     margin: 0 0 6px;
     font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-banner p {
     margin: 0;
     opacity: 0.9;
     font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-banner-btn {
@@ -117,9 +124,9 @@
     border-radius: 10px;
     text-decoration: none;
     white-space: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Tabs */
 .ud-tabs {
     margin-top: 18px;
     background: #fff;
@@ -138,6 +145,7 @@
     cursor: pointer;
     font-weight: 800;
     color: #374151;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-tab.active {
@@ -146,7 +154,6 @@
     border-bottom: 2px solid #7c3aed;
 }
 
-/* List */
 .ud-list {
     margin-top: 14px;
     background: #fff;
@@ -155,6 +162,7 @@
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
     padding: 14px;
     min-height: 260px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-empty {
@@ -197,7 +205,6 @@
     border-radius: 10px;
 }
 
-/* Booking cards */
 .ud-card {
     border: 1px solid #edf0f5;
     border-radius: 12px;

@@ -47,7 +47,7 @@ export default function UserDashboard() {
         const pending = bookings.filter((b) => (b.status || "pending") === "pending").length;
         const confirmed = bookings.filter((b) => (b.status || "") === "accepted").length;
         const totalSpent = bookings
-            .filter((b) => (b.status || "") === "accepted")
+            .filter((b) => b.status === "accepted")
             .reduce((sum, b) => sum + Number(b.totalPrice || 0), 0);
 
         return { total, pending, confirmed, totalSpent };

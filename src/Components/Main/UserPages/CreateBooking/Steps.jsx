@@ -5,8 +5,8 @@ export default function Steps({ current = 1 }) {
     const steps = [
         { n: 1, label: "Event Info" },
         { n: 2, label: "Music & DJ" },
-        { n: 3, label: "Additional Services" },
-        { n: 4, label: "Review & Submit" },
+        { n: 3, label: "Decoration & Theme" },
+        { n: 4, label: "Venue" },
     ];
 
     return (
@@ -17,10 +17,16 @@ export default function Steps({ current = 1 }) {
 
                 return (
                     <div className="stepper-item" key={s.n}>
-                        <div className={`stepper-dot ${active ? "active" : ""} ${done ? "done" : ""}`}>
+
+                        <div
+                            className={`stepper-dot ${active ? "active" : ""} ${done ? "done" : ""}`}>
                             {s.n}
                         </div>
-                        <div className={`stepper-label ${active ? "active" : ""}`}>{s.label}</div>
+
+                        <div
+                            className={`stepper-label ${active ? "active" : ""}`}>{s.label}
+                        </div>
+
                         {idx !== steps.length - 1 && <div className="stepper-line" />}
                     </div>
                 );
