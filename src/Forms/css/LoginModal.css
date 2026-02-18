@@ -158,6 +158,27 @@
     box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.18);
 }
 
+#phone-input {
+    width: 90%;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding: 0 16px;
+    margin-top: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#phone-input::placeholder {
+    color: #94a3b8;
+}
+
+#phone-input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.18);
+}
+
 .demo-note {
     text-align: center;
     margin: 14px 0 0;
