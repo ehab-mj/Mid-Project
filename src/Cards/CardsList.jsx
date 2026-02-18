@@ -1,42 +1,72 @@
-import { collection, getDoc } from '@firebase/firestore';
-import React, { useEffect, useState } from 'react'
-import { db } from '../firebase/config';
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 export default function CardsList() {
     const [cards, setCards] = useState([]);
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        const fetchCards = async () => {
-            const cardsCollection = collection(db, "BOOKINGS");
-            const snapshot = await getDoc(cardsCollection);
+        setError("");
 
-            const cardsData = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
+        const fetchBookings = async () => {
+            try {
+                setError("");
 
-            setCards(cardsData);
-            console.log("Fetched Cards:", cardsData);
+                console.log("Fetching from collection:", "BOOKINGS");
+
+                const colRef = collection(db, "BOOKINGS");
+                console.log("Before getDocs...");
+
+                const snapshot = await getDocs(colRef);
+                console.log("Snapshot size:", snapshot.size);
+
+                const data = snapshot.docs.map((d) => ({
+                    id: d.id,
+                    ...d.data(),
+                }));
+
+                console.log("Fetched docs:", data);
+                setCards(data);
+            } catch (err) {
+                console.error("Firestore error:", err);
+                setError(err.message || "Failed to load bookings");
+            }
         };
 
-        fetchCards();
+        fetchBookings();
     }, []);
 
     return (
-        <div>
-            <h2>Cards</h2>
-            {cards.map(card => (
-                <div key={card.id}>
-                    <p><strong>Event date:</strong> {card.eventDate}</p>
-                    <p><strong>Event Type:</strong> {card.eventType}</p>
-                    <p><strong>Location:</strong> {card.location}</p>
-                    <p><strong>Number of people:</strong> {card.numberOfPeople}</p>
-                    <p><strong>status:</strong> {card.status}</p>
-                    <p><strong>Total Price:</strong> {card.totalPrice}</p>
-                    <p><strong>Customer:</strong> {card.userId}</p>
-                    <hr />
-                </div>
-            ))}
+        <div style={{ padding: 16 }}>
+            <h2>Bookings Cards</h2>
+
+            {error && (
+                <p style={{ color: "red" }}>
+                    {error}
+                </p>
+            )}
+
+            <p>Total: {cards.length}</p>
+
+            {cards.map((booking) => {
+                const eventDateText =
+                    booking.eventDate?.toDate
+                        ? booking.eventDate.toDate().toLocaleString()
+                        : String(booking.eventDate || "-");
+
+                return (
+                    <div key={booking.id} style={{ border: "1px solid #444", padding: 12, marginBottom: 12 }}>
+                        <h3>{booking.eventType}</h3>
+                        <p><strong>Event Date:</strong> {eventDateText}</p>
+                        <p><strong>Location:</strong> {booking.location}</p>
+                        <p><strong>People:</strong> {booking.numberOfPeople}</p>
+                        <p><strong>Status:</strong> {booking.status}</p>
+                        <p><strong>Total Price:</strong> {booking.totalPrice}</p>
+                        <p><strong>UserId:</strong> {booking.userId}</p>
+                    </div>
+                );
+            })}
         </div>
-    )
+    );
 }

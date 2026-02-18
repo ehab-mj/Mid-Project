@@ -11,6 +11,9 @@ export default function NavBar() {
     const [open, setOpen] = useState(false);
     const goHome = useNavigate();
 
+    const role = String(AuthUser?.role || "").toLowerCase();
+    const isRegular = role === "regular" || role === "user";
+
     function handleLogout() {
         logout();
         goHome("/");
@@ -28,7 +31,17 @@ export default function NavBar() {
                 <div>
                     <Link className="home" to="/">Home</Link>
                     <Link className="services" to="/services">All Services</Link>
+
                 </div>
+
+                {isRegular && (
+                    <Link
+                        className="nav-new-booking"
+                        to="/new-booking">
+                        <span className="nav-new-booking-icon"></span>
+                        New Booking
+                    </Link>
+                )}
 
                 {/* <Search /> */}
 

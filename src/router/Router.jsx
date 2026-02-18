@@ -8,6 +8,7 @@ import ServicesPage from '../Pages/ServicesPage';
 import UserProfilePage from '../Pages/UserProfilePage';
 import { SafeRoute } from '../auth/Role';
 import CardPage from '../Pages/CardPage';
+import BookingPage from '../Pages/BookingPage';
 
 
 export const router = createBrowserRouter([
@@ -51,8 +52,14 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/cards",
+                element: <CardPage />
+            },
+            {
+                path: "/new-booking",
                 element:
-                    <CardPage />
+                    <SafeRoute allow="user">
+                        <BookingPage />
+                    </SafeRoute>
             },
         ],
     },

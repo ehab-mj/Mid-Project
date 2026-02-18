@@ -1,0 +1,249 @@
+import React, { useContext, useEffect, useState } from "react";
+import { addDoc, collection, getDocs, query, Timestamp, where } from "firebase/firestore";
+import { db } from "../../../../firebase/config";
+import { AuthContext } from "../../../../context/Context";
+import Steps from "./Steps";
+import EventInfoStep from "./EventInfoStep";
+import '../css/CreateBooking.css'
+import DjSelectStep from "../../../../Forms/DjSelectStep";
+import DecorationStep from "../../../../Forms/DecorationStep";
+import VenueStep from "../../../../Forms/VenueStep";
+
+export default function CreateBooking() {
+    const { AuthUser } = useContext(AuthContext);
+
+    const role = String(AuthUser?.role || "").toLowerCase();
+    const isRegular = role === "regular" || role === "user";
+
+    const [djs, setDjs] = useState([]);
+    const [djEmail, setDjEmail] = useState("");
+    const [step, setStep] = useState(1);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
+    const [form, setForm] = useState({
+        eventType: "",
+        eventDate: "",     // yyyy-mm-dd
+        startTime: "",     // hh:mm
+        durationHours: 4,
+        numberOfGuests: 50,
+        notes: "",
+
+        decorationId: "",   // step 3
+        decorationName: "",
+        decorationPrice: 0,
+
+        venueId: "",        // step 4
+        venueName: "",
+        venueLocation: "",
+        venueCapacity: 0,
+        venueAmenities: [],
+        venuePricePerHour: 0,
+    });
+    const update = (patch) => setForm((prev) => ({ ...prev, ...patch }));
+
+    useEffect(() => {
+        async function fetchDJs() {
+            try {
+                const q = query(collection(db, "Users"),
+                    where("role", "==", "dj"));
+                const snap = await getDocs(q);
+                const list = snap.docs.map((d) =>
+                    ({ id: d.id, ...d.data() }));
+                setDjs(list);
+                if (!djEmail && list[0]?.email)
+                    setDjEmail(list[0].email);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        if (AuthUser && isRegular) fetchDJs();
+    }, [AuthUser, isRegular]);
+
+    function nextFromStep1() {
+        setError("");
+        setSuccess("");
+
+        if (step === 1) {
+            if (!form.eventType) return setError("Choose event type.");
+            if (!form.eventDate) return setError("Choose event date.");
+            if (!form.startTime) return setError("Choose start time.");
+        }
+        if (step === 2) {
+            if (!djEmail) return setError("Choose a DJ.");
+        }
+
+        if (step === 3) {
+            if (!form.decorationId) return setError("Choose a decoration package.");
+        }
+
+        if (step === 4) {
+            if (!form.venueId) return setError("Choose a venue.");
+        }
+        setStep((s) => Math.min(s + 1, 4));
+    }
+
+    function goBack() {
+        setError("");
+        setSuccess("");
+        setStep((s) => Math.max(s - 1, 1));
+    }
+
+    const submitBooking = async () => {
+        try {
+            setError("");
+            setSuccess("");
+
+            if (!djEmail) return setError("Choose a DJ.");
+            if (!form.venueId) return setError("Choose a venue.");
+            if (!form.decorationId) return setError("Choose a decoration package.");
+
+            // combine date + time -> JS Date -> Firestore Timestamp
+            const dateTimeISO = `${form.eventDate}T${form.startTime}`;
+            const dateObj = new Date(dateTimeISO);
+
+            if (Number.isNaN(dateObj.getTime())) {
+                return setError("Invalid date/time.");
+            }
+
+            const totalPrice =
+                Number(form.decorationPrice || 0) +
+                Number(form.venuePricePerHour || 0) * Number(form.durationHours || 0);
+
+            const bookingData = {
+                eventType: form.eventType,
+                eventDate: Timestamp.fromDate(dateObj),
+                durationHours: Number(form.durationHours),
+                numberOfGuests: Number(form.numberOfGuests),
+                notes: form.notes,
+                // status: "pending",
+
+                djId: djEmail,
+
+                decoration: {
+                    id: form.decorationId,
+                    name: form.decorationName,
+                    price: Number(form.decorationPrice || 0),
+                },
+
+                venue: {
+                    id: form.venueId,
+                    name: form.venueName,
+                    location: form.venueLocation,
+                    capacity: Number(form.venueCapacity || 0),
+                    amenities: form.venueAmenities || [],
+                    pricePerHour: Number(form.venuePricePerHour || 0),
+                },
+
+                totalPrice,
+                status: "pending",
+
+                userId: AuthUser.email,
+                userEmail: AuthUser.email,
+            };
+
+            const docRef = await addDoc(collection(db, "BOOKINGS"), bookingData);
+            setSuccess(`Saved Event Info. Booking ID: ${docRef.id}`);
+
+            // for now we only do step 1
+            // setStep(2);
+        } catch (e) {
+            setSuccess("");
+            setError(e.message || "Failed to create booking");
+        }
+    };
+
+    // Guards
+    if (!AuthUser) {
+        return (
+            <div className="cb-page">
+                <h1>Create Event Booking</h1>
+                <p className="cb-sub">Please login first.</p>
+            </div>
+        );
+    }
+
+    if (!isRegular) {
+        return (
+            <div className="cb-page">
+                <h1>Create Event Booking</h1>
+                <p className="cb-sub">
+                    Only regular users can create bookings. Your role: <b>{role || "missing"}</b>
+                </p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="cb-page">
+            <h1 className="cb-title">Create Event Booking</h1>
+            <p className="cb-sub">Build your custom event package step by step</p>
+
+            <div className="cb-stepper-wrap">
+                <Steps current={step} />
+            </div>
+
+            <div className="cb-card">
+                {step === 1 &&
+                    <EventInfoStep
+                        form={form}
+                        update={update}
+                    />}
+                {step === 2 && (
+                    <DjSelectStep
+                        djs={djs}
+                        selectedDjEmail={djEmail}
+                        onSelectDjEmail={setDjEmail}
+                        onSkip={() => setDjEmail("")}
+                    />
+                )}
+                {step === 3 && (
+                    <DecorationStep
+                        selectedId={form.decorationId}
+                        onSelect={(pkg) =>
+                            update({
+                                decorationId: pkg.id,
+                                decorationName: pkg.name,
+                                decorationPrice: pkg.price,
+                            })
+                        }
+                    />
+                )}
+                {step === 4 && (
+                    <VenueStep
+                        selectedId={form.venueId}
+                        onSelect={(v) =>
+                            update({
+                                venueId: v.id,
+                                venueName: v.name,
+                                venueLocation: v.location,
+                                venueCapacity: v.capacity,
+                                venueAmenities: v.amenities,
+                                venuePricePerHour: v.pricePerHour,
+                            })
+                        }
+                    />
+                )}
+            </div>
+
+            {error && <p className="cb-error">{error}</p>}
+            {success && <p className="cb-success">{success}</p>}
+
+            <div className="cb-actions">
+                <button className="cb-back" onClick={goBack} type="button" disabled={step === 1}>
+                    Back
+                </button>
+
+                {step < 4 ? (
+                    <button className="cb-continue" onClick={nextFromStep1} type="button">
+                        Next →
+                    </button>
+                ) : (
+                    <button className="cb-continue" onClick={submitBooking} type="button">
+                        Send Booking →
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+}
