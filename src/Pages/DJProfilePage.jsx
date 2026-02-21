@@ -1,15 +1,14 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../context/Context'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import DJProfile from '../Components/Main/DJpages/DJProfile/DJProfile';
 
 export default function DJProfilePage() {
-    const { AuthUser } = useContext(AuthContext)
+    const [error, setError] = useState("");
+
     return (
         <div>
-            <h1>DJ Profile</h1>
-            <p>{`${AuthUser.role} Profile`}</p>
-            <Link to="/dj-dashboard">Go to Dashboard</Link>
-            
+            <DJProfile />
+            {error && <p className="djprofile-error">{error}</p>}
+
         </div>
     )
 }

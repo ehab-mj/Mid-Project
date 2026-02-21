@@ -64,7 +64,7 @@ export default function CreateBooking() {
     const computedTotal = useMemo(() => {
         const venueCost = Number(form.venuePricePerHour || 0) * Number(form.durationHours || 0);
         const decorCost = Number(form.decorationPrice || 0);
-        return venueCost + decorCost; // you can add DJ price later if you want
+        return venueCost + decorCost;
     }, [form.venuePricePerHour, form.durationHours, form.decorationPrice]);
 
     function nextFromStep1() {
@@ -93,7 +93,6 @@ export default function CreateBooking() {
 
 
     function editServices() {
-        // go back to DJ step (like screenshot “Edit Services”)
         setStep(2);
     }
 
@@ -128,7 +127,6 @@ export default function CreateBooking() {
             if (!form.venueId) return setError("Choose a venue.");
             if (!form.decorationId) return setError("Choose a decoration package.");
 
-            // combine date + time -> JS Date -> Firestore Timestamp
             const dateTimeISO = `${form.eventDate}T${form.startTime}`;
             const dateObj = new Date(dateTimeISO);
 
@@ -142,7 +140,6 @@ export default function CreateBooking() {
                 durationHours: Number(form.durationHours),
                 numberOfGuests: Number(form.numberOfGuests),
                 notes: form.notes,
-                // status: "pending",
 
                 djId: djEmail,
 
@@ -171,8 +168,7 @@ export default function CreateBooking() {
             const docRef = await addDoc(collection(db, "BOOKINGS"), bookingData);
             setSuccess(`Saved Event Info. Booking ID: ${docRef.id}`);
 
-            // for now we only do step 1
-            // setStep(2);
+
         } catch (e) {
             setSuccess("");
             setError(e.message || "Failed to create booking");

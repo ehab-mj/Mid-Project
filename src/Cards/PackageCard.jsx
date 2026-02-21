@@ -12,7 +12,6 @@ export default function PackageCard({ form, djEmail, total, onRemove, onNotesCha
             </div>
 
             <div className="rp-body">
-                {/* Event Details */}
                 <div className="rp-box">
                     <div className="rp-box-title">📅 Event Details</div>
 
@@ -27,10 +26,8 @@ export default function PackageCard({ form, djEmail, total, onRemove, onNotesCha
                     </div>
                 </div>
 
-                {/* Selected Services */}
                 <div className="rp-section-title">Selected Services</div>
 
-                {/* Venue */}
                 <div className="rp-service venue">
                     <div className="rp-icon">🏢</div>
                     <div className="rp-service-body">
@@ -42,7 +39,6 @@ export default function PackageCard({ form, djEmail, total, onRemove, onNotesCha
                     <button className="rp-trash" type="button" onClick={() => onRemove("venue")}>🗑</button>
                 </div>
 
-                {/* DJ */}
                 <div className="rp-service dj">
                     <div className="rp-icon">🎵</div>
                     <div className="rp-service-body">
@@ -51,7 +47,6 @@ export default function PackageCard({ form, djEmail, total, onRemove, onNotesCha
                     <button className="rp-trash" type="button" onClick={() => onRemove("dj")}>🗑</button>
                 </div>
 
-                {/* Decoration */}
                 <div className="rp-service decor">
                     <div className="rp-icon">✨</div>
                     <div className="rp-service-body">
@@ -61,7 +56,6 @@ export default function PackageCard({ form, djEmail, total, onRemove, onNotesCha
                     <button className="rp-trash" type="button" onClick={() => onRemove("decor")}>🗑</button>
                 </div>
 
-                {/* Notes */}
                 <div className="rp-section-title">Additional Notes (Optional)</div>
                 <textarea
                     className="rp-notes"
@@ -70,7 +64,6 @@ export default function PackageCard({ form, djEmail, total, onRemove, onNotesCha
                     placeholder="Any special requests or information..."
                 />
 
-                {/* Total */}
                 <div className="rp-total">
                     <div>
                         <div className="rp-total-title">Total Package Cost:</div>

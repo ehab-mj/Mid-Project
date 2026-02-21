@@ -1,4 +1,5 @@
 import React from "react";
+import '../css/BookingReq.css'
 
 export default function BookingReq({ bookingId, status, onSetStatus }) {
     if (status !== "pending") return null;

@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './css/Decor&Venue.css'
+import { collection, getDocs } from "@firebase/firestore";
+import { db } from "../firebase/config";
 
 const DECORATIONS = [
-    {
-        id: "decor_basic",
-        name: "Classic Elegance",
-        price: 450,
-        desc: "Simple modern setup with flowers and table styling.",
-        img: "https://images.unsplash.com/photo-1529634897861-1d7d2f3b2e52?auto=format&fit=crop&w=1200&q=60",
-    },
+    // {
+    //     id: pkg.id,
+    //     name: pkg.name,
+    //     category: pkg.category,
+    //     desc: pkg.desc,
+    //     features: pkg.features,
+    //     isAvailable: pkg.isAvailable,
+    //     price: pkg.price,
+    //     img: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=60",
+    //     rating: pkg.rating,
+    // }, 
     {
         id: "decor_premium",
         name: "Premium Floral",
@@ -25,7 +31,27 @@ const DECORATIONS = [
     },
 ];
 
+
 export default function DecorationStep({ selectedId, onSelect }) {
+    // const [pkgs, setPkgs] = useState([])
+
+    // useEffect(() => {
+    //     const fetchcollection = async () => {
+    //         const collection = collection(db, "collection");
+    //         const snapshot = await getDocs(collection);
+
+    //         const collectionData = snapshot.docs.map(doc => ({
+    //             id: doc.id,
+    //             ...doc.data()
+    //         }));
+
+    //         setpkgs(collectionData);
+    //         console.log("Fetched collection:", collectionData);
+    //     };
+
+    //     fetchcollection();
+    // }, []);
+
     return (
         <div className="sc">
             <div className="sc-head">
@@ -34,6 +60,16 @@ export default function DecorationStep({ selectedId, onSelect }) {
             </div>
 
             <div className="sc-grid">
+
+                {/* {DECORATIONS.map(pkg => (
+                    <div key={pkg.id}>
+                        <p><strong>Name:</strong> {pkg.name}</p>
+                        <p><strong>Email:</strong> {pkg.desc}</p>
+                        <p><strong>Phone:</strong> {pkg.rating}</p>
+                        <p><strong>Role:</strong> {pkg.price}</p>
+                        <hr />
+                    </div>
+                ))} */}
                 {DECORATIONS.map((pkg) => {
                     const active = selectedId === pkg.id;
                     return (
@@ -43,7 +79,11 @@ export default function DecorationStep({ selectedId, onSelect }) {
                             className={`sc-card ${active ? "active" : ""}`}
                             onClick={() => onSelect(pkg)}
                         >
-                            <img className="sc-img" src={pkg.img} alt={pkg.name} />
+                            <img
+                                className="sc-img"
+                                src={pkg.img}
+                                alt={pkg.name}
+                            />
                             <div className="sc-body">
                                 <div className="sc-row">
                                     <div className="sc-name">{pkg.name}</div>
