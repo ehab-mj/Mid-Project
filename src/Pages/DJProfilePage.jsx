@@ -6,7 +6,7 @@ export default function DJProfilePage() {
     const { AuthUser } = useContext(AuthContext)
     return (
         <div>
-            <h1>DJ Profile</h1>
+            <h3>Manage your booking requests and event packages</h3>
             <p>{`${AuthUser.role} Profile`}</p>
             <Link to="/dj-dashboard">Go to Dashboard</Link>
             

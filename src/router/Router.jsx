@@ -42,6 +42,22 @@ export const router = createBrowserRouter([
                 element: <ServicesPage />
             },
             {
+                path: "/music",
+                element: <ServicesPage />
+            },
+            {
+                path: "/decorations",
+                element: <ServicesPage />
+            },
+            {
+                path: "/photographers",
+                element: <ServicesPage />
+            },
+            {
+                path: "/venues",
+                element: <ServicesPage />
+            },
+            {
                 path: "dj-dashboard",
                 element:
                     <SafeRoute allow="dj">
