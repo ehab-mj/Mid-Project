@@ -1,0 +1,43 @@
+.dj-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.dj-btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.dj-btn.decline {
+    background: #fff;
+    border-color: #fecaca;
+    color: #ef4444;
+}
+
+.dj-btn.approve {
+    background: #16a34a;
+    color: #fff;
+}
+
+.dj-btn.approve:hover {
+    filter: brightness(0.95);
+}
+
+.dj-btn.decline:hover {
+    background: #fef2f2;
+}
+
+.dj-error {
+    color: #ef4444;
+    font-weight: 800;
+    margin: 12px 0;
+}
+
+.dj-empty {
+    color: #6b7280;
+    font-weight: 700;
+    margin-top: 10px;
+}

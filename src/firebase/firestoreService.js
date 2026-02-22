@@ -1,12 +1,15 @@
-import { 
-    collection, 
-    doc, 
-    getDoc, 
-    getDocs, 
-    query, 
-    where, 
+import {
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    query,
+    where,
     orderBy,
-    onSnapshot 
+    onSnapshot,
+    addDoc,
+    updateDoc,
+    deleteDoc
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -21,7 +24,7 @@ export const getSingleDocument = async (collectionName, documentId) => {
     try {
         const docRef = doc(db, collectionName, documentId);
         const docSnap = await getDoc(docRef);
-        
+
         if (docSnap.exists()) {
             return { id: docSnap.id, ...docSnap.data() };
         } else {
@@ -39,11 +42,11 @@ export const getAllDocuments = async (collectionName) => {
     try {
         const querySnapshot = await getDocs(collection(db, collectionName));
         const documents = [];
-        
+
         querySnapshot.forEach((doc) => {
             documents.push({ id: doc.id, ...doc.data() });
         });
-        
+
         return documents;
     } catch (error) {
         console.error("خطأ في جلب المستندات:", error);
@@ -58,14 +61,14 @@ export const getFilteredDocuments = async (collectionName, field, operator, valu
             collection(db, collectionName),
             where(field, operator, value)
         );
-        
+
         const querySnapshot = await getDocs(q);
         const documents = [];
-        
+
         querySnapshot.forEach((doc) => {
             documents.push({ id: doc.id, ...doc.data() });
         });
-        
+
         return documents;
     } catch (error) {
         console.error("خطأ في الفلترة:", error);
@@ -80,14 +83,14 @@ export const getOrderedDocuments = async (collectionName, orderField, direction 
             collection(db, collectionName),
             orderBy(orderField, direction)
         );
-        
+
         const querySnapshot = await getDocs(q);
         const documents = [];
-        
+
         querySnapshot.forEach((doc) => {
             documents.push({ id: doc.id, ...doc.data() });
         });
-        
+
         return documents;
     } catch (error) {
         console.error("خطأ في الترتيب:", error);
@@ -104,7 +107,7 @@ export const subscribeToCollection = (collectionName, callback) => {
         });
         callback(documents);
     });
-    
+
     return unsubscribe; // استخدم هذا لإلغاء الاشتراك
 };
 
@@ -117,8 +120,49 @@ export const subscribeToDocument = (collectionName, documentId, callback) => {
             callback(null);
         }
     });
-    
+
     return unsubscribe;
+};
+
+// 7️⃣ إضافة مستند جديد (Create)
+export const addDocument = async (collectionName, data) => {
+    try {
+        const docRef = await addDoc(collection(db, collectionName), {
+            ...data,
+            createdAt: new Date().toISOString()
+        });
+        return { id: docRef.id, ...data };
+    } catch (error) {
+        console.error("خطأ في إضافة المستند:", error);
+        throw error;
+    }
+};
+
+// 8️⃣ تحديث مستند (Update)
+export const updateDocument = async (collectionName, documentId, data) => {
+    try {
+        const docRef = doc(db, collectionName, documentId);
+        await updateDoc(docRef, {
+            ...data,
+            updatedAt: new Date().toISOString()
+        });
+        return { id: documentId, ...data };
+    } catch (error) {
+        console.error("خطأ في تحديث المستند:", error);
+        throw error;
+    }
+};
+
+// 9️⃣ حذف مستند (Delete)
+export const deleteDocument = async (collectionName, documentId) => {
+    try {
+        const docRef = doc(db, collectionName, documentId);
+        await deleteDoc(docRef);
+        return { id: documentId, deleted: true };
+    } catch (error) {
+        console.error("خطأ في حذف المستند:", error);
+        throw error;
+    }
 };
 
 export default {
@@ -127,5 +171,8 @@ export default {
     getFilteredDocuments,
     getOrderedDocuments,
     subscribeToCollection,
-    subscribeToDocument
+    subscribeToDocument,
+    addDocument,
+    updateDocument,
+    deleteDocument
 };

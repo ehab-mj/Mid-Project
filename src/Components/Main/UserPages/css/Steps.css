@@ -1,0 +1,53 @@
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow-x: none;
+    font-size: 14px;
+    padding: 4px 2px;
+}
+
+.stepper-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: max-content;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.stepper-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    color: #6b7280;
+    background: #e5e7eb;
+}
+
+.stepper-dot.active {
+    background: #7c3aed;
+    color: white;
+}
+
+.stepper-dot.done {
+    background: #7c3aed;
+    color: white;
+    opacity: 0.85;
+}
+
+.stepper-label {
+    font-weight: 700;
+    color: #374151;
+}
+
+.stepper-label.active {
+    color: #7c3aed;
+}
+
+.stepper-line {
+    width: 64px;
+    height: 2px;
+    background: #e5e7eb;
+}

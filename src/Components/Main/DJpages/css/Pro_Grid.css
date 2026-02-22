@@ -1,0 +1,67 @@
+.djprofile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.djprofile-box {
+    background: #fff;
+    border: 1px solid #edf0f5;
+    border-radius: 14px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    padding: 14px;
+}
+
+.djprofile-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #111827;
+    font-weight: 800;
+    line-height: 1.9;
+}
+
+.djprofile-portfolio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.djprofile-shot {
+    height: 90px;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
+    background: #f8fafc;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    color: #6b7280;
+}
+
+.djprofile-note {
+    margin: 10px 0 0;
+    color: #6b7280;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.djprofile-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.djprofile-mini-btn {
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 900;
+    text-decoration: none;
+    border: 1px solid #edf0f5;
+    background: #f8fafc;
+    color: #111827;
+}
+
+.djprofile-mini-btn:hover {
+    background: #f1f5f9;
+}

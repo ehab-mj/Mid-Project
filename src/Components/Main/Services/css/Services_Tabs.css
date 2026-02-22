@@ -1,0 +1,42 @@
+/* container */
+.categories-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* buttons */
+.category-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #f3f5f7;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+/* active tab */
+.category-item.active {
+    color: #a100ff;
+    font-weight: 600;
+}
+
+/* icon */
+.icon {
+    font-size: 20px;
+}
+
+/* number badge */
+.count {
+    background: white;
+    color: #333;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}

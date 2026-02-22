@@ -1,5 +1,6 @@
 import React from 'react'
 import CardsList from '../Cards/CardsList'
+import CreateBooking from '../Components/Main/UserPages/CreateBooking/CreateBooking'
 
 
 export default function CardPage() {
