@@ -1,86 +1,45 @@
 import React from 'react'
 import '../css/ServicesAllPage.css'
-export default function Services_Content({ selectedCategory, items, loading, error }) {
+import '../css/Services_Content.css'
+export default function Services_Content({ selectedCategory, items, loading, error, providers, decorations }) {
+
+    if (loading) return <div className="loading">Loading...</div>;
+    if (error) return <div className="error">{error}</div>;
+
+    if (selectedCategory === "decoration") {
+        return (
+            <div className="services-grid">
+                {decorations.length === 0 ? (
+                    <p>No decoration packages found.</p>
+                ) : (
+                    decorations.map(pkg => (
+                        <div key={pkg.id} className="service-card">
+                            <img src={pkg.Image || "fallback.jpg"} alt={pkg.name} />
+                            <h3>{pkg.name}</h3>
+                            <p className="price">₪{pkg.price}</p>
+                            <p>{pkg.description || pkg.desc}</p>
+                            <div>
+                                <ul>
+                                    <li>{pkg.features}</li>
+                                </ul>
+                            </div>
+                            <p>{pkg.rating}</p>
+                            <p>{pkg.category}</p>
+                            {/* Add "Select" / "View details" button if needed */}
+                        </div>
+                    ))
+                )}
+            </div>
+        );
+    }
+
     return (
-        <div>
-            {selectedCategory && (
-                <div className="category-content">
-                    <h2 className="content-title">
-                        {items.find((i) => i.key === selectedCategory)?.name}
-                    </h2>
-
-                    {/* Loading */}
-                    {loading && <p>Loading...</p>}
-
-                    {/* Error */}
-                    {error && <p className="error-text">{error}</p>}
-
-                    {/* Data */}
-                    {!loading && !error && (
-                        <>
-                            {data.length > 0 ? (
-                                <div className="services-list">
-                                    {data.map((item) => (
-                                        <div key={item.id} className="service-card">
-                                            {/* صورة (إذا موجودة) */}
-                                            {item.imageUrl ? (
-                                                <img
-                                                    src={item.imageUrl}
-                                                    alt={item.name}
-                                                    className="card-image"
-                                                />
-                                            ) : (
-                                                <div className="card-image placeholder-gradient" />
-                                            )}
-
-                                            <div className="card-body">
-                                                <div className="card-heading">
-                                                    <h3 className="service-name">{item.name}</h3>
-
-                                                    {typeof item.rating === "number" && (
-                                                        <span className="rating-badge">
-                                                            ⭐ {item.rating.toFixed(1)}
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                <p className="service-description">
-                                                    {item.description}
-                                                </p>
-
-                                                {/* Features */}
-                                                {item.features && (
-                                                    <div className="tags">
-                                                        {item.features.slice(0, 4).map((tag, i) => (
-                                                            <span key={i} className="tag">
-                                                                {tag}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                )}
-
-                                                <div className="card-footer">
-                                                    <span className="service-price">
-                                                        ${item.price?.toLocaleString()}
-                                                    </span>
-
-                                                    {item.isAvailable && (
-                                                        <span className="availability">
-                                                            ✔ Available
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p>No services found in this category.</p>
-                            )}
-                        </>
-                    )}
+        <div className="services-grid">
+            {providers.map(provider => (
+                <div key={provider.id} className="service-card">
+                    {/* your normal provider card layout */}
                 </div>
-            )}
+            ))}
         </div>
     )
 }

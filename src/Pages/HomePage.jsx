@@ -47,7 +47,8 @@ export default function HomePage() {
                 </div>
             </section>
 
-            <DJGrid />
+            <div>Upcoming Events</div>
+            {/* <DJGrid /> */}
         </div>
     )
 }
