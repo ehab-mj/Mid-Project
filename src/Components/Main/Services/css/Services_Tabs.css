@@ -20,6 +20,7 @@
     transition: 0.2s ease;
 }
 
+
 /* active tab */
 .category-item.active {
     color: #a100ff;

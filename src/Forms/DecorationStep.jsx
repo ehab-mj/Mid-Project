@@ -1,56 +1,84 @@
 import React, { useEffect, useState } from "react";
 import './css/Decor&Venue.css'
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, getDocs, setDoc } from "@firebase/firestore";
 import { db } from "../firebase/config";
 
-const DECORATIONS = [
-    // {
-    //     id: pkg.id,
-    //     name: pkg.name,
-    //     category: pkg.category,
-    //     desc: pkg.desc,
-    //     features: pkg.features,
-    //     isAvailable: pkg.isAvailable,
-    //     price: pkg.price,
-    //     img: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=60",
-    //     rating: pkg.rating,
-    // }, 
-    {
-        id: "decor_premium",
-        name: "Premium Floral",
-        price: 850,
-        desc: "Full floral theme, lighting accents, premium tables.",
-        img: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=60",
-    },
-    {
-        id: "decor_luxury",
-        name: "Luxury Stage & Lights",
-        price: 1400,
-        desc: "Stage design, lighting setup, and luxury decoration.",
-        img: "https://images.unsplash.com/photo-1521337581100-8ca9a73a5f79?auto=format&fit=crop&w=1200&q=60",
-    },
-];
-
-
 export default function DecorationStep({ selectedId, onSelect }) {
-    // const [pkgs, setPkgs] = useState([])
 
-    // useEffect(() => {
-    //     const fetchcollection = async () => {
-    //         const collection = collection(db, "collection");
-    //         const snapshot = await getDocs(collection);
+    const [decorations, setDecorations] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState("");
 
-    //         const collectionData = snapshot.docs.map(doc => ({
-    //             id: doc.id,
-    //             ...doc.data()
-    //         }));
+    useEffect(() => {
+        async function testRead() {
+            try {
+                console.log("→ Starting read from collection: decor_1");
 
-    //         setpkgs(collectionData);
-    //         console.log("Fetched collection:", collectionData);
-    //     };
+                const colRef = collection(db, "decor_1");
+                const snapshot = await getDocs(colRef);
 
-    //     fetchcollection();
-    // }, []);
+                console.log("→ Query finished");
+                console.log("→ empty?", snapshot.empty);
+                console.log("→ count:", snapshot.size);
+                console.log("→ from cache?", snapshot.metadata.fromCache);
+
+                const data = snapshot.docs.map((d) => ({
+                    id: d.id,
+                    ...d.data(),
+                }));
+
+                console.log("→ All documents:", data);
+
+                setDecorations(data);
+            } catch (err) {
+                console.error("→ ERROR:", err);
+                console.error("→ Code:", err.code);
+                console.error("→ Message:", err.message);
+
+                let friendlyMsg = "Unknown error";
+
+                if (err.code === "permission-denied") {
+                    friendlyMsg = "PERMISSION DENIED → your security rules do not allow reading decor_1";
+                } else if (err.code === "unavailable") {
+                    friendlyMsg = "Firestore unavailable (check internet / emulator)";
+                } else if (err.code === "failed-precondition") {
+                    friendlyMsg = "Failed precondition (emulator / rules issue?)";
+                }
+
+                setErrorMsg(friendlyMsg + " — check browser console for details");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        testRead();
+    }, []);
+
+    if (loading) return <div style={{ padding: "2rem" }}>Loading documents from decor_1...</div>;
+
+    if (errorMsg) {
+        return (
+            <div style={{ padding: "2rem", color: "red", fontWeight: "bold" }}>
+                Error: {errorMsg}
+                <br /><br />
+                <small>Open browser console (F12) and look for lines starting with →</small>
+            </div>
+        );
+    }
+
+    if (docs.length === 0) {
+        return (
+            <div style={{ padding: "2rem", background: "#fff3cd", border: "1px solid #ffeeba" }}>
+                <strong>No documents found in decor_1</strong>
+                <ul style={{ marginTop: "1rem" }}>
+                    <li>Check security rules → must allow read on /decor_1</li>
+                    <li>Confirm collection name is exactly "decor_1" (underscore, lowercase d)</li>
+                    <li>Make sure documents have top-level fields (not only subcollections)</li>
+                    <li>Look at browser console for more clues</li>
+                </ul>
+            </div>
+        );
+    }
 
     return (
         <div className="sc">
@@ -60,40 +88,56 @@ export default function DecorationStep({ selectedId, onSelect }) {
             </div>
 
             <div className="sc-grid">
+                {decorations.length === 0 ? (
+                    <p style={{ gridColumn: "1 / -1", textAlign: "center", padding: "2rem" }}>
+                        No decoration packages found
+                    </p>
+                ) : (
+                    decorations.map((pkg) => {
+                        const isActive = selectedId === pkg.id;
 
-                {/* {DECORATIONS.map(pkg => (
-                    <div key={pkg.id}>
-                        <p><strong>Name:</strong> {pkg.name}</p>
-                        <p><strong>Email:</strong> {pkg.desc}</p>
-                        <p><strong>Phone:</strong> {pkg.rating}</p>
-                        <p><strong>Role:</strong> {pkg.price}</p>
-                        <hr />
-                    </div>
-                ))} */}
-                {DECORATIONS.map((pkg) => {
-                    const active = selectedId === pkg.id;
-                    return (
-                        <button
-                            key={pkg.id}
-                            type="button"
-                            className={`sc-card ${active ? "active" : ""}`}
-                            onClick={() => onSelect(pkg)}
-                        >
-                            <img
-                                className="sc-img"
-                                src={pkg.img}
-                                alt={pkg.name}
-                            />
-                            <div className="sc-body">
-                                <div className="sc-row">
-                                    <div className="sc-name">{pkg.name}</div>
-                                    <div className="sc-price">${pkg.price}</div>
+                        // Fallback values in case some fields are missing
+                        const imageUrl =
+                            pkg.img ||
+                            "https://images.unsplash.com/photo-1519741497674-281450b9b157?auto=format&fit=crop&w=800&q=80";
+
+                        return (
+                            <button
+                                key={pkg.id}
+                                type="button"
+                                className={`sc-card ${isActive ? "active" : ""}`}
+                                onClick={() => onSelect(pkg)}
+                                disabled={!pkg.isAvailable}
+                                style={{ opacity: pkg.isAvailable ? 1 : 0.6 }}
+                            >
+                                <img className="sc-img" src={imageUrl} alt={pkg.name || "Decoration"} />
+
+                                <div className="sc-body">
+                                    <div className="sc-row">
+                                        <div className="sc-name">{pkg.name || "Unnamed Package"}</div>
+                                        <div className="sc-price">
+                                            {pkg.price ? `₪${pkg.price.toLocaleString()}` : "Contact for price"}
+                                        </div>
+                                    </div>
+
+                                    <div className="sc-desc">
+                                        {pkg.description || pkg.desc || "No description available"}
+                                    </div>
+
+                                    {pkg.rating && (
+                                        <div className="sc-rating">★ {pkg.rating.toFixed(1)}</div>
+                                    )}
+
+                                    {!pkg.isAvailable && (
+                                        <div style={{ color: "#e74c3c", fontSize: "0.9rem", marginTop: "8px" }}>
+                                            Currently Unavailable
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="sc-desc">{pkg.desc}</div>
-                            </div>
-                        </button>
-                    );
-                })}
+                            </button>
+                        );
+                    })
+                )}
             </div>
         </div>
     );
