@@ -13,14 +13,21 @@
 }
 
 .djprofile-avatar {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     border-radius: 16px;
+    overflow: hidden;
     background: #f5f3ff;
     border: 1px solid #ddd6fe;
-    display: grid;
-    place-items: center;
-    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.djprofile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .djprofile-main {

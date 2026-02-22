@@ -9,6 +9,8 @@ import UserProfilePage from '../Pages/UserProfilePage';
 import { SafeRoute } from '../auth/Role';
 import CardPage from '../Pages/CardPage';
 import BookingPage from '../Pages/BookingPage';
+import DJProfileEdit from '../Components/Main/DJpages/DJProfile/DJProfileEdit/DJProfileEdit';
+import ServiceDetails from '../Components/Main/Services/ServiceDetails';
 
 
 export const router = createBrowserRouter([
@@ -60,6 +62,37 @@ export const router = createBrowserRouter([
                     <SafeRoute allow="user">
                         <BookingPage />
                     </SafeRoute>
+            },
+            {
+                path: "/edit-djprofile",
+                element:
+                    <SafeRoute allow="dj">
+                        <DJProfileEdit />
+                    </SafeRoute>
+            },
+            {
+                path: "/services",
+                element: <ServicesPage />
+            },
+            {
+                path: "/service/:id",
+                element: <ServiceDetails />
+            },
+            {
+                path: "/music",
+                element: <ServicesPage />
+            },
+            {
+                path: "/decorations",
+                element: <ServicesPage />
+            },
+            {
+                path: "/photographers",
+                element: <ServicesPage />
+            },
+            {
+                path: "/venues",
+                element: <ServicesPage />
             },
         ],
     },

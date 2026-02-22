@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import '../css/Pro_Header.css';
+import DJProfileEdit from './DJProfileEdit/DJProfileEdit';
 export default function Pro_Header() {
+    const navigate = useNavigate()
+
+    function handleEdit() {
+        navigate("/edit-djprofile")
+    }
+
     return (
         <div>
             <header className="djprofile-hero">
@@ -14,7 +21,11 @@ export default function Pro_Header() {
                     <Link className="djprofile-btn outline" to="/dj-dashboard">
                         Go to Dashboard
                     </Link>
-                    <button className="djprofile-btn solid" type="button">
+                    <button
+                        className="djprofile-btn solid"
+                        type="button"
+                        onClick={handleEdit}
+                    >
                         Edit Profile
                     </button>
                 </div>

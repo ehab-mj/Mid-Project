@@ -1,0 +1,100 @@
+.djcard {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #edf0f5;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+}
+
+.djcard:hover {
+    border-color: #ddd6fe;
+}
+
+.djcard.selected {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.djcard-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.djcard-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    background: #f5f3ff;
+    display: grid;
+    place-items: center;
+    flex: none;
+}
+
+.djcard-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.djcard-avatar span {
+    font-size: 24px;
+}
+
+.djcard-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.djcard-name {
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.djcard-sub {
+    color: #6b7280;
+    font-weight: 800;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.djcard-price {
+    font-weight: 900;
+    color: #7c3aed;
+}
+
+.djcard-tags {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.djcard-tag {
+    background: #f8fafc;
+    border: 1px solid #edf0f5;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.djcard-portfolio {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.djcard-portfolio img {
+    width: 100%;
+    height: 70px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid #edf0f5;
+}

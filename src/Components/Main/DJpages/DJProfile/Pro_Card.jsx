@@ -1,11 +1,18 @@
 import React from 'react'
 import '../css/Pro_Card.css';
+import DJProfileEdit from './DJProfileEdit/DJProfileEdit';
 export default function Pro_Card({ profile }) {
     return (
         <div>
             <section className="djprofile-card">
                 <div className="djprofile-top">
-                    <div className="djprofile-avatar">🎧</div>
+                    <div className="djprofile-avatar">
+                        {profile.photoURL ? (
+                            <img src={profile.photoURL} alt="DJ Profile" />
+                        ) : (
+                            <span>🎧</span>
+                        )}
+                    </div>
 
                     <div className="djprofile-main">
                         <div className="djprofile-name">
