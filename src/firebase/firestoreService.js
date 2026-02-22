@@ -6,7 +6,10 @@ import {
     query, 
     where, 
     orderBy,
-    onSnapshot 
+    onSnapshot,
+    addDoc,
+    updateDoc,
+    deleteDoc
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -121,11 +124,55 @@ export const subscribeToDocument = (collectionName, documentId, callback) => {
     return unsubscribe;
 };
 
+// 7️⃣ إضافة مستند جديد (Create)
+export const addDocument = async (collectionName, data) => {
+    try {
+        const docRef = await addDoc(collection(db, collectionName), {
+            ...data,
+            createdAt: new Date().toISOString()
+        });
+        return { id: docRef.id, ...data };
+    } catch (error) {
+        console.error("خطأ في إضافة المستند:", error);
+        throw error;
+    }
+};
+
+// 8️⃣ تحديث مستند (Update)
+export const updateDocument = async (collectionName, documentId, data) => {
+    try {
+        const docRef = doc(db, collectionName, documentId);
+        await updateDoc(docRef, {
+            ...data,
+            updatedAt: new Date().toISOString()
+        });
+        return { id: documentId, ...data };
+    } catch (error) {
+        console.error("خطأ في تحديث المستند:", error);
+        throw error;
+    }
+};
+
+// 9️⃣ حذف مستند (Delete)
+export const deleteDocument = async (collectionName, documentId) => {
+    try {
+        const docRef = doc(db, collectionName, documentId);
+        await deleteDoc(docRef);
+        return { id: documentId, deleted: true };
+    } catch (error) {
+        console.error("خطأ في حذف المستند:", error);
+        throw error;
+    }
+};
+
 export default {
     getSingleDocument,
     getAllDocuments,
     getFilteredDocuments,
     getOrderedDocuments,
     subscribeToCollection,
-    subscribeToDocument
+    subscribeToDocument,
+    addDocument,
+    updateDocument,
+    deleteDocument
 };

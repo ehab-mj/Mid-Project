@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getProvidersByCategory } from "../services/providers";
 import "../Forms/css/ServicesPage.css";
 
@@ -7,11 +8,13 @@ import "../Forms/css/ServicesPage.css";
  * @param {Object} props
  * @param {"music"|"decoration"|"photography"|"venue"} props.selectedCategory
  * @param {string} [props.title] - Optional custom title shown above the list
+ * @param {boolean} [props.showCategoryButtons] - Whether to show category buttons (default: true)
  */
-export default function ServicesList({ selectedCategory, title }) {
+export default function ServicesList({ selectedCategory, title, showCategoryButtons = true }) {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [category, setCategory] = useState(selectedCategory || "music");
 
   useEffect(() => {
     let mounted = true;
@@ -19,7 +22,7 @@ export default function ServicesList({ selectedCategory, title }) {
     (async () => {
       try {
         setLoading(true);
-        const data = await getProvidersByCategory(selectedCategory);
+        const data = await getProvidersByCategory(category);
         if (mounted) {
           setServices(data);
           setError("");
@@ -34,7 +37,7 @@ export default function ServicesList({ selectedCategory, title }) {
     return () => {
       mounted = false;
     };
-  }, [selectedCategory]);
+  }, [category]);
 
   const categoryLabels = {
     music: "DJs & Music",
@@ -43,11 +46,21 @@ export default function ServicesList({ selectedCategory, title }) {
     venue: "Venues",
   };
 
-  return (
+return (
     <div className="category-content">
+      {showCategoryButtons && (
+      <div>
+        <h1>Choose Category</h1>
+        <button onClick={() => setCategory("music")}>Music</button>
+        <button onClick={() => setCategory("decoration")}>Decoration</button>
+        <button onClick={() => setCategory("photography")}>Photography</button>
+        <button onClick={() => setCategory("venue")}>Venue</button>
+      </div>
+      )}
+
       <div className="content-header">
         <h2 className="content-title">
-          {title || categoryLabels[selectedCategory] || "Services"}
+          {title || categoryLabels[category] || "Services"}
         </h2>
         <span className="count-badge">{services.length}</span>
       </div>
@@ -68,7 +81,9 @@ export default function ServicesList({ selectedCategory, title }) {
 }
 
 function ServiceCard({ item }) {
+  const navigate = useNavigate();
   const {
+    id,
     name,
     description,
     features = [],
@@ -78,8 +93,16 @@ function ServiceCard({ item }) {
     isAvailable,
   } = item;
 
+  const handleCardClick = () => {
+    navigate(`/service/${id}`);
+  };
+
   return (
-    <div className="service-card">
+    <div 
+      className="service-card" 
+      onClick={handleCardClick}
+      style={{ cursor: "pointer" }}
+    >
       {/* صورة */}
       {imageUrl ? (
         <img src={imageUrl} alt={name} className="card-image" loading="lazy" />

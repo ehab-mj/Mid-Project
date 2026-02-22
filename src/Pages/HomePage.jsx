@@ -7,7 +7,7 @@ export default function HomePage() {
     return (
         
         <>
-        <ServicesList selectedCategory="decoration" />
+        
             {/* HERO SECTION */}
             <div className="welcome-section">
                 <h1>Your Complete Event Planning Solution</h1>
@@ -15,7 +15,7 @@ export default function HomePage() {
                     Book DJs, decorations, staff, venues, and more.
                     Create your perfect event package in minutes.
                 </p>
-                <ServicesList selectedCategory="music" title="DJs & Music" />
+                
             </div>
 
             {/* SERVICES SECTION */}
@@ -46,6 +46,8 @@ export default function HomePage() {
     </div>
 
 </div>
+
+
         </>
     );
 }

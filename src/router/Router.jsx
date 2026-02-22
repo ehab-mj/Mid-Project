@@ -5,6 +5,7 @@ import DJDashboard from '../Components/Main/DJpages/DJDashboard';
 import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import ServicesPage from '../Pages/ServicesPage';
+import ServiceDetails from '../Pages/ServiceDetails';
 import UserProfilePage from '../Pages/UserProfilePage';
 import { SafeRoute } from '../auth/Role';
 
@@ -37,9 +38,13 @@ export const router = createBrowserRouter([
                 path: "/login",
                 element: <LoginPage />
             },
-            {
+{
                 path: "/services",
                 element: <ServicesPage />
+            },
+            {
+                path: "/service/:id",
+                element: <ServiceDetails />
             },
             {
                 path: "/music",
