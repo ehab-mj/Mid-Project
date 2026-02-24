@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Services_Tabs from '../Components/Main/Services/ServicesCategory/Services_Tabs';
-import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
 import { listenByCategory } from '../Components/Main/Services/ServicesCategory/Services_Category';
+import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
 
 export default function ServicesPage() {
     const location = useLocation();

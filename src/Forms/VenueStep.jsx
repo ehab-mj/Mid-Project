@@ -1,37 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import './css/Decor&Venue.css'
-
-const VENUES = [
-    {
-        id: "venue_ballroom",
-        name: "Grand Ballroom",
-        location: "Downtown Manhattan, NY",
-        capacity: 300,
-        amenities: ["Parking", "Stage", "VIP Area"],
-        pricePerHour: 500,
-        img: "https://images.unsplash.com/photo-1521337706264-a414f153a5f5?auto=format&fit=crop&w=1200&q=60",
-    },
-    {
-        id: "venue_rooftop",
-        name: "Rooftop Garden",
-        location: "Brooklyn, NY",
-        capacity: 150,
-        amenities: ["Outdoor", "Bar", "City View"],
-        pricePerHour: 350,
-        img: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=1200&q=60",
-    },
-    {
-        id: "venue_beach",
-        name: "Beachside Pavilion",
-        location: "Long Beach, NY",
-        capacity: 200,
-        amenities: ["Ocean View", "Outdoor", "Photography Spot"],
-        pricePerHour: 400,
-        img: "https://images.unsplash.com/photo-1529634897861-1d7d2f3b2e52?auto=format&fit=crop&w=1200&q=60",
-    },
-];
+import { useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 export default function VenueStep({ selectedId, onSelect }) {
+    const [Venues, setVenues] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState("");
+
+    useEffect(() => {
+        async function fetchVenues() {
+            try {
+                setLoading(true);
+
+                const colRef = collection(db, "Collection");
+                const snapshot = await getDocs(colRef);
+
+
+                const allDocs = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+
+                const decorDocs = allDocs.filter(
+                    (doc) => doc.category === "venue"
+                );
+
+                setVenues(decorDocs);
+            } catch (err) {
+                setErrorMsg(err.message || "Failed to load venue");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchVenues();
+    }, []);
+
+    if (loading) return <p>Loading decorations...</p>;
+    if (errorMsg) return <p style={{ color: "red" }}>{errorMsg}</p>;
+
     return (
         <div className="sc">
             <div className="sc-head">
@@ -40,8 +49,12 @@ export default function VenueStep({ selectedId, onSelect }) {
             </div>
 
             <div className="sc-grid">
-                {VENUES.map((v) => {
+                {Venues.map((v) => {
                     const active = selectedId === v.id;
+                    const imageUrl =
+                        v.Image ||
+                        "https://img.freepik.com/free-vector/music-party-banner-design-texture-background_460848-11808.jpg?semt=ais_user_personalization&w=740&q=80";
+
                     return (
                         <button
                             key={v.id}
@@ -49,7 +62,8 @@ export default function VenueStep({ selectedId, onSelect }) {
                             className={`sc-card ${active ? "active" : ""}`}
                             onClick={() => onSelect(v)}
                         >
-                            <img className="sc-img" src={v.img} alt={v.name} />
+                            <img className="sc-img" src={imageUrl} alt={v.name} />
+
                             <div className="sc-body">
                                 <div className="sc-row">
                                     <div className="sc-name">{v.name}</div>
@@ -59,11 +73,11 @@ export default function VenueStep({ selectedId, onSelect }) {
                                 <div className="sc-meta">📍 {v.location}</div>
                                 <div className="sc-meta">👥 Capacity: {v.capacity}</div>
 
-                                <div className="sc-tags">
+                                {/* <div className="sc-tags">
                                     {v.amenities.map((a) => (
                                         <span className="sc-tag" key={a}>{a}</span>
                                     ))}
-                                </div>
+                                </div> */}
                             </div>
                         </button>
                     );

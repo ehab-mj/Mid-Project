@@ -1,10 +1,12 @@
-import React from "react";
-import "./css/ServiceCard.css";
+import React, { useMemo, useState } from "react";
+import "./css/ServicesCard.css";
 
-export default function ServiceCard({ item, category, onClick }) {
+export default function ServicesCard({ item, category, onClick }) {
     const title = item.title || item.name || item.packageName || "Service";
     const desc = item.description || item.bio || "View full package details";
-    const img = item.image || item.photoURL || item.cover || item.thumbnail;
+
+    const img = item.image || item.photoURL || item.cover || item.thumbnail; // NO placeholder.com
+    const [imgOk, setImgOk] = useState(true);
 
     const price =
         item.price ??
@@ -13,29 +15,38 @@ export default function ServiceCard({ item, category, onClick }) {
         item.packagePrice ??
         0;
 
+    const rating = Number(item.rating ?? item.stars ?? 4.8);
+
     const tags = useMemo(() => {
-        const arr =
-            item.tags ||
-            item.genres ||
-            item.styles ||
-            item.categories ||
-            [];
+        const arr = item.tags || item.genres || item.styles || item.categories || [];
         return Array.isArray(arr) ? arr : [];
     }, [item]);
 
     return (
-        <button type="button" className="svcCard" onClick={onClick}>
-            <div className={`svcMedia ${img ? "" : "blank"}`}>
-                {img ? <img src={img} alt={title} /> : <div className="svcPlaceholder" />}
+        <div className="svcCard" onClick={onClick} role="button" tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && onClick?.()}>
+            <div className={`svcMedia ${img && imgOk ? "" : "blank"}`}>
+                {img && imgOk ? (
+                    <img
+                        src={img}
+                        alt={title}
+                        className="svcImg"
+                        onError={() => setImgOk(false)}
+                    />
+                ) : (
+                    <div className="svcBlank">
+                        <span className="svcBlankIcon">🎉</span>
+                    </div>
+                )}
 
                 <div className="svcRating">
                     <span className="svcStar">★</span>
-                    <span>{rating.toFixed(1)}</span>
+                    <span className="svcRatingNum">{rating.toFixed(1)}</span>
                 </div>
             </div>
 
             <div className="svcBody">
-                <h3 className="svcTitle">{title}</h3>
+                <div className="svcTitle">{title}</div>
 
                 {tags.length > 0 && (
                     <div className="svcTags">
@@ -45,17 +56,16 @@ export default function ServiceCard({ item, category, onClick }) {
                     </div>
                 )}
 
-                <p className="svcDesc">{desc}</p>
+                <div className="svcDesc">{desc}</div>
 
                 <div className="svcBottom">
-                    <div className="svcLeft">
+                    <div>
                         <div className="svcFrom">Packages from:</div>
                         <div className="svcNote">🎵 Custom playlists available</div>
                     </div>
-
                     <div className="svcPrice">₪{Number(price || 0).toLocaleString()}</div>
                 </div>
             </div>
-        </button>
+        </div>
     );
 }

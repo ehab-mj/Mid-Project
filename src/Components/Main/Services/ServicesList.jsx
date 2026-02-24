@@ -58,7 +58,7 @@ export default function ServicesList({ selectedCategory, title }) {
             {!loading && !error && (
                 <div className="services-list">
                     {services.map((service) => (
-                        <ServiceCard key={service.id} item={service} />
+                        <ServiceCardFunc key={service.id} item={service} />
                     ))}
                     {!services.length && <p>لا يوجد نتائج حالياً.</p>}
                 </div>
@@ -67,7 +67,7 @@ export default function ServicesList({ selectedCategory, title }) {
     );
 }
 
-function ServiceCard({ item }) {
+function ServiceCardFunc({ item }) {
     const {
         name,
         description,
