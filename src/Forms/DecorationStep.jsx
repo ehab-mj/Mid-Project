@@ -1,56 +1,55 @@
 import React, { useEffect, useState } from "react";
-import './css/Decor&Venue.css'
-import { collection, getDocs } from "@firebase/firestore";
+import "./css/Decor&Venue.css";
+
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 
-const DECORATIONS = [
-    // {
-    //     id: pkg.id,
-    //     name: pkg.name,
-    //     category: pkg.category,
-    //     desc: pkg.desc,
-    //     features: pkg.features,
-    //     isAvailable: pkg.isAvailable,
-    //     price: pkg.price,
-    //     img: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=60",
-    //     rating: pkg.rating,
-    // }, 
-    {
-        id: "decor_premium",
-        name: "Premium Floral",
-        price: 850,
-        desc: "Full floral theme, lighting accents, premium tables.",
-        img: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=60",
-    },
-    {
-        id: "decor_luxury",
-        name: "Luxury Stage & Lights",
-        price: 1400,
-        desc: "Stage design, lighting setup, and luxury decoration.",
-        img: "https://images.unsplash.com/photo-1521337581100-8ca9a73a5f79?auto=format&fit=crop&w=1200&q=60",
-    },
-];
-
-
 export default function DecorationStep({ selectedId, onSelect }) {
-    // const [pkgs, setPkgs] = useState([])
+    const [decorations, setDecorations] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState("");
 
-    // useEffect(() => {
-    //     const fetchcollection = async () => {
-    //         const collection = collection(db, "collection");
-    //         const snapshot = await getDocs(collection);
+    useEffect(() => {
+        async function fetchDecorations() {
+            try {
+                setLoading(true);
 
-    //         const collectionData = snapshot.docs.map(doc => ({
-    //             id: doc.id,
-    //             ...doc.data()
-    //         }));
+                console.log("→ Reading ALL documents from /Collection");
 
-    //         setpkgs(collectionData);
-    //         console.log("Fetched collection:", collectionData);
-    //     };
+                const colRef = collection(db, "Collection");
+                const snapshot = await getDocs(colRef);
 
-    //     fetchcollection();
-    // }, []);
+                console.log("→ Total docs:", snapshot.size);
+
+                const allDocs = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+
+                console.log("→ All docs:", allDocs);
+
+                // Filter only decoration category items
+                const decorDocs = allDocs.filter(
+                    (doc) => doc.category === "decoration"
+                );
+
+
+                console.log("→ Decoration docs:", decorDocs);
+
+                setDecorations(decorDocs);
+            } catch (err) {
+                console.error("Fetch decorations failed:", err);
+                setErrorMsg(err.message || "Failed to load decorations");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchDecorations();
+    }, []);
+
+    if (loading) return <p>Loading decorations...</p>;
+    if (errorMsg) return <p style={{ color: "red" }}>{errorMsg}</p>;
 
     return (
         <div className="sc">
@@ -60,36 +59,32 @@ export default function DecorationStep({ selectedId, onSelect }) {
             </div>
 
             <div className="sc-grid">
+                {decorations.map((pkg) => {
+                    const isActive = selectedId === pkg.id;
 
-                {/* {DECORATIONS.map(pkg => (
-                    <div key={pkg.id}>
-                        <p><strong>Name:</strong> {pkg.name}</p>
-                        <p><strong>Email:</strong> {pkg.desc}</p>
-                        <p><strong>Phone:</strong> {pkg.rating}</p>
-                        <p><strong>Role:</strong> {pkg.price}</p>
-                        <hr />
-                    </div>
-                ))} */}
-                {DECORATIONS.map((pkg) => {
-                    const active = selectedId === pkg.id;
+                    const imageUrl =
+                        pkg.Image ||
+                        "https://img.freepik.com/free-vector/music-party-banner-design-texture-background_460848-11808.jpg?semt=ais_user_personalization&w=740&q=80";
+
                     return (
                         <button
                             key={pkg.id}
                             type="button"
-                            className={`sc-card ${active ? "active" : ""}`}
+                            className={`sc-card ${isActive ? "active" : ""}`}
                             onClick={() => onSelect(pkg)}
                         >
-                            <img
-                                className="sc-img"
-                                src={pkg.img}
-                                alt={pkg.name}
-                            />
+
+                            <img className="sc-img" src={imageUrl} alt={pkg.name || "Decoration package"} />
+
                             <div className="sc-body">
                                 <div className="sc-row">
-                                    <div className="sc-name">{pkg.name}</div>
-                                    <div className="sc-price">${pkg.price}</div>
+                                    <div className="sc-name">{pkg.name || "Unnamed Package"}</div>
+                                    <div className="sc-price">₪{pkg.price || "?"}</div>
                                 </div>
-                                <div className="sc-desc">{pkg.desc}</div>
+
+                                <div className="sc-desc">
+                                    {pkg.description || pkg.desc || "No description available"}
+                                </div>
                             </div>
                         </button>
                     );
