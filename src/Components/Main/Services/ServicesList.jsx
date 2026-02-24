@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getProvidersByCategory } from "./providers";
+import { getProvidersByCategory } from "./ServicesCategory/providers";
 import '../../../Pages/css/ServicesPage.css'
 
 /**

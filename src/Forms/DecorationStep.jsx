@@ -63,15 +63,15 @@ export default function DecorationStep({ selectedId, onSelect }) {
                     const isActive = selectedId === pkg.id;
 
                     const imageUrl =
-                        pkg.img ||
-                        "https://images.unsplash.com/photo-1519741497674-281450b9b157?auto=format&fit=crop&w=800&q=80";
+                        pkg.Image ||
+                        "https://img.freepik.com/free-vector/music-party-banner-design-texture-background_460848-11808.jpg?semt=ais_user_personalization&w=740&q=80";
 
                     return (
                         <button
                             key={pkg.id}
                             type="button"
                             className={`sc-card ${isActive ? "active" : ""}`}
-                            onClick={() => onSelect(pkg.id)}
+                            onClick={() => onSelect(pkg)}
                         >
 
                             <img className="sc-img" src={imageUrl} alt={pkg.name || "Decoration package"} />

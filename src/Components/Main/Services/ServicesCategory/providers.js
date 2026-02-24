@@ -1,5 +1,6 @@
 import { collection, getDocs, onSnapshot, query, where, orderBy } from "firebase/firestore";
-import { db } from "../../../firebase/config";
+import { db } from "../../../../firebase/config";
+
 
 // category must be one of: music | decoration | photography | venue
 export async function getProvidersByCategory(category) {
