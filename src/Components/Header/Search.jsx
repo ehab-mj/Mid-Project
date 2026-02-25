@@ -4,7 +4,7 @@ import { db } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
 import filterIcon from "./filter.png";
 import "./css/Search.css";
-
+import ShowSearch from "./ShowSearch";
 export default function Search() {
   const navigate = useNavigate();
   const boxRef = useRef(null);
@@ -333,28 +333,12 @@ export default function Search() {
               )}
 
               {/* results */}
-              <div className="results-panel">
-                {results.length === 0 ? (
-                  <div className="result-empty">No results</div>
-                ) : (
-                  results.map((item) => {
-                    const cat = normalizeCategory(item.category);
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        className="result-item"
-                        onClick={() => handleSelect(item)}
-                      >
-                        <div className="result-name">{item.name}</div>
-                        <div className="result-meta">
-                          {cat} • {item.city || item.location || "—"}
-                        </div>
-                      </button>
-                    );
-                  })
-                )}
-              </div>
+{/* results */}
+{results.length === 0 ? (
+  <div className="result-empty">No results</div>
+) : (
+  <ShowSearch items={results} onSelect={handleSelect} />
+)}
             </div>
           </div>
         </div>
