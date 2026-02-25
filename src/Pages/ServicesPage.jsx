@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Services_Tabs from '../Components/Main/Services/ServicesCategory/Services_Tabs';
 import { listenByCategory } from '../Components/Main/Services/ServicesCategory/Services_Category';
 import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
-
+import './css/ServicesPage.css'
 export default function ServicesPage() {
     const location = useLocation();
     const navigate = useNavigate();
