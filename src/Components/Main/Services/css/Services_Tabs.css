@@ -1,0 +1,62 @@
+.st-wrap {
+    margin-top: 14px;
+}
+
+.st-row {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+
+.st-tab {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: #555;
+    font-size: 13px;
+    position: relative;
+}
+
+.st-tab:hover {
+    background: #fafafa;
+}
+
+.st-icon {
+    font-size: 14px;
+}
+
+.st-count {
+    font-size: 11px;
+    color: #666;
+    background: #f2f2f2;
+    border: 1px solid #eee;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.st-tab.active {
+    color: #7a2cff;
+}
+
+.st-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: -10px;
+    height: 2px;
+    background: #7a2cff;
+    border-radius: 999px;
+}
+
+.st-line {
+    height: 1px;
+    background: #eee;
+}

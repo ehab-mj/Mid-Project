@@ -1,0 +1,1 @@
+- In Dj Dashboard changing card title with dec to name 

@@ -1,0 +1,126 @@
+/* mini search in navbar */
+.nav-search-mini {
+  width: 220px;
+  padding: 8px 12px;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  cursor: text;
+  background: #fff;
+}
+.nav-search-placeholder { opacity: .6; }
+
+/* overlay */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;         /* ✅ whole background white */
+  z-index: 9999;
+}
+
+.search-topbar {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 120px 14px 16px;
+  border: 1px solid #e7e7e7;
+  border-radius: 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+.filter-btn {
+  position: absolute;
+  right: 52px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+.filter-icon { width: 22px; height: 22px; }
+
+.close-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* filters panel */
+.filters-panel {
+  margin-top: 12px;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.filter-section { padding: 10px 0; border-bottom: 1px solid #f2f2f2; }
+.filter-section:last-child { border-bottom: 0; }
+
+.filter-title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.filter-grid input {
+  padding: 10px 12px;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+}
+
+.filters-actions { padding-top: 10px; display: flex; justify-content: flex-end; }
+.reset-btn {
+  padding: 10px 12px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* results */
+.results-panel {
+  margin-top: 12px;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.result-item {
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 0;
+  padding: 12px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f2f2f2;
+}
+.result-item:hover { background: #fafafa; }
+.result-item:last-child { border-bottom: 0; }
+
+.result-name { font-weight: 700; }
+.result-meta { opacity: .7; font-size: 12px; }
+.result-empty { padding: 14px; opacity: .7; }

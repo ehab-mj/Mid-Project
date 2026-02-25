@@ -1,0 +1,25 @@
+.dj-tabs {
+    background: #fff;
+    border: 1px solid #edf0f5;
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.dj-tab {
+    border: none;
+    background: transparent;
+    padding: 12px 10px;
+    cursor: pointer;
+    font-weight: 800;
+    color: #374151;
+}
+
+.dj-tab.active {
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.06);
+    border-bottom: 2px solid #7c3aed;
+}

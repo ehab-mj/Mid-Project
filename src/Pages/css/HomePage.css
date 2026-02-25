@@ -1,0 +1,259 @@
+/* ==================== */
+.welcome-section {
+    height: 320px;
+    background: linear-gradient(90deg, #9b00ff, #3a60ff);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.welcome-section h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    max-width: 650px;
+    font-size: 17px;
+}
+
+
+/* ==================== */
+
+.services-wrapper {
+    background: #ffffff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.services-title {
+    font-size: 30px;
+    margin-bottom: 35px;
+}
+
+.services-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* ==================== */
+.service-card {
+    margin: 55px 0;
+    width: 250px;
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 28px;
+    padding: 12px;
+    border-radius: 12px;
+    display: inline-block;
+    color: white;
+}
+
+.pink {
+    background: #d88bff;
+}
+
+.red {
+    background: #ff78a4;
+}
+
+.blue {
+    background: #6fa8ff;
+}
+
+.green {
+    background: #6ee7b7;
+}
+
+.service-card h3 {
+    margin-top: 15px;
+}
+
+/* Problems/Solutions */
+
+.ps-wrapper {
+    background: #ffffff;
+    padding: 40px 20px 60px;
+}
+
+.ps-header {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #111;
+}
+
+.ps-header h2 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.ps-header h2 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.ps-section {
+    padding: 32px 16px;
+}
+
+.ps-grid {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ps-card {
+    width: 520px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px 20px 10px;
+}
+
+.ps-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ps-title--problems {
+    color: #b91c1c;
+}
+
+/* red-ish */
+.ps-title--solutions {
+    color: #166534;
+}
+
+/* green-ish */
+.ps-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+@media (max-width: 900px) {
+    .ps-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ps-col {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.ps-heading {
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.ps-heading--problems {
+    color: #b91c1c;
+}
+
+/* red-700 */
+.ps-heading--solutions {
+    color: #166534;
+}
+
+/* green-700 */
+.ps-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ps-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.ps-item--problem {
+    background: #ffeaea;
+}
+
+.ps-item--solution {
+    background: #eaffea;
+}
+
+.ps-bullet {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.ps-bullet--x {
+    background: #ffc9c9;
+    color: #b91c1c;
+}
+
+.ps-bullet--check {
+    background: #c9ffd6;
+    color: #166534;
+}
+
+.ps-text {
+    color: #111827;
+    font-size: 15px;
+}
+
+.ps-mark {
+    font-size: 18px;
+}
+
+.ps-mark--x {
+    color: #dc2626;
+}
+
+.ps-mark--check {
+    color: #16a34a;
+}
+
+.upcoming-title {
+    padding: 24px 16px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

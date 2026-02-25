@@ -1,0 +1,56 @@
+.djprofile-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.djprofile-hero h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.djprofile-hero p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-weight: 700;
+}
+
+.djprofile-hero-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.djprofile-btn {
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 900;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.djprofile-btn.solid {
+    background: #7c3aed;
+    color: #fff;
+}
+
+.djprofile-btn.solid:hover {
+    filter: brightness(0.95);
+}
+
+.djprofile-btn.outline {
+    background: #fff;
+    color: #7c3aed;
+    border-color: #ddd6fe;
+}
+
+.djprofile-btn.outline:hover {
+    background: #f5f3ff;
+}

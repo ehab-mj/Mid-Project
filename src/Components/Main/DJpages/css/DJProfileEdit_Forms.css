@@ -1,0 +1,124 @@
+.djedit-card {
+    background: #fff;
+    border: 1px solid #edf0f5;
+    border-radius: 16px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    padding: 16px;
+}
+
+.djedit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.djedit-grid label {
+    display: grid;
+    gap: 6px;
+    font-weight: 900;
+}
+
+.djedit-grid input {
+    padding: 11px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    outline: none;
+    font-weight: 800;
+}
+
+.djedit-grid input:focus {
+    border-color: #c4b5fd;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.djedit-full {
+    grid-column: 1 / -1;
+}
+
+.djedit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.djedit-title {
+    font-weight: 900;
+}
+
+.djedit-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+}
+
+.djedit-avatar.empty {
+    display: grid;
+    place-items: center;
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    font-size: 24px;
+}
+
+.djedit-portfolio {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.djedit-shot {
+    border: 1px solid #edf0f5;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+.djedit-shot img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    display: block;
+}
+
+.djedit-shot button {
+    width: 100%;
+    border: none;
+    background: #fff;
+    padding: 8px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.djedit-shot button:hover {
+    background: #f1f5f9;
+}
+
+.djedit-save {
+    margin-top: 14px;
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 14px;
+    background: #7c3aed;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.djedit-save:hover {
+    filter: brightness(0.95);
+}
+
+@media (max-width: 900px) {
+    .djedit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .djedit-portfolio {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
