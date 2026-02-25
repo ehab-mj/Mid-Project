@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from "react";
-import "../css/Services_Content.css";
-import ServicesCard from "../../../../Cards/ServicesCard";
+import ServicesCard from "../../../../Cards/ServicesCard.jsx"
+import ServiceModalPackage from "../../../../Forms/ServiceModalPackage.jsx";
 
 export default function Services_Content({ selectedCategory, items, error }) {
-    console.log("SERVICES_CONTENT items:", items?.length, "category:", selectedCategory);
     const [selected, setSelected] = useState(null);
 
     const meta = useMemo(() => {
@@ -29,19 +28,19 @@ export default function Services_Content({ selectedCategory, items, error }) {
         <section className="scontent">
             {error && <p className="serr">{error}</p>}
 
-            <p style={{ color: "red" }}>DEBUG items: {items?.length || 0}</p>
-
-            <div className="scontent-header">
-                <h2 className="scontent-title">{meta.title}</h2>
-                <p className="scontent-subtitle">{meta.subtitle}</p>
-            </div>
-
-            <div style={{ padding: 30, border: "6px solid red", fontSize: 24 }}>
-                ✅ THIS IS Services_Content.jsx YOU EDITED
+            <div className="cardsgrid">
+                {(items || []).map((item) => (
+                    <ServicesCard
+                        key={item.id}
+                        item={item}
+                        category={selectedCategory}
+                        onClick={() => setSelected(item)}
+                    />
+                ))}
             </div>
 
             {selected && (
-                <ServiceModal
+                <ServiceModalPackage
                     item={selected}
                     category={selectedCategory}
                     onClose={() => setSelected(null)}

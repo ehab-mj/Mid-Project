@@ -1,7 +1,7 @@
 import React from "react";
-import "../css/ServiceModal.css";
+import "./css/ServiceModalPackage.css";
 
-export default function ServiceModal({ item, category, onClose }) {
+export default function ServiceModalPackage({ item, category, onClose }) {
     const title = item.title || item.name || "Service";
     const img = item.image || item.photoURL || item.cover || item.thumbnail;
     const price = item.price ?? item.totalPrice ?? item.pricePerHour ?? 0;

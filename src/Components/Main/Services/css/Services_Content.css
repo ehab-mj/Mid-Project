@@ -1,7 +1,10 @@
+/* container */
 .scontent {
-    margin-top: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
+/* section header */
 .scontent-header {
     margin: 18px 0 12px;
 }
@@ -19,21 +22,21 @@
     color: #666;
 }
 
-.serr {
-    margin: 12px 0;
-    color: crimson;
-    font-size: 13px;
-}
-
 .cardsgrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    /* center the row */
+    align-items: flex-start;
+    gap: 22px;
+    /* spacing between cards */
+    flex-wrap: wrap;
+    /* go to next line if not enough space */
+    padding: 10px 0;
 }
 
-@media (max-width: 820px) {
+/* optional: on very small screens make them full width */
+@media (max-width: 900px) {
     .cardsgrid {
-        grid-template-columns: 1fr;
+        justify-content: center;
     }
 }

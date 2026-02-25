@@ -35,7 +35,6 @@ export default function ServicesCard({ item, category, onClick }) {
                     />
                 ) : (
                     <div className="svcBlank">
-                        <span className="svcBlankIcon">🎉</span>
                     </div>
                 )}
 
