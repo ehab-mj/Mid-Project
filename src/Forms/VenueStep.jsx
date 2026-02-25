@@ -52,7 +52,7 @@ export default function VenueStep({ selectedId, onSelect }) {
                 {Venues.map((v) => {
                     const active = selectedId === v.id;
                     const imageUrl =
-                        v.Image ||
+                        v.image ||
                         "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg?w=360";
 
                     return (

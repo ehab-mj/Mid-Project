@@ -25,12 +25,9 @@
 .cardsgrid {
     display: flex;
     justify-content: center;
-    /* center the row */
     align-items: flex-start;
     gap: 22px;
-    /* spacing between cards */
     flex-wrap: wrap;
-    /* go to next line if not enough space */
     padding: 10px 0;
 }
 

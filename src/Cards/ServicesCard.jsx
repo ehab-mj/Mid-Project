@@ -5,8 +5,10 @@ export default function ServicesCard({ item, category, onClick }) {
     const title = item.title || item.name || item.packageName || "Service";
     const desc = item.description || item.bio || "View full package details";
 
-    const img = item.image || item.photoURL || item.cover || item.thumbnail; // NO placeholder.com
+    const img = item.image || item.photoURL
     const [imgOk, setImgOk] = useState(true);
+
+    const cate = item.category;
 
     const price =
         item.price ??
@@ -18,13 +20,19 @@ export default function ServicesCard({ item, category, onClick }) {
     const rating = Number(item.rating ?? item.stars ?? 4.8);
 
     const tags = useMemo(() => {
-        const arr = item.tags || item.genres || item.styles || item.categories || [];
+        const arr = item.tags || item.genres || item.styles || item.categories || item.features || [];
         return Array.isArray(arr) ? arr : [];
     }, [item]);
 
     return (
-        <div className="svcCard" onClick={onClick} role="button" tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && onClick?.()}>
+        <div
+            className="svcCard"
+            onClick={onClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && onClick?.()}
+        >
+
             <div className={`svcMedia ${img && imgOk ? "" : "blank"}`}>
                 {img && imgOk ? (
                     <img
@@ -34,8 +42,7 @@ export default function ServicesCard({ item, category, onClick }) {
                         onError={() => setImgOk(false)}
                     />
                 ) : (
-                    <div className="svcBlank">
-                    </div>
+                    <div className="svcBlank"></div>
                 )}
 
                 <div className="svcRating">
@@ -56,7 +63,7 @@ export default function ServicesCard({ item, category, onClick }) {
                 )}
 
                 <div className="svcDesc">{desc}</div>
-
+                <div className="svcCate">{cate}</div>
                 <div className="svcBottom">
                     <div>
                         <div className="svcFrom">Packages from:</div>
