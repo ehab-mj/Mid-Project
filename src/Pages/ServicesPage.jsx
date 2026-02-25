@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Services_Tabs from '../Components/Main/Services/ServicesCategory/Services_Tabs';
-import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
 import { listenByCategory } from '../Components/Main/Services/ServicesCategory/Services_Category';
+import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
 
 export default function ServicesPage() {
     const location = useLocation();
@@ -13,13 +13,27 @@ export default function ServicesPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    const [counts, setCounts] = useState({
+        music: 0,
+        decoration: 0,
+        photography: 0,
+        venue: 0,
+    });
+
+    useEffect(() => {
+        setCounts((prev) => ({
+            ...prev,
+            [selectedCategory]: items?.length || 0,
+        }));
+    }, [items, selectedCategory]);
+
     // Category definitions (used for tabs)
     const categories = useMemo(() => [
-        { name: "DJs & Music", icon: "🎵", path: "/music", key: "music", count: 50 },
-        { name: "Decorations", icon: "🪅", path: "/decorations", key: "decoration", count: 30 },
-        { name: "Photographers", icon: "📸", path: "/photographers", key: "photography", count: 25 },
-        { name: "Venues", icon: "🏛️", path: "/venues", key: "venue", count: 20 },
-    ], []);
+        { name: "DJs & Music", icon: "🎵", path: "/music", key: "music", count: counts.music },
+        { name: "Decorations", icon: "🪅", path: "/decorations", key: "decoration", count: counts.decoration },
+        { name: "Photographers", icon: "📸", path: "/photographers", key: "photography", count: counts.photography },
+        { name: "Venues", icon: "🏛️", path: "/venues", key: "venue", count: counts.venue },
+    ], [counts]);
 
     // Get category from URL
     const categoryFromUrl = useMemo(() => {

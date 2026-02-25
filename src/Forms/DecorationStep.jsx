@@ -64,7 +64,7 @@ export default function DecorationStep({ selectedId, onSelect }) {
 
                     const imageUrl =
                         pkg.Image ||
-                        "https://img.freepik.com/free-vector/music-party-banner-design-texture-background_460848-11808.jpg?semt=ais_user_personalization&w=740&q=80";
+                        "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg?w=360";
 
                     return (
                         <button

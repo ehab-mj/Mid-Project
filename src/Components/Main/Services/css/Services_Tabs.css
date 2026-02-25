@@ -1,43 +1,62 @@
-/* container */
-.categories-container {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap;
+.st-wrap {
+    margin-top: 14px;
 }
 
-/* buttons */
-.category-item {
+.st-row {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+
+.st-tab {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
-    background: #f3f5f7;
-    border-radius: 50px;
-    text-decoration: none;
-    color: #444;
-    font-size: 15px;
-    transition: 0.2s ease;
-}
-
-
-/* active tab */
-.category-item.active {
-    color: #a100ff;
-    font-weight: 600;
-}
-
-/* icon */
-.icon {
-    font-size: 20px;
-}
-
-/* number badge */
-.count {
-    background: white;
-    color: #333;
-    padding: 2px 8px;
-    border-radius: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: #555;
     font-size: 13px;
-    font-weight: 600;
+    position: relative;
+}
+
+.st-tab:hover {
+    background: #fafafa;
+}
+
+.st-icon {
+    font-size: 14px;
+}
+
+.st-count {
+    font-size: 11px;
+    color: #666;
+    background: #f2f2f2;
+    border: 1px solid #eee;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.st-tab.active {
+    color: #7a2cff;
+}
+
+.st-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: -10px;
+    height: 2px;
+    background: #7a2cff;
+    border-radius: 999px;
+}
+
+.st-line {
+    height: 1px;
+    background: #eee;
 }
