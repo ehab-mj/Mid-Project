@@ -11,6 +11,7 @@ import CardPage from '../Pages/CardPage';
 import BookingPage from '../Pages/BookingPage';
 import DJProfileEdit from '../Components/Main/DJpages/DJProfile/DJProfileEdit/DJProfileEdit';
 import ServiceDetails from '../Components/Main/Services/ServiceDetails';
+import UploadTest from '../test/UploadTest';
 
 
 export const router = createBrowserRouter([
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
             {
                 path: "/venues",
                 element: <ServicesPage />
+            },
+            {
+                path: "/upload-test",
+                element: <UploadTest />
             },
         ],
     },
