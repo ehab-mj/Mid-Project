@@ -43,7 +43,7 @@ export default function NavBar() {
                     </Link>
                 )}
 
-                {/* <Search /> */}
+                <Search />
 
                 <div>
                     {AuthUser ? (
