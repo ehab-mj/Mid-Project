@@ -40,7 +40,7 @@ export default function HomePage() {
             </div>
 
             <section className="services-wrapper">
-                <h2 className="services-title">Browse Services</h2>
+                <h2 className="services-title"></h2>
 
                 <div className="services-grid">
                     <Link to="/music" className="service-card">
