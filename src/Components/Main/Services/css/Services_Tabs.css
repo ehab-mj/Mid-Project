@@ -10,9 +10,9 @@
 .st-row {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 14px;
     flex-wrap: wrap;
-    padding: 14px 0 10px;
+    padding: 12px 0 12px;
 }
 
 /* each tab */
@@ -21,21 +21,35 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 6px;
-    border: 0;
-    background: transparent;
+
+    padding: 10px 14px;
+    border-radius: 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(18, 18, 45, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
     cursor: pointer;
 
-    color: #334155;
-    /* slate */
-    font-weight: 700;
-    font-size: 15px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.2px;
 
-    transition: color 0.15s ease;
+    transition: transform .12s ease, border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.st-tab.active {
+    background: linear-gradient(135deg,
+            rgba(124, 58, 237, 0.35),
+            rgba(34, 211, 238, 0.25));
 }
 
 .st-tab:hover {
-    color: #111827;
+    transform: translateY(-1px);
+    border-color: rgba(34, 211, 238, 0.35);
+    color: #fff;
 }
 
 /* icon */
@@ -45,6 +59,7 @@
     justify-content: center;
     font-size: 18px;
     line-height: 1;
+    opacity: .9;
 }
 
 /* label */
@@ -63,39 +78,37 @@
     padding: 0 8px;
 
     border-radius: 999px;
-    background: #f1f5f9;
-    color: #475569;
+    background: rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 900;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* active underline like screenshot */
+/* active tab */
 .st-tab.active {
-    color: #6d28d9;
-    /* purple */
+    color: #fff;
+    border: 0;
+    background: linear-gradient(135deg, rgba(124, 58, 237, .95), rgba(34, 211, 238, .55));
+    box-shadow: 0 14px 40px rgba(124, 58, 237, .28);
 }
 
 .st-tab.active .st-count {
-    background: #ede9fe;
-    color: #6d28d9;
+    background: rgba(0, 0, 0, .20);
+    color: #fff;
+    border-color: rgba(255, 255, 255, .16);
 }
 
-/* purple line under active tab */
+/* remove old underline style */
 .st-tab.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -11px;
-    height: 3px;
-    border-radius: 999px;
-    background: #6d28d9;
+    content: none;
 }
 
 /* thin divider line under tabs */
 .st-line {
     height: 1px;
-    background: rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.10);
     width: 100%;
 }
 
@@ -106,11 +119,11 @@
     }
 
     .st-row {
-        gap: 14px;
+        gap: 10px;
     }
 
     .st-tab {
-        font-size: 14px;
-        padding: 8px 4px;
+        font-size: 13px;
+        padding: 9px 12px;
     }
 }

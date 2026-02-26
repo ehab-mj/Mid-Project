@@ -1,7 +1,9 @@
 import React, { useMemo } from "react";
 import "./css/ServiceModalPackage.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ServiceModalPackage({ item, category = "", onClose }) {
+    const navigate = useNavigate();
     const safeItem = item ?? {};
 
     const title = safeItem.title || safeItem.name || "Service";
@@ -22,6 +24,7 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
     const experience = safeItem.experienceYears ?? safeItem.yearsExperience ?? "—";
 
     const city = safeItem.location || safeItem.city || safeItem.address || "—";
+    
     const isAvailable = Boolean(safeItem.isAvailable);
 
     const rating = Number(safeItem.rating ?? safeItem.stars ?? 0);
@@ -114,10 +117,22 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
                         </p>
                     </div>
 
-                    {/* ✅ READ ONLY: only close */}
                     <div className="mactions">
                         <button className="mbtn solid" type="button" onClick={onClose}>
                             Close
+                        </button>
+
+                        <button
+                            className="mbtn book"
+                            type="button"
+                            onClick={() => {
+                                onClose?.();
+                                navigate(`/package/${safeItem.id}`);
+                            }}
+                            disabled={!isAvailable}
+                            title={!isAvailable ? "This service is busy" : "Book this service"}
+                        >
+                            Book
                         </button>
                     </div>
                 </div>

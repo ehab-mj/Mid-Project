@@ -11,6 +11,7 @@ import CardPage from '../Pages/CardPage';
 import BookingPage from '../Pages/BookingPage';
 import DJProfileEdit from '../Components/Main/DJpages/DJProfile/DJProfileEdit/DJProfileEdit';
 import ServiceDetails from '../Components/Main/Services/ServiceDetails';
+import BookingForms from '../Forms/BookingForms';
 
 
 export const router = createBrowserRouter([
@@ -77,6 +78,13 @@ export const router = createBrowserRouter([
             {
                 path: "/service/:id",
                 element: <ServiceDetails />
+            },
+            {
+                path: "/package/:serviceId",
+                element:
+                    <SafeRoute allow="user">
+                        <BookingForms />
+                    </SafeRoute>
             },
             {
                 path: "/music",

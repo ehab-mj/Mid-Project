@@ -11,7 +11,7 @@
 
 .subtitle {
     font-size: 16px;
-    color: #666;
+    color: #fff;
     margin-bottom: 25px;
 }
 
@@ -32,7 +32,7 @@
     background: #f3f5f7;
     border-radius: 50px;
     text-decoration: none;
-    color: #444;
+    color: #fff;
     font-size: 15px;
     transition: 0.2s ease;
 }
@@ -104,7 +104,7 @@
 .modal-content h2 {
     margin-top: 0;
     margin-bottom: 20px;
-    color: #333;
+    color: #fff;
 }
 
 /* Form Styles */
@@ -116,7 +116,7 @@
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    color: #444;
+    color: #fff;
 }
 
 .form-group input[type="text"],

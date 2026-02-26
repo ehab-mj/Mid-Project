@@ -26,13 +26,13 @@ export default function NavBar() {
     return (
         <>
             <nav className="nav-bar">
-                <Link className="logo" to="/">Logo</Link>
+                <Link className="logo" to="/">DJ PULSE</Link>
 
-                <div>
+                <div className='nav-menu'>
                     <Link className="home" to="/">Home</Link>
                     <Link className="services" to="/services">All Services</Link>
-
                 </div>
+
 
                 {isRegular && (
                     <Link
