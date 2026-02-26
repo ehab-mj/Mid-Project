@@ -1,0 +1,195 @@
+/* =========================
+   PackageCardSingle (rp-*)
+   Premium Review UI
+   ========================= */
+
+.rp {
+    width: min(1000px, 100%);
+    margin: 0 auto;
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, .18);
+    border: 1px solid rgba(0, 0, 0, .06);
+}
+
+/* header */
+.rp-header {
+    padding: 22px 22px;
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: #fff;
+}
+
+.rp-header-title {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: .2px;
+}
+
+.rp-header-sub {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: .9;
+    font-weight: 600;
+}
+
+/* body */
+.rp-body {
+    padding: 18px 20px 22px;
+}
+
+/* section titles */
+.rp-section-title {
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #111827;
+    letter-spacing: .3px;
+}
+
+/* event details box */
+.rp-box {
+    background: #f8f8ff;
+    border: 1px solid #ececf7;
+    border-radius: 16px;
+    padding: 14px 14px;
+}
+
+.rp-box-title {
+    font-weight: 900;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+/* Selected service card */
+.rp-service {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #ececf4;
+    border-radius: 16px;
+    padding: 14px 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+}
+
+.rp-service.dj {
+    border-left: 6px solid #7c3aed;
+}
+
+.rp-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    background: rgba(124, 58, 237, .12);
+    border: 1px solid rgba(124, 58, 237, .18);
+}
+
+.rp-service-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.rp-service-title {
+    font-weight: 900;
+    color: #111827;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rp-service-sub {
+    font-weight: 900;
+    color: #5b21b6;
+    font-size: 14px;
+}
+
+/* textarea (you already use ei-textarea, but we enhance it) */
+.ei-textarea {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding: 12px 12px;
+    outline: none;
+    font-weight: 600;
+    color: #111827;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+}
+
+.ei-textarea:focus {
+    border-color: rgba(124, 58, 237, .55);
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, .15), 0 10px 25px rgba(0, 0, 0, .05);
+}
+
+/* total box */
+.rp-total {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 16px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, .10), rgba(91, 33, 182, .08));
+    border: 1px solid rgba(124, 58, 237, .18);
+}
+
+.rp-total-title {
+    font-weight: 900;
+    font-size: 14px;
+    color: #111827;
+}
+
+.rp-total-sub {
+    margin-top: 4px;
+    color: #6b7280;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.rp-total-price {
+    font-size: 22px;
+    font-weight: 950;
+    color: #5b21b6;
+    white-space: nowrap;
+}
+
+/* button (you use cb-continue already, but make sure it looks premium) */
+.cb-continue {
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    box-shadow: 0 12px 28px rgba(124, 58, 237, .28);
+}
+
+.cb-continue:hover {
+    filter: brightness(1.02);
+}
+
+/* responsive */
+@media (max-width: 720px) {
+    .rp-body {
+        padding: 14px 14px 18px;
+    }
+
+    .rp-total {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rp-total-price {
+        font-size: 20px;
+    }
+}

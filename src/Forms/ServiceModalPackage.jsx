@@ -24,7 +24,7 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
     const experience = safeItem.experienceYears ?? safeItem.yearsExperience ?? "—";
 
     const city = safeItem.location || safeItem.city || safeItem.address || "—";
-    
+
     const isAvailable = Boolean(safeItem.isAvailable);
 
     const rating = Number(safeItem.rating ?? safeItem.stars ?? 0);
@@ -43,7 +43,13 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
 
     return (
         <div className="mback" onClick={onClose} role="button" tabIndex={-1}>
-            <div className="mmodal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+            <div
+                className="mmodal mmodal--card"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+            >
+
                 <div className="mhead">
                     <div>
                         <div className="mtitle">{title}</div>
@@ -55,85 +61,85 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
                     </button>
                 </div>
 
-                <div className="mimg">
-                    {img ? <img src={img} alt={title} /> : <div className="mimgEmpty" />}
-                </div>
-
-                <div className="mbody">
-                    <div className="minfo">
-                        <div>
-                            <span>Price:</span>
-                            <b>₪{Number(price || 0).toLocaleString()}</b>
-                        </div>
-
-                        <div>
-                            <span>Rating:</span>
-                            <b>{ratingText}</b>
-                        </div>
-
-                        <div>
-                            <span>Location:</span>
-                            <b>{city}</b>
-                        </div>
-
-                        <div>
-                            <span>Email:</span>
-                            <b>{safeItem.email || "—"}</b>
-                        </div>
-
-                        <div>
-                            <span>Phone:</span>
-                            <b>{safeItem.phone || "—"}</b>
-                        </div>
+                <div className="mcard">
+                    <div className="mcard-left">
+                        {img ? (
+                            <img className="mcard-img" src={img} alt={title} />
+                        ) : (
+                            <div className="mcard-imgEmpty" />
+                        )}
                     </div>
 
-                    <div className="mdesc">
-                        <b className="svcDesc">Description</b>
-                        <p>{desc}</p>
+                    <div className="mcard-right">
+                        <h3 className="mcard-title">{title}</h3>
+                        <p className="mcard-desc">{desc}</p>
 
-                        <p>Events Count: {eventsCompleted}</p>
-                        <p>Experience: {experience}</p>
-                        <p>Capacity: {capacity}</p>
-                    </div>
+                        <div className="mcard-info">
+                            <div className="infoRow">
+                                <span className="infoLabel">Price</span>
+                                <span className="infoValue">₪{Number(price || 0).toLocaleString()}</span>
+                            </div>
 
-                    <div className="mdesc">
+                            <div className="infoRow">
+                                <span className="infoLabel">Location</span>
+                                <span className="infoValue">{city}</span>
+                            </div>
+
+                            <div className="infoRow">
+                                <span className="infoLabel">Rating</span>
+                                <span className="infoValue">{ratingText}</span>
+                            </div>
+
+                            <div className="infoRow">
+                                <span className="infoLabel">Email</span>
+                                <span className="infoValue">{safeItem.email || "—"}</span>
+                            </div>
+
+                            <div className="infoRow">
+                                <span className="infoLabel">Phone</span>
+                                <span className="infoValue">{safeItem.phone || "—"}</span>
+                            </div>
+                        </div>
+
+                        <div className="mcard-meta">
+                            <p>Events Count: {eventsCompleted}</p>
+                            <p>Experience: {experience}</p>
+                            <p>Capacity: {capacity}</p>
+                            <p className="svcCate">Category: {cate}</p>
+
+                            <p className={`isAvailable ${isAvailable ? "available" : "busy"}`}>
+                                {isAvailable ? "Available" : "Busy"}
+                            </p>
+                        </div>
+
                         {tags.length > 0 && (
-                            <div className="svcTags">
+                            <div className="mcard-tags">
                                 {tags.slice(0, 6).map((t, i) => (
-                                    <span key={`${t}-${i}`} className="svcTag">
+                                    <span key={`${t}-${i}`} className="chip">
                                         {t}
                                     </span>
                                 ))}
                             </div>
                         )}
 
-                        <p className="svcCate">Category: {cate}</p>
+                        <div className="mcard-actions">
+                            <button className="btnGhost" type="button" onClick={onClose}>
+                                Close
+                            </button>
 
-                        <p
-                            className={`isAvailable 
-                        ${isAvailable ? "available" : "busy"}`}
-                        >
-                            {isAvailable ? "Available" : "Busy"}
-                        </p>
-                    </div>
-
-                    <div className="mactions">
-                        <button className="mbtn solid" type="button" onClick={onClose}>
-                            Close
-                        </button>
-
-                        <button
-                            className="mbtn book"
-                            type="button"
-                            onClick={() => {
-                                onClose?.();
-                                navigate(`/package/${safeItem.id}`);
-                            }}
-                            disabled={!isAvailable}
-                            title={!isAvailable ? "This service is busy" : "Book this service"}
-                        >
-                            Book
-                        </button>
+                            <button
+                                className="btnPrimary"
+                                type="button"
+                                onClick={() => {
+                                    onClose?.();
+                                    navigate(`/package/${safeItem.id}`);
+                                }}
+                                disabled={!isAvailable}
+                                title={!isAvailable ? "This service is busy" : "Book this service"}
+                            >
+                                Book
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

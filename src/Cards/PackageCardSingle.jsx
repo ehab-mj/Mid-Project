@@ -1,5 +1,5 @@
 import React from "react";
-import "../Cards/css/PackageCard.css";
+import "../Cards/css/PackageCardSingle.css";
 import '../Components/Main/UserPages/css/EventInfoStep.css'
 const EVENT_TYPES = ["Wedding", "Birthday", "Corporate", "Anniversary", "Graduation", "Other"];
 

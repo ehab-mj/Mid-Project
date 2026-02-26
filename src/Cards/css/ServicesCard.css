@@ -110,27 +110,17 @@ ACTIVE BADGE (top right)
     color: #dc2626;
 }
 
-/* =========================
-IMAGE AREA
-   ========================= */
 .svcMedia {
-    /* CHANGED: push media under the curved top */
     position: relative;
     height: 160px;
-    /* CHANGED: closer to screenshot */
     background: #f3f5f9;
-    /* CHANGED: light placeholder background */
     margin: 0 18px;
-    /* ADDED: side padding like screenshot */
     margin-top: -18px;
-    /* ADDED: slight overlap under curve */
     border-radius: 12px;
-    /* ADDED */
     overflow: hidden;
-    /* ADDED */
+
 }
 
-/* CHANGED: image fits clean */
 .svcImg {
     width: 100%;
     height: 100%;
@@ -138,7 +128,6 @@ IMAGE AREA
     display: block;
 }
 
-/* CHANGED: blank state */
 .svcMedia.blank {
     background: #f3f5f9;
 }
@@ -149,18 +138,13 @@ IMAGE AREA
     background: #f3f5f9;
 }
 
-/* =========================
-    RATING BADGE (stars)
-   ========================= */
 .svcRating {
-    /* CHANGED: badge like screenshot (soft white badge) */
     position: absolute;
     bottom: 10px;
-    /* CHANGED: bottom looks nicer on image */
     right: 10px;
 
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid #e8ecf5;
+    background: #0f172a;
+    border: 1px solid #0f172a;
     border-radius: 999px;
     padding: 6px 10px;
     display: flex;
@@ -170,25 +154,18 @@ IMAGE AREA
     color: #25ff0d;
 }
 
-/* CHANGED: star gold */
 .svcStar {
     color: #f6b100;
 }
 
-/* CHANGED: number bold */
 .svcRatingNum {
     font-weight: 800;
 }
 
-/* =========================
-    BODY
-   ========================= */
 .svcBody {
-    /* CHANGED: better spacing */
     padding: 14px 18px 16px;
 }
 
-/* CHANGED: title centered + uppercase like screenshot */
 .svcTitle {
     font-size: 20px;
     font-weight: 900;
@@ -196,96 +173,68 @@ IMAGE AREA
     text-transform: uppercase;
     text-align: center;
     color: #fff;
-    /* CHANGED: match top color */
     margin-bottom: 8px;
 }
 
-/* =========================
-   TAGS (chips)
-   ========================= */
 .svcTags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     color: #fff;
     justify-content: center;
-    /* CHANGED: centered like clean UI */
     margin-bottom: 10px;
 }
 
-/* FIXED: you had svcTags span overriding colors badly */
 .svcTags span {
     background: #a78bfa;
     color: #0f172a;
 }
 
-/* CHANGED: tag chip style clean */
 .svcTag {
     font-size: 11px;
     padding: 6px 10px;
     border-radius: 999px;
     background: #f3f5ff;
-    /* CHANGED: light chip */
-    border: 1px solid #e6e9ff;
     color: #fff;
-    /* CHANGED: readable */
     font-weight: 800;
 }
 
-/* =========================
-   DESCRIPTION
-   ========================= */
-.svcDesc {
-    font-size: 13px;
-    color: #fff;
-    /* CHANGED: gray text */
+
+.svcDesc p {
     line-height: 1.55;
     margin-bottom: 12px;
     text-align: center;
-    /* CHANGED */
     min-height: 40px;
-}
-
-.svcDesc p {
+    font-size: 13px;
+    min-height: 40px;
+    color: #fff;
     margin: 0;
-    color: inherit;
 }
 
-/* =========================
-   CATEGORY + CITY
-   ========================= */
 .svcCate p,
 .svcCity p {
     margin: 6px 0;
     text-align: center;
-    /* CHANGED: centered */
     font-size: 13px;
     font-weight: 800;
 }
 
 .svcCate p {
     color: #fff;
-    /* CHANGED */
 }
 
 .svcCity p {
     color: #7b8496;
-    /* CHANGED */
 }
 
-/* =========================
-   BOTTOM ROW (Price)
-   ========================= */
 .svcBottom {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 10px;
     margin-top: 12px;
-    /* ADDED */
 }
 
-/* CHANGED: small note style */
 .svcFrom {
     font-size: 12px;
     color: #7b8496;
@@ -299,7 +248,6 @@ IMAGE AREA
     font-weight: 800;
 }
 
-/* CHANGED: big price like screenshot */
 .svcPrice {
     font-size: 34px;
     font-weight: 900;
@@ -307,24 +255,17 @@ IMAGE AREA
     line-height: 1;
 }
 
-/* =========================
-    BOOK NOW BUTTON (bottom)
-   ========================= */
 .svcBookBtn {
-    /* ADDED: full width CTA button */
     width: 100%;
     margin-top: 14px;
     padding: 14px 14px;
     border: 0;
     border-radius: 12px;
-
     background: #1f2a3a;
-    /* like screenshot */
     color: #fff;
     font-weight: 900;
     letter-spacing: 0.6px;
     text-transform: uppercase;
-
     cursor: pointer;
     transition: transform 0.08s ease, filter 0.2s ease;
 }

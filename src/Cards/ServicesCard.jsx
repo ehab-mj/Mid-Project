@@ -31,29 +31,27 @@ export default function ServicesCard({ item, category, onClick }) {
     return (
         <section className="product-container">
             <div
-                className={`svcCard ${isAvailable ? "" : "busy"}`} // busy class when not available
+                className={`svcCard ${isAvailable ? "" : "busy"}`}
                 onClick={onClick}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => e.key === "Enter" && onClick?.()}
             >
-                {/* TOP CURVE + ACTIVE/BUSY BADGE */}
                 <div
                     className="svcTop"
-                    data-status={isAvailable ? "available" : "busy"} // controls top color
+                    data-status={isAvailable ? "available" : "busy"}
                 >
                     <div className="svcTopCurve" />
 
                     <div
                         className="svcActive"
-                        data-active={isAvailable ? "true" : "false"} // controls badge color
+                        data-active={isAvailable ? "true" : "false"}
                     >
                         <span className={`svcDot ${isAvailable ? "available" : "busy"}`} />
                         {isAvailable ? "Available" : "Busy"}
                     </div>
                 </div>
 
-                {/* IMAGE */}
                 <div className={`svcMedia ${img && imgOk ? "" : "blank"}`}>
                     {img && imgOk ? (
                         <img
@@ -66,14 +64,13 @@ export default function ServicesCard({ item, category, onClick }) {
                         <div className="svcBlank"></div>
                     )}
 
-                    {/* RATING */}
                     <div className="svcRating">
                         <span className="svcStar">★</span>
                         <span className="svcRatingNum">{Number(rating || 0).toFixed(1)}</span>
                     </div>
                 </div>
 
-                {/* BODY */}
+
                 <div className="svcBody">
                     <div className="svcTitle">{title}</div>
 
@@ -100,25 +97,18 @@ export default function ServicesCard({ item, category, onClick }) {
                     </div>
 
                     <div className="svcBottom">
-                        {/* <div>
-                            <div className="svcFrom">
-                                Packages from:
-                                <div className="svcNote">🎵 Custom playlists available</div>
-                            </div>
-                        </div> */}
-
                         <div className="svcPrice">₪{Number(price || 0).toLocaleString()}</div>
                     </div>
 
-                    {/* BOOK NOW BUTTON */}
                     <button
                         type="button"
                         className="svcBookBtn"
                         onClick={(e) => {
-                            e.stopPropagation(); // prevent triggering card click
-                            onClick?.(); // or call your booking function
+                            e.stopPropagation();
+                            onClick?.();
+                            // navigate(`/package/${safeItem.id}`);
                         }}
-                        disabled={!isAvailable} // optional: disable when busy
+                        disabled={!isAvailable}
                     >
                         {isAvailable ? "Book Now" : "Busy"}
                     </button>

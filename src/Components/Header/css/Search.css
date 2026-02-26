@@ -1,5 +1,5 @@
 /* =========================
-   MINI SEARCH (Navbar)
+MINI SEARCH (Navbar)
 ========================= */
 .nav-search-mini {
     width: 220px;
@@ -15,8 +15,8 @@
 }
 
 /* =========================
-   OVERLAY (Full screen)
-   ✅ scroll fixed overlay
+OVERLAY (Full screen)
+✅ scroll fixed overlay
 ========================= */
 .search-overlay {
     position: fixed;
