@@ -79,9 +79,9 @@ export default function CreateBooking() {
             if (!form.startTime) return setError("Choose start time.");
         }
 
-        if (step === 2) {
-            if (!form.djId) return setError("Choose a DJ.");
-        }
+        // if (step === 2) {
+        //     if (!form.djId) return setError("Choose a DJ.");
+        // }
 
         if (step === 3) {
             if (!form.decorationIds.length) return setError("Choose at least 1 decoration.");
@@ -148,7 +148,7 @@ export default function CreateBooking() {
             setError("");
             setSuccess("");
 
-            if (!form.djId) return setError("Choose a DJ.");
+            // if (!form.djId) return setError("Choose a DJ.");
             if (!form.decorationIds.length) return setError("Choose at least 1 decoration.");
             if (!form.venueId) return setError("Choose a venue.");
 
@@ -251,6 +251,7 @@ export default function CreateBooking() {
 
                 {step === 2 && (
                     <DjSelectStep
+                        // onSkip={() => setDjEmail("")}
                         selectedId={form.djId}
                         onSelect={(dj) =>
                             update({
@@ -264,7 +265,6 @@ export default function CreateBooking() {
                     />
                 )}
 
-                {/* ✅ Decoration MULTI */}
                 {step === 3 && (
                     <DecorationStep
                         selectedIds={form.decorationIds}
@@ -314,6 +314,28 @@ export default function CreateBooking() {
                 <button className="cb-back" onClick={back} type="button" disabled={step === 1}>
                     Back
                 </button>
+
+                {step === 2 && (
+                    <button
+                        type="button"
+                        className="cb-skip"
+                        onClick={() => {
+                            update({
+                                djId: "",
+                                djName: "",
+                                djEmail: "",
+                                djPricePerHour: 0,
+                                djLocation: "",
+                            });
+
+                            setError("");
+                            setSuccess("");
+                            setStep((s) => Math.min(s + 1, 5));
+                        }}
+                    >
+                        Skip - choose later
+                    </button>
+                )}
 
                 {step < 5 ? (
                     <button className="cb-continue" onClick={next} type="button">

@@ -1,51 +1,136 @@
+/* =========================
+CARD WRAPPER (new style)
+   ========================= */
 .svcCard {
+    /* CHANGED: make it white like the screenshot */
     width: 320px;
-    height: 450px;
+    height: 590px;
     max-width: 100%;
-    background: #243254;
-    border-radius: 14px;
+    background: #0f172a;
+    border-radius: 18px;
+    /* CHANGED: more rounded */
     border: 1px solid #1f2937;
+    /* CHANGED: soft border */
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    /* CHANGED: soft shadow like UI card */
     overflow: hidden;
     margin-top: 50px;
     font-family: Arial, Helvetica, sans-serif;
+
+    /* ADDED: smooth hover */
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .svcCard:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+    /* CHANGED: hover lift like modern UI */
+    transform: translateY(-4px);
+    box-shadow: 0 22px 55px rgba(25, 40, 70, 0.22);
     cursor: pointer;
 }
 
-.svcBlank {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0f172a;
-}
-
-.svcBlankIcon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0f172a;
-    border: 1px solid #1f2937;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
-    font-size: 20px;
-}
-
-/* image */
-.svcMedia {
+/* =========================
+TOP COLOR CURVE AREA
+   ========================= */
+.svcTop {
+    /* ADDED: top color section */
+    height: 78px;
     position: relative;
-    height: 180px;
-    background: #0b0f19;
+
+    /* ADDED: you can change this color per category later */
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
 }
 
+/* ADDED: creates the white curved cap like the screenshot */
+.svcTopCurve {
+    position: absolute;
+    left: -30px;
+    right: -30px;
+    bottom: -1px;
+    height: 72px;
+    background: #0f172a;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+}
+
+/* =========================
+ACTIVE BADGE (top right)
+   ========================= */
+.svcActive {
+    /* ADDED: small pill badge */
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    backdrop-filter: blur(6px);
+}
+
+/* ADDED: dot */
+.svcDot.available {
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+}
+
+.svcActive[data-active="true"] {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #16a34a;
+}
+
+.svcTop[data-status="available"] {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.svcDot.busy {
+    background: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+}
+
+.svcActive[data-active="false"] {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #dc2626;
+}
+
+.svcTop[data-status="busy"] {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.svcCard.busy .svcTitle {
+    color: #dc2626;
+}
+
+/* =========================
+IMAGE AREA
+   ========================= */
+.svcMedia {
+    /* CHANGED: push media under the curved top */
+    position: relative;
+    height: 160px;
+    /* CHANGED: closer to screenshot */
+    background: #f3f5f9;
+    /* CHANGED: light placeholder background */
+    margin: 0 18px;
+    /* ADDED: side padding like screenshot */
+    margin-top: -18px;
+    /* ADDED: slight overlap under curve */
+    border-radius: 12px;
+    /* ADDED */
+    overflow: hidden;
+    /* ADDED */
+}
+
+/* CHANGED: image fits clean */
 .svcImg {
     width: 100%;
     height: 100%;
@@ -53,119 +138,201 @@
     display: block;
 }
 
+/* CHANGED: blank state */
 .svcMedia.blank {
-    background: #111827;
+    background: #f3f5f9;
 }
 
 .svcBlank {
     width: 100%;
     height: 100%;
+    background: #f3f5f9;
 }
 
-/* rating badge */
+/* =========================
+    RATING BADGE (stars)
+   ========================= */
 .svcRating {
+    /* CHANGED: badge like screenshot (soft white badge) */
     position: absolute;
-    top: 10px;
+    bottom: 10px;
+    /* CHANGED: bottom looks nicer on image */
     right: 10px;
-    background: #111827;
-    border: 1px solid #1f2937;
+
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #e8ecf5;
     border-radius: 999px;
-    padding: 4px 9px;
+    padding: 6px 10px;
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 12px;
+    color: #25ff0d;
 }
 
+/* CHANGED: star gold */
 .svcStar {
-    color: #f5b400;
+    color: #f6b100;
 }
 
+/* CHANGED: number bold */
 .svcRatingNum {
-    font-weight: 600;
+    font-weight: 800;
 }
 
-/* body */
+/* =========================
+    BODY
+   ========================= */
 .svcBody {
-    padding: 14px 14px 12px;
+    /* CHANGED: better spacing */
+    padding: 14px 18px 16px;
 }
 
+/* CHANGED: title centered + uppercase like screenshot */
 .svcTitle {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-align: center;
     color: #fff;
+    /* CHANGED: match top color */
     margin-bottom: 8px;
 }
 
-/* chips */
+/* =========================
+   TAGS (chips)
+   ========================= */
 .svcTags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    color: #fff;
+    justify-content: center;
+    /* CHANGED: centered like clean UI */
     margin-bottom: 10px;
 }
 
+/* FIXED: you had svcTags span overriding colors badly */
 .svcTags span {
-    display: flex;
-    flex-wrap: wrap;
-    background: #7a2cff;
-    color: #ffff;
+    background: #a78bfa;
+    color: #0f172a;
 }
 
+/* CHANGED: tag chip style clean */
 .svcTag {
     font-size: 11px;
-    padding: 4px 8px;
+    padding: 6px 10px;
     border-radius: 999px;
-    background: #9b00ff;
-    border: 1px solid #1f2937;
-    color: #7a2cff;
+    background: #f3f5ff;
+    /* CHANGED: light chip */
+    border: 1px solid #e6e9ff;
+    color: #fff;
+    /* CHANGED: readable */
+    font-weight: 800;
 }
 
-/* description */
+/* =========================
+   DESCRIPTION
+   ========================= */
 .svcDesc {
-    font-size: 12px;
+    font-size: 13px;
     color: #fff;
-    line-height: 1.45;
+    /* CHANGED: gray text */
+    line-height: 1.55;
     margin-bottom: 12px;
-    min-height: 34px;
+    text-align: center;
+    /* CHANGED */
+    min-height: 40px;
 }
 
 .svcDesc p {
-    color: #fff;
+    margin: 0;
+    color: inherit;
+}
+
+/* =========================
+   CATEGORY + CITY
+   ========================= */
+.svcCate p,
+.svcCity p {
+    margin: 6px 0;
+    text-align: center;
+    /* CHANGED: centered */
+    font-size: 13px;
+    font-weight: 800;
 }
 
 .svcCate p {
-    font-size: 14px;
-    color: #827cff;
+    color: #fff;
+    /* CHANGED */
 }
 
 .svcCity p {
-    font-size: 14px;
-    color: #c853ff;
+    color: #7b8496;
+    /* CHANGED */
 }
 
-/* bottom row */
+/* =========================
+   BOTTOM ROW (Price)
+   ========================= */
 .svcBottom {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 10px;
+    margin-top: 12px;
+    /* ADDED */
 }
 
+/* CHANGED: small note style */
 .svcFrom {
-    font-size: 13px;
-    color: #fff;
+    font-size: 12px;
+    color: #7b8496;
+    font-weight: 800;
 }
-
 
 .svcNote {
     font-size: 12px;
-    color: #18a058;
+    color: #22c55e;
     margin-top: 4px;
+    font-weight: 800;
 }
 
+/* CHANGED: big price like screenshot */
 .svcPrice {
-    font-size: 13px;
-    font-weight: 700;
-    color: #7a2cff;
+    font-size: 34px;
+    font-weight: 900;
+    color: #22c55e;
+    line-height: 1;
+}
+
+/* =========================
+    BOOK NOW BUTTON (bottom)
+   ========================= */
+.svcBookBtn {
+    /* ADDED: full width CTA button */
+    width: 100%;
+    margin-top: 14px;
+    padding: 14px 14px;
+    border: 0;
+    border-radius: 12px;
+
+    background: #1f2a3a;
+    /* like screenshot */
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition: transform 0.08s ease, filter 0.2s ease;
+}
+
+.svcBookBtn:hover {
+    filter: brightness(0.98);
+}
+
+.svcBookBtn:active {
+    transform: translateY(1px);
 }

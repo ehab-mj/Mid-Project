@@ -3,14 +3,17 @@
 }
 
 .sc-title {
+    color: #fff;
     margin: 0 0 6px;
     font-size: 26px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sc-sub {
     margin: 0;
-    color: #6b7280;
+    color: #ebeced;
     font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sc-grid {
@@ -36,8 +39,8 @@
 
 .sc-card.active {
     border-color: #7c3aed;
-    box-shadow: 0 16px 34px rgba(124, 58, 237, 0.16);
-    background: rgba(124, 58, 237, 0.03);
+    box-shadow: 0 16px 34px #a78bfa;
+    /* background: #a78bfa; */
 }
 
 .sc-img {

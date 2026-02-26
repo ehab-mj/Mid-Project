@@ -51,7 +51,7 @@ export default function DecorationStep({ selectedIds = [], onChange }) {
         <div className="sc">
             <div className="sc-head">
                 <h2 className="sc-title">Select Decoration</h2>
-                <p className="sc-sub">Choose decoration package(s) for your event</p>
+                <p className="sc-sub">Choose decoration packages for your event</p>
             </div>
 
             <div className="sc-grid">
