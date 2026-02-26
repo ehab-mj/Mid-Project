@@ -49,7 +49,6 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
                 role="dialog"
                 aria-modal="true"
             >
-
                 <div className="mhead">
                     <div>
                         <div className="mtitle">{title}</div>
