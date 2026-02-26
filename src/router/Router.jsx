@@ -91,6 +91,10 @@ export const router = createBrowserRouter([
                 element: <ServicesPage />
             },
             {
+                path: "/dj",
+                element: <ServicesPage />
+            },
+            {
                 path: "/decorations",
                 element: <ServicesPage />
             },

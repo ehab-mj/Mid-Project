@@ -1,4 +1,3 @@
-/* overlay */
 .mback {
     position: fixed;
     inset: 0;
@@ -10,7 +9,6 @@
     z-index: 9999;
 }
 
-/* modal */
 .mmodal {
     width: min(980px, 96vw);
     background: #0f172a;
@@ -20,7 +18,6 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
 }
 
-/* header (purple like your screenshot) */
 .mhead {
     display: flex;
     justify-content: space-between;
@@ -53,7 +50,6 @@
     cursor: pointer;
 }
 
-/* NEW layout container */
 .mcard {
     display: grid;
     grid-template-columns: 420px 1fr;
@@ -80,7 +76,6 @@
     min-height: 260px;
 }
 
-/* right side */
 .mcard-right {
     display: flex;
     flex-direction: column;
@@ -100,7 +95,6 @@
     line-height: 1.5;
 }
 
-/* info box like first modal section */
 .mcard-info {
     background: #243254;
     border: 1px solid #243254;
@@ -129,14 +123,12 @@
     font-size: 13px;
 }
 
-/* meta lines */
 .mcard-meta p {
     margin: 6px 0;
     color: #fff;
     font-weight: 600;
 }
 
-/* availability colors */
 .isAvailable {
     margin-top: 8px;
     font-weight: 900;
@@ -150,7 +142,6 @@
     color: #ef4444;
 }
 
-/* tags chips */
 .mcard-tags {
     display: flex;
     flex-wrap: wrap;
@@ -168,7 +159,6 @@
     font-size: 13px;
 }
 
-/* actions bottom */
 .mcard-actions {
     margin-top: auto;
     display: flex;
@@ -194,7 +184,6 @@
     font-weight: 900;
     cursor: pointer;
     min-width: 220px;
-    /* makes it feel like Get Ticket */
 }
 
 .btnPrimary:disabled {
@@ -202,7 +191,6 @@
     cursor: not-allowed;
 }
 
-/* responsive */
 @media (max-width: 900px) {
     .mcard {
         grid-template-columns: 1fr;

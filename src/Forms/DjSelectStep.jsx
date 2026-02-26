@@ -22,7 +22,7 @@ export default function DjSelectStep({ selectedId = "", onSelect }) {
                     ...doc.data(),
                 }));
 
-                const djDocs = allDocs.filter((doc) => doc.category === "music");
+                const djDocs = allDocs.filter((doc) => doc.category === "DJ");
                 setDjs(djDocs);
             } catch (err) {
                 setErrorMsg(err.message || "Failed to load DJs");

@@ -46,7 +46,8 @@ export default function ServicesPage() {
         setSelectedCategory(categoryFromUrl);
     }, [categoryFromUrl]);
 
-    // ── Realtime listener for ANY category ───────────────────────
+
+
     useEffect(() => {
         if (!selectedCategory) return;
 
@@ -54,19 +55,30 @@ export default function ServicesPage() {
         setError("");
         setItems([]);
 
-        const unsubscribe = listenByCategory(
-            selectedCategory,
-            (data) => {
-                setItems(data);
-                setLoading(false);
-            },
-            (err) => {
-                setError(err.message || `Failed to load ${selectedCategory} items`);
-                setLoading(false);
-            }
+        const keysToListen =
+            selectedCategory === "music" ? ["music", "DJ"] : [selectedCategory];
+
+        const unsubscribers = keysToListen.map((key) =>
+            listenByCategory(
+                key,
+                (data) => {
+                    setItems((prev) => {
+                        const map = new Map(prev.map((x) => [x.id, x]));
+                        data.forEach((x) => map.set(x.id, x));
+                        return Array.from(map.values());
+                    });
+                    setLoading(false);
+                },
+                (err) => {
+                    setError(err.message || `Failed to load ${key} items`);
+                    setLoading(false);
+                }
+            )
         );
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribers.forEach((u) => u && u());
+        };
     }, [selectedCategory]);
 
     const handleCategoryClick = (cat) => {

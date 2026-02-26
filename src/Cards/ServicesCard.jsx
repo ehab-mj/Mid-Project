@@ -21,6 +21,29 @@ export default function ServicesCard({ item, category, onClick }) {
         item.packagePrice ??
         0;
 
+    const eventDate = item.eventDate || item.date || item.startDate || null;
+    const toJsDate = (val) => {
+        if (!val) return null;
+
+        if (typeof val.toDate === "function") return val.toDate();
+
+        if (typeof val === "object" && typeof val.seconds === "number") {
+            return new Date(val.seconds * 1000);
+        }
+
+        if (val instanceof Date) return val;
+
+        const d = new Date(val);
+        return Number.isNaN(d.getTime()) ? null : d;
+    };
+
+    const dateObj = toJsDate(eventDate);
+
+    const eventDateText = dateObj
+        ? dateObj.toLocaleDateString(undefined,
+            { year: "numeric", month: "short", day: "numeric" })
+        : null;
+
     const rating = Number(item.rating ?? item.stars ?? 4.8);
 
     const tags = useMemo(() => {
@@ -73,6 +96,12 @@ export default function ServicesCard({ item, category, onClick }) {
 
                 <div className="svcBody">
                     <div className="svcTitle">{title}</div>
+
+                    {eventDateText && (
+                        <div className="svcEventDate">
+                            {eventDateText}
+                        </div>
+                    )}
 
                     {tags?.length > 0 && (
                         <div className="svcTags">

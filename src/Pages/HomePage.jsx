@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../context/Context';
 import UserNavProfile from '../Components/Header/UserNavProfile';
 import LoginModal from '../Forms/LoginModal';
+import UpcomingEvents from '../Cards/UpcomingEvents';
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -114,8 +115,9 @@ export default function HomePage() {
                 <span>in</span>
             </div>
 
-            <div className="upcoming-title">Upcoming Events</div>
+            {/* <div className="upcoming-title">Upcoming Events</div> */}
 
+            <UpcomingEvents mode="allSameDate" />
         </div>
     )
 }

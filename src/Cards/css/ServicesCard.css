@@ -277,3 +277,12 @@ ACTIVE BADGE (top right)
 .svcBookBtn:active {
     transform: translateY(1px);
 }
+
+.svcEventDate {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+    color: #22c55e;
+}
