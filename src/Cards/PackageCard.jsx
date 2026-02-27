@@ -74,11 +74,9 @@ export default function PackageCard({ form, total, onRemove, onNotesChange }) {
 
                         <div className="rp-service-sub">📍 {form.photoLocation || "—"}</div>
 
-                        {/* ✅ NEW: show email if exists */}
                         {form.photoEmail && <div className="rp-service-sub">✉ {form.photoEmail}</div>}
                     </div>
 
-                    {/* ✅ NEW: allow remove photographer (CreateBooking already supports onRemove("photo")) */}
                     <button className="rp-trash" type="button" onClick={() => onRemove("photo")}>
                         🗑
                     </button>

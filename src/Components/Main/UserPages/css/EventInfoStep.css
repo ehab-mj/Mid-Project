@@ -22,53 +22,27 @@
 }
 
 .ei-type-btn {
-    position: relative;
-    padding: 15px 14px;
+    width: 100%;
+    padding: 14px 16px;
     border-radius: 14px;
-    background: rgba(20, 20, 40, 0.45);
-    color: rgba(255, 255, 255, .9);
-    font-weight: 700;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, .12);
 
-    transition: transform .15s ease, background .2s ease;
-    overflow: hidden;
+    background: rgba(8, 12, 35, 0.65);
+    border: 1px solid rgba(124, 58, 237, 0.45);
+
+    color: #e9edff;
+    font-weight: 700;
+    font-size: 14px;
+
+    transition: all 0.25s ease;
 }
 
 
 /* the moving shine layer */
 .ei-type-btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 1.5px;
-    border-radius: inherit;
-    background: linear-gradient(120deg,
-            #7c3aed,
-            #22d3ee,
-            #7c3aed);
-    background-size: 200% 200%;
-    animation: borderMove 4s linear infinite;
-
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-}
-
-
-/* soft glow border */
-.ei-type-btn::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, .10) inset;
-    opacity: 1;
-    z-index: 0;
-    pointer-events: none;
+    border-color: #7c3aed;
+    box-shadow:
+        0 0 0 3px rgba(124, 58, 237, 0.15),
+        0 8px 22px rgba(124, 58, 237, 0.35);
 }
 
 /* make text above layers */
@@ -109,16 +83,14 @@
     }
 }
 
-/* .ei-type-btn:hover {
-    transform: translateY(-1px);
-    border-color: rgba(34, 211, 238, .35);
-} */
-
 .ei-type-btn.selected {
-    border: 0;
-    background: linear-gradient(135deg, rgba(124, 58, 237, .95), rgba(34, 211, 238, .55));
-    color: #fff;
-    box-shadow: 0 18px 45px rgba(124, 58, 237, .28);
+    background: linear-gradient(90deg, #6d28d9, #7c3aed);
+    border-color: #22d3ee;
+    color: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(34, 211, 238, 0.12),
+        0 10px 30px rgba(124, 58, 237, 0.45);
 }
 
 .ei-type-btn.selected::before {
