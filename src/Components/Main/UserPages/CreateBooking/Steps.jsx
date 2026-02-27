@@ -6,7 +6,8 @@ export default function Steps({ current = 1 }) {
         { n: 1, label: "Event Info" },
         { n: 2, label: "Music & DJ" },
         { n: 3, label: "Decoration & Theme" },
-        { n: 4, label: "Venue" },
+        { n: 4, label: "Photography" },
+        { n: 5, label: "Venue" },
     ];
 
     return (

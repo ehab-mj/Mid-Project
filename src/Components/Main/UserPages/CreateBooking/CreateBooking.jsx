@@ -12,6 +12,7 @@ import VenueStep from "../../../../Forms/VenueStep";
 import PackageCard from "../../../../Cards/PackageCard";
 
 import "../css/CreateBooking.css";
+import PhotographerStep from "../../../../Forms/PhotographerStep";
 
 export default function CreateBooking() {
     const { AuthUser } = useContext(AuthContext);
@@ -44,6 +45,12 @@ export default function CreateBooking() {
         decorations: [],                 // [{id,name,price,image,...}]
         decorationsTotal: 0,             // sum of prices
 
+        photoId: "",
+        photoName: "",
+        photoEmail: "",
+        photoPricePerHour: 0,
+        photoLocation: "",
+
         // step 4 Venue (single)
         venueId: "",
         venueName: "",
@@ -67,7 +74,14 @@ export default function CreateBooking() {
         return Number(form.decorationsTotal || 0);
     }, [form.decorationsTotal]);
 
-    const total = useMemo(() => venueCost + djCost + decorCost, [venueCost, djCost, decorCost]);
+    const photoCost = useMemo(() => {
+        return Number(form.photoPricePerHour || 0) * Number(form.durationHours || 0);
+    }, [form.photoPricePerHour, form.durationHours]);
+
+    const total = useMemo(
+        () => venueCost + djCost + decorCost + photoCost,
+        [venueCost, djCost, decorCost, photoCost]
+    );
 
     function next() {
         setError("");
@@ -88,10 +102,14 @@ export default function CreateBooking() {
         }
 
         if (step === 4) {
+            if (!form.photoId) return setError("Choose a photographer.");
+        }
+
+        if (step === 5) {
             if (!form.venueId) return setError("Choose a venue.");
         }
 
-        setStep((s) => Math.min(s + 1, 5));
+        setStep((s) => Math.min(s + 1, 6));
     }
 
     function back() {
@@ -115,6 +133,16 @@ export default function CreateBooking() {
                 djEmail: "",
                 djPricePerHour: 0,
                 djLocation: "",
+            });
+        }
+
+        if (type === "photo") {
+            update({
+                photoId: "",
+                photoName: "",
+                photoEmail: "",
+                photoPricePerHour: 0,
+                photoLocation: "",
             });
         }
 
@@ -150,6 +178,9 @@ export default function CreateBooking() {
 
             // if (!form.djId) return setError("Choose a DJ.");
             if (!form.decorationIds.length) return setError("Choose at least 1 decoration.");
+
+            if (!form.photoId) return setError("Choose a photographer.");
+
             if (!form.venueId) return setError("Choose a venue.");
 
             const dateTimeISO = `${form.eventDate}T${form.startTime}`;
@@ -190,6 +221,16 @@ export default function CreateBooking() {
                 })),
                 decorationsTotal: Number(form.decorationsTotal || 0),
 
+                photographyId: form.photoId,
+                photographyEmail: form.photoEmail,
+                photography: {
+                    id: form.photoId,
+                    name: form.photoName,
+                    email: form.photoEmail,
+                    pricePerHour: Number(form.photoPricePerHour || 0),
+                    location: form.photoLocation,
+                },
+
                 // Venue (single)
                 venue: {
                     id: form.venueId,
@@ -205,12 +246,13 @@ export default function CreateBooking() {
                     djCost,
                     venueCost,
                     decorCost,
+                    photoCost,
                 },
                 totalPrice: total,
             };
 
             const docRef = await addDoc(collection(db, "BOOKINGS"), bookingData);
-            setSuccess(`Booking sent ✅ ID: ${docRef.id}`);
+            setSuccess(`Booking sent ID: ${docRef.id}`);
         } catch (e) {
             setSuccess("");
             setError(e.message || "Failed to create booking");
@@ -251,7 +293,6 @@ export default function CreateBooking() {
 
                 {step === 2 && (
                     <DjSelectStep
-                        // onSkip={() => setDjEmail("")}
                         selectedId={form.djId}
                         onSelect={(dj) =>
                             update({
@@ -280,8 +321,22 @@ export default function CreateBooking() {
                         }}
                     />
                 )}
-
                 {step === 4 && (
+                    <PhotographerStep
+                        selectedId={form.photoId}
+                        onSelect={(p) =>
+                            update({
+                                photoId: p?.id || "",
+                                photoName: p?.name || p?.title || "",
+                                photoEmail: p?.email || "",
+                                photoPricePerHour: p?.pricePerHour || p?.price || 0,
+                                photoLocation: p?.city || p?.location || p?.area || p?.address || "",
+                            })
+                        }
+                    />
+                )}
+
+                {step === 5 && (
                     <VenueStep
                         selectedId={form.venueId}
                         onSelect={(v) =>
@@ -297,7 +352,7 @@ export default function CreateBooking() {
                     />
                 )}
 
-                {step === 5 && (
+                {step === 6 && (
                     <PackageCard
                         form={form}
                         total={total}
@@ -330,16 +385,16 @@ export default function CreateBooking() {
 
                             setError("");
                             setSuccess("");
-                            setStep((s) => Math.min(s + 1, 5));
+                            setStep((s) => Math.min(s + 1, 6));
                         }}
                     >
                         Skip - choose later
                     </button>
                 )}
 
-                {step < 5 ? (
+                {step < 6 ? (
                     <button className="cb-continue" onClick={next} type="button">
-                        {step === 4 ? "Review Package →" : "Next →"}
+                        {step === 5 ? "Review Package →" : "Next →"}
                     </button>
                 ) : (
                     <>

@@ -10,6 +10,10 @@ export default function PackageCard({ form, total, onRemove, onNotesChange }) {
         return Number(form.djPricePerHour || 0) * Number(form.durationHours || 0);
     }, [form.djPricePerHour, form.durationHours]);
 
+    const photoCost = useMemo(() => {
+        return Number(form.photoPricePerHour || 0) * Number(form.durationHours || 0);
+    }, [form.photoPricePerHour, form.durationHours]);
+
     return (
         <div className="rp">
             <div className="rp-header">
@@ -57,6 +61,27 @@ export default function PackageCard({ form, total, onRemove, onNotesChange }) {
                         {form.djEmail && <div className="rp-service-sub">✉ {form.djEmail}</div>}
                     </div>
                     <button className="rp-trash" type="button" onClick={() => onRemove("dj")}>🗑</button>
+                </div>
+
+                <div className="rp-service photo">
+                    <div className="rp-icon">📸</div>
+                    <div className="rp-service-body">
+                        <div className="rp-service-title">{form.photoName || "Photographer"}</div>
+
+                        <div className="rp-service-sub">
+                            ₪{form.photoPricePerHour || 0}/hr × {form.durationHours}h = ₪{photoCost}
+                        </div>
+
+                        <div className="rp-service-sub">📍 {form.photoLocation || "—"}</div>
+
+                        {/* ✅ NEW: show email if exists */}
+                        {form.photoEmail && <div className="rp-service-sub">✉ {form.photoEmail}</div>}
+                    </div>
+
+                    {/* ✅ NEW: allow remove photographer (CreateBooking already supports onRemove("photo")) */}
+                    <button className="rp-trash" type="button" onClick={() => onRemove("photo")}>
+                        🗑
+                    </button>
                 </div>
 
                 {/* DECORATIONS (MULTI) */}
