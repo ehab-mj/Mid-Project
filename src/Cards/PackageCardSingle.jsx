@@ -1,6 +1,6 @@
 import React from "react";
-import "../Cards/css/PackageCardSingle.css";
-import '../Components/Main/UserPages/css/EventInfoStep.css'
+import "./css/PackageCardSingle.css"
+// import '../Components/Main/UserPages/css/EventInfoStep.css'
 const EVENT_TYPES = ["Wedding", "Birthday", "Corporate", "Anniversary", "Graduation", "Other"];
 
 export default function PackageCardSingle({
@@ -21,28 +21,28 @@ export default function PackageCardSingle({
         0;
 
     return (
-        <div className="rp">
-            <div className="rp-header">
-                <div className="rp-header-title">Your Event Package</div>
-                <div className="rp-header-sub">Review and finalize your selections</div>
+        <div className="sng">
+            <div className="sng-header">
+                <div className="sng-header-title">Your Event Package</div>
+                <div className="sng-header-sub">Review and finalize your selections</div>
             </div>
 
-            <div className="rp-body">
+            <div className="sng-body">
                 {/* ✅ Event Details (same style as EventInfoStep) */}
-                <div className="rp-box">
-                    <div className="rp-box-title">📅 Event Details</div>
+                <div className="sng-box">
+                    <div className="sng-box-title">📅 Event Details</div>
 
-                    <div className="ei">
+                    <div className="et">
                         {/* Event Type buttons */}
-                        <div className="ei-block">
-                            <label className="ei-label">Event Type *</label>
+                        <div className="et-block">
+                            <label className="et-label">Event Type *</label>
 
-                            <div className="ei-type-grid">
+                            <div className="et-type-grid">
                                 {EVENT_TYPES.map((t) => (
                                     <button
                                         key={t}
                                         type="button"
-                                        className={`ei-type-btn ${form.eventType === t ? "selected" : ""}`}
+                                        className={`et-type-btn ${form.eventType === t ? "selected" : ""}`}
                                         onClick={() => update({ eventType: t })}
                                     >
                                         {t}
@@ -52,40 +52,40 @@ export default function PackageCardSingle({
                         </div>
 
                         {/* Date + Time */}
-                        <div className="ei-row">
-                            <div className="ei-field">
-                                <label className="ei-label">Event Date *</label>
-                                <div className="ei-input-wrap">
+                        <div className="ed-row">
+                            <div className="ed-field">
+                                <label className="ed-label">Event Date *</label>
+                                <div className="ed-input-wrap">
                                     <input
-                                        className="ei-input"
+                                        className="ed-input"
                                         type="date"
                                         value={form.eventDate || ""}
                                         onChange={(e) => update({ eventDate: e.target.value })}
                                     />
-                                    <span className="ei-icon"></span>
+                                    <span className="ed-icon"></span>
                                 </div>
                             </div>
 
-                            <div className="ei-field">
-                                <label className="ei-label">Start Time *</label>
-                                <div className="ei-input-wrap">
+                            <div className="st-field">
+                                <label className="st-label">Start Time *</label>
+                                <div className="st-input-wrap">
                                     <input
-                                        className="ei-input"
+                                        className="st-input"
                                         type="time"
                                         value={form.startTime || ""}
                                         onChange={(e) => update({ startTime: e.target.value })}
                                     />
-                                    <span className="ei-icon">🕒</span>
+                                    <span className="st-icon">🕒</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Duration + Guests */}
-                        <div className="ei-row">
-                            <div className="ei-field">
-                                <label className="ei-label">Duration (hours) *</label>
+                        <div className="d-row">
+                            <div className="d-field">
+                                <label className="d-label">Duration (hours) *</label>
                                 <input
-                                    className="ei-input"
+                                    className="d-input"
                                     type="number"
                                     min="1"
                                     value={form.durationHours ?? 1}
@@ -93,10 +93,10 @@ export default function PackageCardSingle({
                                 />
                             </div>
 
-                            <div className="ei-field">
-                                <label className="ei-label">Number of Guests *</label>
+                            <div className="gu-field">
+                                <label className="gu-label">Number of Guests *</label>
                                 <input
-                                    className="ei-input"
+                                    className="gu-input"
                                     type="number"
                                     min="1"
                                     value={form.numberOfGuests ?? 1}
@@ -108,21 +108,21 @@ export default function PackageCardSingle({
                 </div>
 
                 {/* Selected service */}
-                <div className="rp-section-title">Selected Services</div>
+                <div className="ser-section-title">Selected Services</div>
 
-                <div className="rp-service dj">
-                    <div className="rp-icon">🎯</div>
-                    <div className="rp-service-body">
-                        <div className="rp-service-title">{title}</div>
-                        <div className="rp-service-sub">₪{Number(price || 0).toLocaleString()}</div>
+                <div className="se-service dj">
+                    <div className="se-icon">🎯</div>
+                    <div className="se-service-body">
+                        <div className="se-service-title">{title}</div>
+                        <div className="se-service-sub">₪{Number(price || 0).toLocaleString()}</div>
                     </div>
                 </div>
 
                 {/* Notes */}
-                <div className="rp-section-title">Additional Notes (Optional)</div>
+                <div className="note-section-title">Additional Notes (Optional)</div>
 
                 <textarea
-                    className="ei-textarea"
+                    className="txt-textarea"
                     rows="5"
                     value={form.notes || ""}
                     onChange={(e) => onNotesChange(e.target.value)}
@@ -130,12 +130,12 @@ export default function PackageCardSingle({
                 />
 
                 {/* Total */}
-                <div className="rp-total">
+                <div className="t-total">
                     <div>
-                        <div className="rp-total-title">Total Package Cost:</div>
-                        <div className="rp-total-sub">Final price subject to service provider confirmation</div>
+                        <div className="t-total-title">Total Package Cost:</div>
+                        <div className="t-total-sub">Final price subject to service provider confirmation</div>
                     </div>
-                    <div className="rp-total-price">₪{Number(total || 0).toLocaleString()}</div>
+                    <div className="t-total-price">₪{Number(total || 0).toLocaleString()}</div>
                 </div>
 
                 {/* Submit */}
