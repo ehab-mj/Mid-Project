@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import LoginModal from '../../Forms/LoginModal';
 import { AuthContext } from '../../context/Context';
 import UserNavProfile from './UserNavProfile';
+import logo from "../../assets/logo.png"
 
 export default function NavBar() {
     const { logout, login, AuthUser } = useContext(AuthContext)
@@ -26,7 +27,9 @@ export default function NavBar() {
     return (
         <>
             <nav className="nav-bar">
-                <Link className="logo" to="/">DJ PULSE</Link>
+                <Link className="logo" to="/">
+                    <img src={logo} alt="EventTune Logo" />
+                </Link>
 
                 <div className='nav-menu'>
                     <Link className="home" to="/">Home</Link>

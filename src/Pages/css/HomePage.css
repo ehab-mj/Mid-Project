@@ -3,7 +3,7 @@
     width: 100%;
     height: 720px;
     inset: 0;
-    background-image: url("./img//1000_F_724019774_pwucXi18rrwQvBEb9emCnQLnWl7SOklp.jpg");
+    background-image: url("./img/pexels-wendywei-1190297.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -163,7 +163,7 @@
 }
 
 .service-card:nth-child(2) {
-    background-image: url("https://images.unsplash.com/photo-1529543544285-b6b1fd8b3b3b?auto=format&fit=crop&w=1400&q=80");
+    background-image: url("./img/decoration.jpg");
 }
 
 .service-card:nth-child(3) {
@@ -171,7 +171,7 @@
 }
 
 .service-card:nth-child(4) {
-    background-image: url("https://images.unsplash.com/photo-1519167817931-1f9f3f9f8f3a?auto=format&fit=crop&w=1400&q=80");
+    background-image: url("./img/venue.jpg");
 }
 
 /* responsive */
