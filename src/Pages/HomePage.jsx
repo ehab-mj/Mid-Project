@@ -33,11 +33,6 @@ export default function HomePage() {
             <div className="home-overlay" />
 
             <div className="welcome-section">
-                {/* <h1>Your Complete Event Planning Solution</h1>
-                <p>
-                    Book DJs, decorations, staff, venues, and more.
-                    Create your perfect event package in minutes.
-                </p> */}
             </div>
 
             <section className="services-wrapper">
@@ -115,7 +110,6 @@ export default function HomePage() {
                 <span>in</span>
             </div>
 
-            {/* <div className="upcoming-title">Upcoming Events</div> */}
 
             <UpcomingEvents mode="allSameDate" />
         </div>

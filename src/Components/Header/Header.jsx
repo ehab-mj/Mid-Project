@@ -5,7 +5,6 @@ export default function Header() {
     return (
         <div>
             <NavBar />
-            {/* <Search /> */}
         </div>
     )
 }

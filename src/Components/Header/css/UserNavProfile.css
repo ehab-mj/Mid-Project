@@ -10,6 +10,14 @@
     gap: 12px;
 }
 
+.nav-profile-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
 #nav-user-icon {
     width: 30px;
     height: 30px;

@@ -93,9 +93,6 @@ export default function CreateBooking() {
             if (!form.startTime) return setError("Choose start time.");
         }
 
-        // if (step === 2) {
-        //     if (!form.djId) return setError("Choose a DJ.");
-        // }
 
         if (step === 3) {
             if (!form.decorationIds.length) return setError("Choose at least 1 decoration.");
