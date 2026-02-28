@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import './css/NavBar.css';
 import Search from './Search';
 import { useContext, useState } from 'react';
@@ -11,6 +11,8 @@ export default function NavBar() {
     const { logout, login, AuthUser } = useContext(AuthContext)
     const [open, setOpen] = useState(false);
     const goHome = useNavigate();
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const role = String(AuthUser?.role || "").toLowerCase();
     const isRegular = role === "regular" || role === "user";
@@ -32,8 +34,18 @@ export default function NavBar() {
                 </Link>
 
                 <div className='nav-menu'>
-                    <Link className="home" to="/">Home</Link>
-                    <Link className="services" to="/services">All Services</Link>
+                    <Link
+                        className={`home ${currentPath === "/" ? "active" : ""}`}
+                        to="/"
+                    >
+                        Home
+                    </Link>
+                    <Link
+                        className={`services ${currentPath.startsWith("/services") ? "active" : ""
+                            }`}
+                        to="/services"
+                    >All Services
+                    </Link>
                 </div>
 
 
