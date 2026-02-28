@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import './css/UserNavProfile.css'
 import profile from '../../assets/man.png'
+import logoutIcon from "../../assets/logout.png";
+
 export default function UserNavProfile({ user, logout }) {
     const profileLink = user.role === "dj" ? "/djprofile" : "/profile";
 
@@ -32,7 +34,11 @@ export default function UserNavProfile({ user, logout }) {
                 onClick={logout}
             >
                 <span id="nav-logout-icon">
-
+                    <img
+                        src={logoutIcon}
+                        alt="Profile"
+                        className="nav-profile-img"
+                    />
                 </span>
                 Logout
             </button>
