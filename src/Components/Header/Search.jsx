@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
-import filterIcon from "./filter.png";
+// import filterIcon from "./filter.png";
+import filterIcon from "../../assets/filter.png"
 import "./css/Search.css";
 import ShowSearch from "./Showsearch";
 

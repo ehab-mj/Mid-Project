@@ -81,8 +81,8 @@
 
 /* ====== SEARCH INPUT + CONTROLS ====== */
 .search-input {
-    width: 100%;
-    padding: 16px 124px 16px 16px;
+    width: 85.5%;
+    padding: 20px 124px 16px 16px;
     border-radius: 14px;
     border: 1px solid var(--border);
     background: var(--surface-2);
