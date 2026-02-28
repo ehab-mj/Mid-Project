@@ -105,21 +105,6 @@ export default function DJDashboard() {
                 formatEventDate={formatEventDate}
                 setStatus={setStatus}
             />
-            {/* {bookings.map((b) => (
-                    <div key={b.id}>
-                        <h3>{b.eventType || "Booking"}</h3>
-                        <p><strong>Location:</strong> {b.location}</p>
-                        <p><strong>People:</strong> {b.numberOfGuests}</p>
-                        <p><strong>Status:</strong> {b.status}</p>
-                        <hr />
-
-                        <BookingReq
-                            bookingId={b.id}
-                            status={b.status}
-                            onSetStatus={setStatus}
-                        />
-                    </div>
-                ))} */}
         </div>
     )
 }

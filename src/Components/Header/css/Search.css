@@ -1,101 +1,165 @@
-/* =========================
-MINI SEARCH (Navbar)
-========================= */
+/* =========================================================
+   DJ Pulse — Search Overlay (Dark Neon / Glass)
+   CSS ONLY — Harmonized Colors
+   ========================================================= */
+
+/* ====== COLOR TOKENS (عدّل إذا حبيت) ====== */
+:root {
+    --bg: #070b14;
+    /* خلفية عامة */
+    --gradient: radial-gradient(1200px 600px at 20% -10%, #101635 0%, #0B0F1A 48%, #070B14 100%);
+
+    /* أسطح زجاجية */
+    --surface-1: rgba(255, 255, 255, 0.06);
+    --surface-2: rgba(255, 255, 255, 0.08);
+    --surface-3: rgba(255, 255, 255, 0.12);
+
+    /* حدود وظلال */
+    --border: rgba(255, 255, 255, 0.14);
+    --border-soft: rgba(255, 255, 255, 0.10);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+
+    /* نصوص */
+    --text: #ffffff;
+    --muted: #cfd2de;
+    --soft: #aeb4c3;
+
+    /* ألوان العلامة */
+    --primary: #7c3aed;
+    --primary-dark: #5b21b6;
+    --primary-soft: rgba(124, 58, 237, 0.18);
+
+    /* دلالية (احتياطي للكروت) */
+    --ok: #22c55e;
+    --ok-bg: rgba(34, 197, 94, 0.18);
+    --warn: #f59e0b;
+    --warn-bg: rgba(245, 158, 11, 0.18);
+}
+
+/* ====== MINI SEARCH (Navbar) ====== */
 .nav-search-mini {
     width: 220px;
     padding: 8px 12px;
-    border: 1px solid #e7e7e7;
     border-radius: 999px;
     cursor: text;
-    background: #fff;
+    color: var(--text);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    transition: box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.nav-search-mini:hover {
+    background: var(--surface-2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .nav-search-placeholder {
-    opacity: 0.6;
+    opacity: .7;
+    color: var(--muted);
 }
 
-/* =========================
-OVERLAY (Full screen)
-✅ scroll fixed overlay
-========================= */
+/* ====== OVERLAY (Full screen) ====== */
 .search-overlay {
     position: fixed;
     inset: 0;
-    background: #fff;
     z-index: 9999;
-
+    background: var(--gradient);
     overflow-y: auto;
-    /* ✅ allow scrolling */
     -webkit-overflow-scrolling: touch;
 }
 
 .search-topbar {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 16px 40px;
-    /* bottom padding so you can scroll past last row */
+    max-width: 980px;
+    margin: 32px auto 48px;
+    padding: 0 16px 42px;
 }
 
 .search-box {
     position: relative;
 }
 
-/* =========================
-   SEARCH INPUT + BUTTONS
-========================= */
+/* ====== SEARCH INPUT + CONTROLS ====== */
 .search-input {
     width: 100%;
-    padding: 14px 120px 14px 16px;
-    border: 1px solid #e7e7e7;
+    padding: 16px 124px 16px 16px;
     border-radius: 14px;
-    font-size: 15px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 16px;
     outline: none;
-    background: #fff;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.search-input::placeholder {
+    color: var(--soft);
+    opacity: .85;
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    background: var(--surface-1);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, .25), var(--shadow);
+}
+
+.filter-btn,
+.close-btn {
+    position: absolute;
+    top: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    cursor: pointer;
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    transition: background .15s ease, transform .12s ease, box-shadow .15s ease, border-color .15s ease;
+    backdrop-filter: blur(10px);
 }
 
 .filter-btn {
-    position: absolute;
-    right: 52px;
-    top: 8px;
-    width: 40px;
-    height: 40px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    background: #fff;
-    cursor: pointer;
+    right: 56px;
+}
+
+.close-btn {
+    right: 8px;
+    font-weight: 900;
+}
+
+.filter-btn:hover,
+.close-btn:hover {
+    background: var(--surface-1);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+    border-color: var(--primary);
 }
 
 .filter-icon {
     width: 22px;
     height: 22px;
+    filter: brightness(1.1);
 }
 
-.close-btn {
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    width: 40px;
-    height: 40px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    background: #fff;
-    cursor: pointer;
-}
-
-/* =========================
-   FILTERS PANEL
-========================= */
+/* ====== FILTERS PANEL ====== */
 .filters-panel {
     margin-top: 12px;
-    border: 1px solid #eee;
+    border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 12px;
-    background: #fff;
+    padding: 14px;
+    background: var(--surface-1);
+    color: var(--text);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
 }
 
 .filter-section {
-    padding: 10px 0;
-    border-bottom: 1px solid #f2f2f2;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .filter-section:last-child {
@@ -106,22 +170,39 @@ OVERLAY (Full screen)
     display: flex;
     gap: 10px;
     align-items: center;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 10px;
+    color: var(--text);
+}
+
+.filter-title input {
+    accent-color: var(--primary);
 }
 
 .filter-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .filter-grid input {
     padding: 10px 12px;
-    border: 1px solid #e7e7e7;
     border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
     outline: none;
-    background: #fff;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.filter-grid input::placeholder {
+    color: var(--soft);
+}
+
+.filter-grid input:focus {
+    border-color: var(--primary);
+    background: var(--surface-1);
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, .20);
 }
 
 .filters-actions {
@@ -132,46 +213,62 @@ OVERLAY (Full screen)
 
 .reset-btn {
     padding: 10px 12px;
-    border: 1px solid #eee;
     border-radius: 10px;
-    background: #fff;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
     cursor: pointer;
+    transition: background .15s ease, transform .12s ease, box-shadow .15s ease;
 }
 
-/* =========================
-   EMPTY MESSAGE
-========================= */
+.reset-btn:hover {
+    background: var(--surface-1);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* ====== EMPTY MESSAGE ====== */
 .result-empty {
     margin-top: 14px;
-    padding: 14px;
-    border: 1px solid #eee;
+    padding: 16px;
+    border: 1px solid var(--border);
     border-radius: 14px;
-    opacity: 0.7;
+    background: var(--surface-1);
+    color: #fff;
+    /* أبيض واضح */
+    text-align: center;
+    backdrop-filter: blur(8px);
 }
 
-/* =========================
-   RESULTS GRID (cards)
-========================= */
+/* ====== RESULTS GRID (cards) ====== */
 .search-grid {
-    margin-top: 18px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 320px));
     gap: 26px;
     justify-content: center;
 }
 
-/* =========================
-   CARD
-========================= */
+/* ====== CARD ====== */
 .search-card {
-    border: 0;
+    border: 1px solid var(--border);
     padding: 0;
     text-align: left;
-    background: #fff;
+    background: var(--surface-2);
+    color: var(--text);
     border-radius: 18px;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow);
+    transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    backdrop-filter: blur(10px);
+}
+
+.search-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+    border-color: var(--primary);
+    background: var(--surface-1);
 }
 
 .search-media {
@@ -189,11 +286,14 @@ OVERLAY (Full screen)
     position: absolute;
     top: 10px;
     right: 10px;
-    background: #fff;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    color: var(--text);
     border-radius: 999px;
     padding: 4px 10px;
     font-size: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
 }
 
 .search-body {
@@ -202,8 +302,9 @@ OVERLAY (Full screen)
 
 .search-title {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 8px;
+    color: var(--text);
 }
 
 .search-tags {
@@ -217,13 +318,14 @@ OVERLAY (Full screen)
     font-size: 11px;
     padding: 4px 10px;
     border-radius: 999px;
-    background: #f3e8ff;
-    color: #6b21a8;
+    background: rgba(124, 58, 237, 0.18);
+    color: #e7ddff;
+    border: 1px solid rgba(124, 58, 237, 0.35);
 }
 
 .search-desc {
     font-size: 13px;
-    opacity: 0.75;
+    color: var(--muted);
     margin-bottom: 12px;
 }
 
@@ -235,18 +337,16 @@ OVERLAY (Full screen)
 
 .search-cat {
     font-size: 12px;
-    opacity: 0.7;
+    color: var(--soft);
     text-transform: lowercase;
 }
 
 .search-price {
-    font-weight: 700;
-    color: #7c3aed;
+    font-weight: 800;
+    color: var(--primary);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* ====== RESPONSIVE ====== */
 @media (max-width: 1050px) {
     .search-grid {
         grid-template-columns: repeat(2, minmax(0, 320px));
@@ -269,4 +369,25 @@ OVERLAY (Full screen)
     .filter-grid {
         grid-template-columns: 1fr;
     }
+
+    .search-input {
+        padding-right: 116px;
+    }
+
+    /* مساحة الأزرار */
+}
+
+/* ====== Optional: تخصيص السْكرول ====== */
+.search-overlay::-webkit-scrollbar {
+    width: 10px;
+}
+
+.search-overlay::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.search-overlay::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.45);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.25);
 }
