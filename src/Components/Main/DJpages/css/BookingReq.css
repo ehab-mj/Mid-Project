@@ -19,7 +19,7 @@
 
 .dj-btn.approve {
     background: #16a34a;
-    color: #fff;
+    color: #ffffff;
 }
 
 .dj-btn.approve:hover {
@@ -27,7 +27,7 @@
 }
 
 .dj-btn.decline:hover {
-    background: #fef2f2;
+    background: #ffffff;
 }
 
 .dj-error {
