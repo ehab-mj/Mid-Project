@@ -357,6 +357,7 @@
     }
 }
 
+
 @media (max-width: 700px) {
     .nav-search-mini {
         width: 180px;
@@ -374,10 +375,8 @@
         padding-right: 116px;
     }
 
-    /* مساحة الأزرار */
 }
 
-/* ====== Optional: تخصيص السْكرول ====== */
 .search-overlay::-webkit-scrollbar {
     width: 10px;
 }

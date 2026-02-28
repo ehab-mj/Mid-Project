@@ -11,6 +11,7 @@ export default function NavBar() {
     const { logout, login, AuthUser } = useContext(AuthContext)
     const [open, setOpen] = useState(false);
     const goHome = useNavigate();
+
     const location = useLocation();
     const currentPath = location.pathname;
 
@@ -26,6 +27,7 @@ export default function NavBar() {
         login(newUser)
         setOpen(false);
     }
+
     return (
         <>
             <nav className="nav-bar">
