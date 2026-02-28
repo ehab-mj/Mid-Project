@@ -43,7 +43,6 @@
     color: #fff;
 }
 
-/* icon */
 .st-icon {
     display: inline-flex;
     align-items: center;
@@ -54,21 +53,17 @@
     padding: 0 5px;
 }
 
-/* label */
 .st-text {
     line-height: 1;
 }
 
-/* count pill */
 .st-count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     height: 22px;
     min-width: 22px;
     padding: 0 25px 0 10px;
-
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.10);
     color: rgba(255, 255, 255, 0.85);
@@ -77,7 +72,6 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* active tab */
 .st-tab.active {
     color: #fff;
     border: 0;
@@ -91,19 +85,16 @@
     border-color: rgba(255, 255, 255, .16);
 }
 
-/* remove old underline style */
 .st-tab.active::after {
     content: none;
 }
 
-/* thin divider line under tabs */
 .st-line {
     height: 1px;
     background: rgba(255, 255, 255, 0.10);
     width: 100%;
 }
 
-/* responsive */
 @media (max-width: 640px) {
     .st-wrap {
         padding: 0 16px;
