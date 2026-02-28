@@ -1,12 +1,9 @@
-/* Services_Tabs.css */
-
 .st-wrap {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 22px;
 }
 
-/* row of tabs */
 .st-row {
     display: flex;
     align-items: center;
@@ -15,28 +12,22 @@
     padding: 12px 0 12px;
 }
 
-/* each tab */
 .st-tab {
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
     padding: 10px 14px;
     border-radius: 14px;
-
     border: 1px solid rgba(255, 255, 255, 0.10);
     background: rgba(18, 18, 45, 0.55);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
     cursor: pointer;
-
     color: #fff;
     font-weight: 800;
     font-size: 14px;
     letter-spacing: 0.2px;
-
     transition: transform .12s ease, border-color .2s ease, background .2s ease, color .2s ease;
 }
 
@@ -60,6 +51,7 @@
     font-size: 18px;
     line-height: 1;
     opacity: .9;
+    padding: 0 5px;
 }
 
 /* label */
@@ -75,14 +67,13 @@
 
     height: 22px;
     min-width: 22px;
-    padding: 0 8px;
+    padding: 0 25px 0 10px;
 
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.10);
     color: rgba(255, 255, 255, 0.85);
     font-size: 12px;
     font-weight: 900;
-
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
