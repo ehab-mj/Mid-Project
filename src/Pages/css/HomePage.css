@@ -68,11 +68,10 @@
 }
 
 
-/* ==================== */
+
 
 .services-wrapper {
     background: #0b1022;
-    /* dark background */
     padding: 60px 0;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -86,47 +85,42 @@
     letter-spacing: 1px;
 }
 
-/* ONE LINE layout */
+
 .services-grid {
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 30px;
-
     display: flex;
     justify-content: center;
     gap: 28px;
     flex-wrap: nowrap;
-    /* force one line */
+
 }
 
-/* smaller cards */
+
 .service-card {
     position: relative;
     width: 260px;
     height: 160px;
-
     border-radius: 18px;
     overflow: hidden;
     text-decoration: none;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-size: cover;
     background-position: center;
-
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
     transition: all .25s ease;
 }
 
-/* hover effect */
+
 .service-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6);
 }
 
-/* dark overlay */
+
 .service-card::after {
     content: "";
     position: absolute;
@@ -135,11 +129,10 @@
     z-index: 1;
 }
 
-/* BIG CENTER TEXT */
+
 .service-card h3 {
     position: relative;
     z-index: 2;
-
     font-size: 22px;
     font-weight: 900;
     letter-spacing: 1px;
@@ -148,17 +141,17 @@
     text-align: center;
 }
 
-/* hide description */
+
 .service-card p {
     display: none;
 }
 
-/* REMOVE ICONS */
+
 .service-card .icon {
     display: none;
 }
 
-/* background images */
+
 .service-card:nth-child(1) {
     background-image: url("https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=1400&q=80");
 }
@@ -175,14 +168,14 @@
     background-image: url("./img/venue.jpg");
 }
 
-/* responsive */
+
 @media (max-width: 1200px) {
     .services-grid {
         flex-wrap: wrap;
     }
 }
 
-/* Problems/Solutions */
+
 
 .ps-wrapper {
     max-width: 1100px;
@@ -192,7 +185,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ===== HEADER ===== */
+
 .ps-header {
     text-align: center;
     margin-bottom: 40px;
@@ -210,14 +203,14 @@
     font-weight: 600;
 }
 
-/* ===== GRID ===== */
+
 .ps-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
-/* ===== CARD ===== */
+
 .ps-card {
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -234,33 +227,33 @@
     box-shadow: 0 20px 40px rgba(124, 58, 237, 0.25);
 }
 
-/* ===== TITLES ===== */
+
 .ps-title {
     font-size: 20px;
     font-weight: 900;
     margin-bottom: 20px;
 }
 
-/* Problems title (red glow) */
+
 .ps-title--problems {
     color: #ef4444;
     text-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
 }
 
-/* Solutions title (purple glow) */
+
 .ps-title--solutions {
     color: #7c3aed;
     text-shadow: 0 0 12px rgba(124, 58, 237, 0.4);
 }
 
-/* ===== LIST ===== */
+
 .ps-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-/* ===== ITEM ===== */
+
 .ps-item {
     display: flex;
     justify-content: space-between;
@@ -272,7 +265,7 @@
     transition: 0.2s ease;
 }
 
-/* Problem item style */
+
 .ps-item--problem {
     background: rgba(239, 68, 68, 0.08);
     border: 1px solid rgba(239, 68, 68, 0.2);
@@ -282,7 +275,7 @@
     background: rgba(239, 68, 68, 0.15);
 }
 
-/* Solution item style */
+
 .ps-item--solution {
     background: rgba(124, 58, 237, 0.10);
     border: 1px solid rgba(124, 58, 237, 0.3);
@@ -292,28 +285,28 @@
     background: rgba(124, 58, 237, 0.18);
 }
 
-/* ===== TEXT ===== */
+
 .ps-text {
     color: #ffffff;
 }
 
-/* ===== BULLETS ===== */
+
 .ps-bullet {
     font-size: 16px;
     font-weight: 900;
 }
 
-/* Red X */
+
 .ps-bullet--x {
     color: #ef4444;
 }
 
-/* Green Check */
+
 .ps-bullet--check {
     color: #22c55e;
 }
 
-/* ===== RESPONSIVE ===== */
+
 @media (max-width: 900px) {
     .ps-grid {
         grid-template-columns: 1fr;

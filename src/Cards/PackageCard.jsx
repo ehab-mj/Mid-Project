@@ -82,7 +82,7 @@ export default function PackageCard({ form, total, onRemove, onNotesChange }) {
                     </button>
                 </div>
 
-                {/* DECORATIONS (MULTI) */}
+                {/* DECORATIONS*/}
                 <div className="rp-section-title" style={{ marginTop: 16 }}>Decorations</div>
 
                 {(form.decorations || []).length === 0 ? (

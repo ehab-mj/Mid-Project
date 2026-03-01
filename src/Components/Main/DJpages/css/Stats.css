@@ -18,7 +18,7 @@
     font-weight: 600;
 }
 
-/* h2 DJ Dashboard */
+
 .dj-page h2 {
     margin: 18px 0 10px;
     font-size: 22px;
@@ -27,14 +27,14 @@
     text-shadow: 0 0 14px rgba(124, 58, 237, 0.25);
 }
 
-/* ===== ERROR ===== */
+
 .dj-error {
     color: #ef4444;
     font-weight: 700;
     margin: 12px 0;
 }
 
-/* ===== STATS ===== */
+
 .dj-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -67,7 +67,7 @@
     margin-top: 6px;
 }
 
-/* STAT ICONS */
+
 .dj-stat-icon {
     width: 40px;
     height: 40px;

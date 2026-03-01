@@ -1,12 +1,7 @@
-/* =========================
-CARD WRAPPER (new style)
-   ========================= */
 .svcCard {
     width: 320px;
     height: 590px;
     max-width: 100%;
-
-    /* CHANGED COLORS */
     background: rgba(255, 255, 255, 0.08);
     border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -20,43 +15,30 @@ CARD WRAPPER (new style)
 
 .svcCard:hover {
     transform: translateY(-4px);
-
-    /* CHANGED COLORS */
     box-shadow:
         0 22px 60px rgba(0, 0, 0, 0.7),
         0 0 22px rgba(124, 58, 237, 0.28);
     cursor: pointer;
 }
 
-/* =========================
-TOP COLOR CURVE AREA
-   ========================= */
 .svcTop {
     height: 78px;
     position: relative;
-
-    /* CHANGED COLORS */
     background: linear-gradient(90deg, #6d28d9, #7c3aed);
 }
 
-/* curved cap */
 .svcTopCurve {
     position: absolute;
     left: -30px;
     right: -30px;
     bottom: -1px;
     height: 72px;
-
-    /* CHANGED COLORS */
     background: rgba(10, 14, 38, 0.95);
 
     border-top-left-radius: 120px;
     border-top-right-radius: 120px;
 }
 
-/* =========================
-ACTIVE BADGE (top right)
-   ========================= */
 .svcActive {
     position: absolute;
     top: 12px;
@@ -65,72 +47,54 @@ ACTIVE BADGE (top right)
     display: inline-flex;
     align-items: center;
     gap: 8px;
-
     padding: 7px 10px;
     border-radius: 999px;
-
-    /* CHANGED COLORS */
     background: rgba(10, 14, 38, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.10);
     color: rgba(234, 240, 255, 0.9);
-
     font-size: 12px;
     font-weight: 700;
     backdrop-filter: blur(6px);
 }
 
-/* dot */
 .svcDot.available {
-    /* keep green */
     background: #22c55e;
     box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
 }
 
 .svcActive[data-active="true"] {
-    /* CHANGED COLORS (green but matches theme) */
     background: rgba(34, 197, 94, 0.10);
     border: 1px solid rgba(34, 197, 94, 0.35);
     color: #22c55e;
 }
 
 .svcTop[data-status="available"] {
-    /* CHANGED COLORS */
     background: linear-gradient(90deg, #6d28d9, #22d3ee);
 }
 
 .svcDot.busy {
-    /* keep red */
     background: #ef4444;
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
 }
 
 .svcActive[data-active="false"] {
-    /* CHANGED COLORS */
     background: rgba(239, 68, 68, 0.10);
     border: 1px solid rgba(239, 68, 68, 0.35);
     color: #ef4444;
 }
 
 .svcTop[data-status="busy"] {
-    /* CHANGED COLORS */
     background: linear-gradient(90deg, #7c3aed, #ef4444);
 }
 
 .svcCard.busy .svcTitle {
-    /* CHANGED COLORS */
     color: rgba(234, 240, 255, 0.7);
 }
 
-/* =========================
-MEDIA
-   ========================= */
 .svcMedia {
     position: relative;
     height: 160px;
-
-    /* CHANGED COLORS */
     background: rgba(12, 18, 55, 0.75);
-
     margin: 0 18px;
     margin-top: -18px;
     border-radius: 12px;
@@ -145,41 +109,31 @@ MEDIA
 }
 
 .svcMedia.blank {
-    /* CHANGED COLORS */
     background: rgba(12, 18, 55, 0.75);
 }
 
 .svcBlank {
     width: 100%;
     height: 100%;
-
-    /* CHANGED COLORS */
     background: rgba(12, 18, 55, 0.75);
 }
 
-/* rating badge */
 .svcRating {
     position: absolute;
     bottom: 10px;
     right: 10px;
-
-    /* CHANGED COLORS */
     background: rgba(10, 14, 38, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.10);
-
     border-radius: 999px;
     padding: 6px 10px;
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 12px;
-
-    /* CHANGED COLORS */
     color: rgba(234, 240, 255, 0.85);
 }
 
 .svcStar {
-    /* keep gold */
     color: #f6b100;
 }
 
@@ -187,9 +141,6 @@ MEDIA
     font-weight: 800;
 }
 
-/* =========================
-BODY
-   ========================= */
 .svcBody {
     padding: 14px 18px 16px;
 }
@@ -200,10 +151,7 @@ BODY
     letter-spacing: 0.6px;
     text-transform: uppercase;
     text-align: center;
-
-    /* CHANGED COLORS */
     color: #eaf0ff;
-
     margin-bottom: 8px;
 }
 
@@ -211,16 +159,12 @@ BODY
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-
-    /* CHANGED COLORS */
     color: #eaf0ff;
-
     justify-content: center;
     margin-bottom: 10px;
 }
 
 .svcTags span {
-    /* CHANGED COLORS */
     background: rgba(124, 58, 237, 0.18);
     color: #c4b5fd;
     border: 1px solid rgba(124, 58, 237, 0.35);
@@ -230,11 +174,8 @@ BODY
     font-size: 11px;
     padding: 6px 10px;
     border-radius: 999px;
-
-    /* CHANGED COLORS */
     background: rgba(124, 58, 237, 0.18);
     color: #c4b5fd;
-
     font-weight: 800;
 }
 
@@ -245,8 +186,6 @@ BODY
     min-height: 40px;
     font-size: 13px;
     margin: 0;
-
-    /* CHANGED COLORS */
     color: rgba(234, 240, 255, 0.70);
 }
 
@@ -259,18 +198,13 @@ BODY
 }
 
 .svcCate p {
-    /* CHANGED COLORS */
     color: rgba(234, 240, 255, 0.85);
 }
 
 .svcCity p {
-    /* CHANGED COLORS */
     color: rgba(234, 240, 255, 0.55);
 }
 
-/* =========================
-BOTTOM / PRICE
-   ========================= */
 .svcBottom {
     display: flex;
     justify-content: space-between;
@@ -281,19 +215,13 @@ BOTTOM / PRICE
 
 .svcFrom {
     font-size: 12px;
-
-    /* CHANGED COLORS */
     color: rgba(234, 240, 255, 0.55);
-
     font-weight: 800;
 }
 
 .svcNote {
     font-size: 12px;
-
-    /* CHANGED COLORS */
     color: #22d3ee;
-
     margin-top: 4px;
     font-weight: 800;
 }
@@ -301,27 +229,18 @@ BOTTOM / PRICE
 .svcPrice {
     font-size: 34px;
     font-weight: 900;
-
-    /* CHANGED COLORS */
     color: #eaf0ff;
-
     line-height: 1;
 }
 
-/* =========================
-BUTTON
-   ========================= */
 .svcBookBtn {
     width: 100%;
     margin-top: 14px;
     padding: 14px 14px;
     border: 0;
     border-radius: 12px;
-
-    /* CHANGED COLORS */
     background: linear-gradient(90deg, #6d28d9, #7c3aed);
     color: #ffffff;
-
     font-weight: 900;
     letter-spacing: 0.6px;
     text-transform: uppercase;
@@ -331,8 +250,6 @@ BUTTON
 
 .svcBookBtn:hover {
     filter: brightness(1.05);
-
-    /* CHANGED COLORS */
     box-shadow: 0 10px 26px rgba(124, 58, 237, 0.45);
 }
 
@@ -340,14 +257,11 @@ BUTTON
     transform: translateY(1px);
 }
 
-/* date */
 .svcEventDate {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
     font-weight: 900;
     font-size: 18px;
-
-    /* CHANGED COLORS */
     color: #22d3ee;
 }

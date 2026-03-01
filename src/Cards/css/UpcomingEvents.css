@@ -24,7 +24,6 @@
     color: #ff6b6b;
 }
 
-/* ✅ Use flex to center + wrap service cards */
 .upc-grid {
     width: 100%;
     display: flex;
