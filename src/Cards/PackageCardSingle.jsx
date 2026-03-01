@@ -28,12 +28,10 @@ export default function PackageCardSingle({
             </div>
 
             <div className="sng-body">
-                {/* ✅ Event Details (same style as EventInfoStep) */}
                 <div className="sng-box">
                     <div className="sng-box-title">📅 Event Details</div>
 
                     <div className="et">
-                        {/* Event Type buttons */}
                         <div className="et-block">
                             <label className="et-label">Event Type *</label>
 
@@ -51,7 +49,6 @@ export default function PackageCardSingle({
                             </div>
                         </div>
 
-                        {/* Date + Time */}
                         <div className="ed-row">
                             <div className="ed-field">
                                 <label className="ed-label">Event Date *</label>
@@ -80,7 +77,6 @@ export default function PackageCardSingle({
                             </div>
                         </div>
 
-                        {/* Duration + Guests */}
                         <div className="d-row">
                             <div className="d-field">
                                 <label className="d-label">Duration (hours) *</label>
@@ -107,7 +103,6 @@ export default function PackageCardSingle({
                     </div>
                 </div>
 
-                {/* Selected service */}
                 <div className="ser-section-title">Selected Services</div>
 
                 <div className="se-service dj">
@@ -118,7 +113,6 @@ export default function PackageCardSingle({
                     </div>
                 </div>
 
-                {/* Notes */}
                 <div className="note-section-title">Additional Notes (Optional)</div>
 
                 <textarea
@@ -129,7 +123,6 @@ export default function PackageCardSingle({
                     placeholder="Any special requests or information about your event..."
                 />
 
-                {/* Total */}
                 <div className="t-total">
                     <div>
                         <div className="t-total-title">Total Package Cost:</div>
@@ -138,7 +131,6 @@ export default function PackageCardSingle({
                     <div className="t-total-price">₪{Number(total || 0).toLocaleString()}</div>
                 </div>
 
-                {/* Submit */}
                 <div style={{ marginTop: 16, display: "flex", justifyContent: "flex-end" }}>
                     <button className="cb-continue" type="button" onClick={onSubmit}>
                         Send Booking →

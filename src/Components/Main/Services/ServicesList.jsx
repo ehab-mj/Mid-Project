@@ -80,7 +80,7 @@ function ServiceCardFunc({ item }) {
 
     return (
         <div className="service-card">
-            {/* صورة */}
+
             {imageUrl ? (
                 <img src={imageUrl} alt={name} className="card-image" loading="lazy" />
             ) : (
@@ -88,7 +88,7 @@ function ServiceCardFunc({ item }) {
             )}
 
             <div className="card-body">
-                {/* العنوان + التقييم */}
+
                 <div className="card-heading">
                     <h3 className="service-name">{name}</h3>
                     {typeof rating === "number" && (
@@ -96,10 +96,10 @@ function ServiceCardFunc({ item }) {
                     )}
                 </div>
 
-                {/* الوصف */}
+
                 {description && <p className="service-description">{description}</p>}
 
-                {/* التاغز */}
+
                 {!!features.length && (
                     <div className="tags">
                         {features.slice(0, 4).map((t, i) => (
@@ -110,7 +110,7 @@ function ServiceCardFunc({ item }) {
                     </div>
                 )}
 
-                {/* السعر + ملاحظة التوفر */}
+
                 <div className="card-footer">
                     {typeof price === "number" && (
                         <span className="service-price">${price.toLocaleString()}</span>

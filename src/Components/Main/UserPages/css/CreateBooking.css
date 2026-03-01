@@ -10,7 +10,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ---------- Header text ---------- */
+
 .cb-title {
     max-width: 1100px;
     margin: 0 auto;
@@ -26,7 +26,7 @@
     font-size: 15px;
 }
 
-/* ---------- Stepper wrap ---------- */
+
 .cb-stepper-wrap {
     max-width: 1100px;
     margin: 0 auto 18px;
@@ -40,7 +40,7 @@
     backdrop-filter: blur(10px);
 }
 
-/* ---------- Main card area (where steps render) ---------- */
+
 .cb-card {
     max-width: 1100px;
     margin: 0 auto;
@@ -57,7 +57,7 @@
     backdrop-filter: blur(10px);
 }
 
-/* ---------- Error / Success ---------- */
+
 .cb-error,
 .cb-success {
     max-width: 1100px;
@@ -82,7 +82,7 @@
     color: #bbf7d0;
 }
 
-/* ---------- Actions row ---------- */
+
 .cb-actions {
     max-width: 1100px;
     margin: 18px auto 0;
@@ -94,7 +94,6 @@
     flex-wrap: wrap;
 }
 
-/* base button */
 .cb-actions button {
     border: 1px solid rgba(255, 255, 255, 0.10);
     background: rgba(12, 18, 55, 0.60);
@@ -126,13 +125,13 @@
     box-shadow: none;
 }
 
-/* Back button */
+
 .cb-back {
     min-width: 150px;
     background: rgba(15, 20, 55, 0.55);
 }
 
-/* Skip button (purple outline, subtle) */
+
 .cb-skip {
     min-width: 220px;
     border: none !important;
@@ -147,7 +146,7 @@
     transform: translateY(-2px);
 }
 
-/* Continue (primary gradient) */
+
 .cb-continue {
     min-width: 220px;
     border: none !important;
@@ -160,7 +159,7 @@
     box-shadow: 0 14px 34px rgba(124, 58, 237, 0.45);
 }
 
-/* Edit button (cyan tint) */
+
 .cb-edit {
     min-width: 220px;
     border: none !important;
@@ -175,7 +174,7 @@
     transform: translateY(-2px);
 }
 
-/* ---------- Typography fallback for h1 in the two "not allowed" states ---------- */
+
 .cb-page h1 {
     max-width: 1100px;
     margin: 0 auto;

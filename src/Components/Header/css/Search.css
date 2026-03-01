@@ -1,42 +1,33 @@
-/* =========================================================
-   DJ Pulse — Search Overlay (Dark Neon / Glass)
-   CSS ONLY — Harmonized Colors
-   ========================================================= */
-
-/* ====== COLOR TOKENS (عدّل إذا حبيت) ====== */
 :root {
     --bg: #070b14;
-    /* خلفية عامة */
+
     --gradient: radial-gradient(1200px 600px at 20% -10%, #101635 0%, #0B0F1A 48%, #070B14 100%);
 
-    /* أسطح زجاجية */
     --surface-1: rgba(255, 255, 255, 0.06);
     --surface-2: rgba(255, 255, 255, 0.08);
     --surface-3: rgba(255, 255, 255, 0.12);
 
-    /* حدود وظلال */
     --border: rgba(255, 255, 255, 0.14);
     --border-soft: rgba(255, 255, 255, 0.10);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 
-    /* نصوص */
     --text: #ffffff;
     --muted: #cfd2de;
     --soft: #aeb4c3;
 
-    /* ألوان العلامة */
+
     --primary: #7c3aed;
     --primary-dark: #5b21b6;
     --primary-soft: rgba(124, 58, 237, 0.18);
 
-    /* دلالية (احتياطي للكروت) */
+
     --ok: #22c55e;
     --ok-bg: rgba(34, 197, 94, 0.18);
     --warn: #f59e0b;
     --warn-bg: rgba(245, 158, 11, 0.18);
 }
 
-/* ====== MINI SEARCH (Navbar) ====== */
+
 .nav-search-mini {
     width: 220px;
     padding: 8px 12px;
@@ -59,7 +50,7 @@
     color: var(--muted);
 }
 
-/* ====== OVERLAY (Full screen) ====== */
+
 .search-overlay {
     position: fixed;
     inset: 0;
@@ -79,7 +70,7 @@
     position: relative;
 }
 
-/* ====== SEARCH INPUT + CONTROLS ====== */
+
 .search-input {
     width: 85.5%;
     padding: 20px 124px 16px 16px;
@@ -145,7 +136,7 @@
     filter: brightness(1.1);
 }
 
-/* ====== FILTERS PANEL ====== */
+
 .filters-panel {
     margin-top: 12px;
     border: 1px solid var(--border);
@@ -227,7 +218,7 @@
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
 }
 
-/* ====== EMPTY MESSAGE ====== */
+
 .result-empty {
     margin-top: 14px;
     padding: 16px;
@@ -235,12 +226,12 @@
     border-radius: 14px;
     background: var(--surface-1);
     color: #fff;
-    /* أبيض واضح */
+
     text-align: center;
     backdrop-filter: blur(8px);
 }
 
-/* ====== RESULTS GRID (cards) ====== */
+
 .search-grid {
     margin-top: 20px;
     display: grid;
@@ -249,7 +240,7 @@
     justify-content: center;
 }
 
-/* ====== CARD ====== */
+
 .search-card {
     border: 1px solid var(--border);
     padding: 0;
@@ -346,7 +337,7 @@
     color: var(--primary);
 }
 
-/* ====== RESPONSIVE ====== */
+
 @media (max-width: 1050px) {
     .search-grid {
         grid-template-columns: repeat(2, minmax(0, 320px));
