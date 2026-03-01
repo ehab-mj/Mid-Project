@@ -1,0 +1,34 @@
+.upc-wrap {
+    width: min(1200px, 92%);
+    margin: 25px auto 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.upc-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.upc-msg {
+    color: rgba(255, 255, 255, .75);
+    font-weight: 700;
+}
+
+.upc-err {
+    color: #ff6b6b;
+}
+
+/* ✅ Use flex to center + wrap service cards */
+.upc-grid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}

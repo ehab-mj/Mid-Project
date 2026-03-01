@@ -2,14 +2,18 @@
     display: grid;
     gap: 14px;
     font-family: Arial, Helvetica, sans-serif;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .dj-card {
-    background: #fff;
-    border: 1px solid #edf0f5;
     border-radius: 12px;
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
     padding: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
 }
 
 .dj-card-top {
@@ -25,11 +29,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #fff;
 }
 
 .dj-person-email {
     margin-top: 6px;
-    color: #6b7280;
+    color: #cfd2de;
     font-weight: 700;
     font-size: 13px;
 }
@@ -43,18 +48,18 @@
 }
 
 .dj-badge.pending {
-    background: #fef3c7;
-    color: #92400e;
+    background: rgba(245, 158, 11, 0.18);
+    color: #f59e0b;
 }
 
 .dj-badge.accepted {
-    background: #dcfce7;
-    color: #166534;
+    background: rgba(34, 197, 94, 0.18);
+    color: #22c55e;
 }
 
 .dj-badge.rejected {
-    background: #fee2e2;
-    color: #991b1b;
+    background: rgba(239, 68, 68, 0.18);
+    color: #ef4444;
 }
 
 .dj-total {
@@ -62,7 +67,7 @@
 }
 
 .dj-total-label {
-    color: #6b7280;
+    color: #cfd2de;
     font-weight: 800;
     font-size: 12px;
 }
@@ -84,7 +89,7 @@
 }
 
 .dj-info-label {
-    color: #6b7280;
+    color: #fff;
     font-weight: 800;
     font-size: 12px;
     margin-bottom: 4px;
@@ -92,7 +97,7 @@
 
 .dj-info-value {
     font-weight: 800;
-    color: #111827;
+    color: #E6E9F2;
     font-size: 13px;
 }
 
@@ -123,7 +128,7 @@
 }
 
 .dj-requested {
-    color: #6b7280;
+    color: #cfd2de;
     font-weight: 700;
     font-size: 12px;
 }

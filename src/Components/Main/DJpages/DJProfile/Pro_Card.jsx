@@ -1,6 +1,8 @@
 import React from 'react'
 import '../css/Pro_Card.css';
 import DJProfileEdit from './DJProfileEdit/DJProfileEdit';
+import DjIcon from "../../../../assets/DJ-Icon.png";
+
 export default function Pro_Card({ profile }) {
     return (
         <div>
@@ -10,7 +12,13 @@ export default function Pro_Card({ profile }) {
                         {profile.photoURL ? (
                             <img src={profile.photoURL} alt="DJ Profile" />
                         ) : (
-                            <span>🎧</span>
+                            <span>
+                                <img
+                                    src={DjIcon}
+                                    alt="Profile"
+                                    className="nav-profile-img"
+                                />
+                            </span>
                         )}
                     </div>
 

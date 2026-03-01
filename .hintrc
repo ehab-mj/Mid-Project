@@ -3,6 +3,15 @@
     "development"
   ],
   "hints": {
-    "css-prefix-order": "off"
+    "css-prefix-order": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "backdrop-filter",
+          "-webkit-mask"
+        ]
+      }
+    ]
   }
 }

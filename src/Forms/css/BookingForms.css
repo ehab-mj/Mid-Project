@@ -1,0 +1,205 @@
+.bback {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 9999;
+}
+
+.bmodal {
+    width: min(980px, 96vw);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .35);
+}
+
+.bhead {
+    padding: 22px 24px;
+    background: linear-gradient(90deg, #6d36ff, #7a3cff);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.btitle {
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.bsub {
+    opacity: .9;
+    margin-top: 6px;
+}
+
+.bclose {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .35);
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    cursor: pointer;
+}
+
+.bcontent {
+    padding: 22px 24px;
+}
+
+.bsection {
+    margin-bottom: 18px;
+}
+
+.bsectionTitle {
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.bdetails {
+    background: #f4f6fb;
+    border: 1px solid #e7eaf2;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+}
+
+.bdetails span {
+    color: #6b7280;
+    margin-right: 10px;
+}
+
+.bselected {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bserviceRow {
+    background: #f3f0ff;
+    border: 1px solid #ece6ff;
+    border-radius: 14px;
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bicon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bserviceInfo {
+    flex: 1;
+}
+
+.bserviceName {
+    font-weight: 800;
+}
+
+.bserviceMeta {
+    color: #6b7280;
+    margin-top: 3px;
+    font-size: 13px;
+}
+
+.bservicePrice {
+    font-weight: 900;
+    color: #4f46e5;
+}
+
+.bnotes {
+    width: 100%;
+    min-height: 110px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding: 12px 14px;
+    outline: none;
+    resize: vertical;
+}
+
+.btotal {
+    margin-top: 10px;
+    background: #eef2ff;
+    border: 1px solid #dbe3ff;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btotalLabel {
+    font-weight: 900;
+}
+
+.btotalHint {
+    color: #6b7280;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.btotalValue {
+    font-size: 26px;
+    font-weight: 900;
+    color: #6d36ff;
+}
+
+.berr {
+    margin-top: 10px;
+    color: #b91c1c;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    padding: 10px 12px;
+    border-radius: 12px;
+}
+
+.bactions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.bbtn {
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.bbtn.ghost {
+    background: #fff;
+}
+
+.bbtn.solid {
+    border: none;
+    background: linear-gradient(90deg, #6d36ff, #7a3cff);
+    color: #fff;
+}
+
+.bbtn.solid:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+    .bdetails {
+        grid-template-columns: 1fr;
+    }
+}

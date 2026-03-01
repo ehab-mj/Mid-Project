@@ -1,7 +1,46 @@
+/* ====== COLOR SYSTEM / TOKENS ====== */
+:root {
+    /* Backgrounds */
+    --bg-dark: #05070f;
+    /* خلفية عامة للموقع إن احتجت */
+    --bg-surface: rgba(255, 255, 255, 0.06);
+    /* أسطح زجاجية فاتحة */
+    --bg-surface-2: rgba(255, 255, 255, 0.08);
+    /* أسطح زجاجية أقوى قليلاً */
+    --bg-surface-3: rgba(255, 255, 255, 0.04);
+    /* درجات إضافية */
+
+    /* Borders & Shadows */
+    --border: rgba(255, 255, 255, 0.14);
+    --border-soft: rgba(255, 255, 255, 0.10);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+
+    /* Text */
+    --text-main: #ffffff;
+    --text-muted: #cfd2de;
+    --text-soft: #aeb4c3;
+
+    /* Brand */
+    --primary: #7c3aed;
+    --primary-dark: #5b21b6;
+    --primary-soft: rgba(124, 58, 237, 0.18);
+    --accent: #00D0FF;
+
+    /* Semantic */
+    --ok: #22c55e;
+    --ok-bg: rgba(34, 197, 94, 0.18);
+    --warn: #f59e0b;
+    --warn-bg: rgba(245, 158, 11, 0.18);
+    --err: #ef4444;
+    --err-bg: rgba(239, 68, 68, 0.18);
+}
+
+/* ====== PAGE WRAPPER ====== */
 .ud-page {
     max-width: 1100px;
     margin: 0 auto;
     padding: 28px 18px 60px;
+    color: var(--text-main);
 }
 
 .ud-header {
@@ -12,49 +51,52 @@
 .ud-title {
     font-size: 30px;
     margin: 0 0 6px;
+    color: var(--text-main);
     font-weight: 900;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
 }
 
 .ud-sub {
     margin: 0;
-    color: #6b7280;
+    color: var(--text-muted);
     font-weight: 600;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .ud-error {
-    color: #dc2626;
+    color: var(--err);
     font-weight: 700;
     margin: 12px 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/* Stats */
+/* ====== STATS ====== */
 .ud-stats {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 16px;
+    gap: 16px;
+    margin-top: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-stat {
-    background: #fff;
-    border: 1px solid #edf0f5;
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: var(--shadow);
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 78px;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-main);
+    backdrop-filter: blur(12px);
 }
 
 .ud-stat-label {
     font-size: 12px;
-    color: #6b7280;
+    color: var(--text-soft);
     font-weight: 700;
 }
 
@@ -62,112 +104,134 @@
     font-size: 22px;
     font-weight: 900;
     margin-top: 6px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-stat-icon {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 999px;
     display: grid;
     place-items: center;
-    background: #eef2ff;
-    color: #4f46e5;
+    background: var(--primary-soft);
+    color: var(--primary);
     font-weight: 900;
 }
 
 .ud-stat-icon.warn {
-    background: #fff7ed;
-    color: #f59e0b;
+    background: var(--warn-bg);
+    color: var(--warn);
 }
 
 .ud-stat-icon.ok {
-    background: #ecfdf5;
-    color: #22c55e;
+    background: var(--ok-bg);
+    color: var(--ok);
 }
 
 .ud-stat-icon.money {
-    background: #f3e8ff;
-    color: #7c3aed;
+    background: var(--primary-soft);
+    color: var(--primary);
 }
 
+/* ====== BANNER ====== */
 .ud-banner {
-    margin-top: 18px;
-    background: linear-gradient(90deg, #7c3aed, #5b21b6);
-    border-radius: 12px;
-    padding: 18px 18px;
+    margin-top: 24px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    border-radius: 14px;
+    padding: 20px 22px;
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    box-shadow: var(--shadow);
 }
 
 .ud-banner h3 {
     margin: 0 0 6px;
-    font-size: 18px;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
 }
 
 .ud-banner p {
     margin: 0;
-    opacity: 0.9;
+    opacity: 0.92;
     font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .ud-banner-btn {
     background: #fff;
-    color: #5b21b6;
+    color: var(--primary-dark);
     font-weight: 900;
-    padding: 10px 14px;
+    padding: 12px 16px;
     border-radius: 10px;
     text-decoration: none;
     white-space: nowrap;
     font-family: Arial, Helvetica, sans-serif;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
+.ud-banner-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ====== TABS ====== */
 .ud-tabs {
-    margin-top: 18px;
-    background: #fff;
-    border: 1px solid #edf0f5;
-    border-radius: 12px;
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+    background: var(--bg-surface-3);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .ud-tab {
-    padding: 12px 10px;
+    padding: 14px 10px;
     background: transparent;
     border: none;
     cursor: pointer;
     font-weight: 800;
-    color: #374151;
+    color: var(--text-muted);
     font-family: Arial, Helvetica, sans-serif;
+    transition: background .12s ease, color .12s ease;
+}
+
+.ud-tab:hover {
+    background: var(--bg-surface);
 }
 
 .ud-tab.active {
-    color: #7c3aed;
-    background: rgba(124, 58, 237, 0.06);
-    border-bottom: 2px solid #7c3aed;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border-bottom: 2px solid var(--primary);
 }
 
+/* ====== LIST / EMPTY ====== */
 .ud-list {
-    margin-top: 14px;
-    background: #fff;
-    border: 1px solid #edf0f5;
-    border-radius: 12px;
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
-    padding: 14px;
+    margin-top: 18px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 18px;
     min-height: 260px;
     font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-main);
+    position: relative;
 }
 
+/* Empty State — إصلاح الوضوح ولون الكتابة للأبيض */
 .ud-empty {
     padding: 60px 10px;
     text-align: center;
+    color: #fff;
+    /* افتراضي لكل ما داخل الحالة الفارغة */
 }
 
 .ud-empty-icon {
@@ -177,39 +241,60 @@
     display: grid;
     place-items: center;
     margin: 0 auto 12px;
-    background: #f3f4f6;
-    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.12);
+    /* زجاجي أوضح */
+    color: #E6E9F2;
+    /* رمادي فاتح للأيقونة فقط */
     font-size: 26px;
     font-weight: 900;
 }
 
 .ud-empty-title {
     font-weight: 900;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 6px;
+    color: #FFFFFF;
+    /* أبيض صافي */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
 }
 
 .ud-empty-sub {
-    color: #6b7280;
+    color: #FFFFFF;
+    /* أبيض */
+    opacity: 0.88;
+    /* نعومة بسيطة */
     font-weight: 600;
     margin-bottom: 14px;
 }
 
 .ud-empty-btn {
     display: inline-block;
-    background: #7c3aed;
+    background: var(--primary);
     color: #fff;
     text-decoration: none;
     font-weight: 900;
     padding: 10px 14px;
     border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 10px 22px rgba(124, 58, 237, 0.35);
+    transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
 }
 
+.ud-empty-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(124, 58, 237, 0.45);
+}
+
+/* ====== CARDS ====== */
 .ud-card {
-    border: 1px solid #edf0f5;
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    background: var(--bg-surface-2);
+    box-shadow: var(--shadow);
+    color: var(--text-main);
 }
 
 .ud-card-top {
@@ -222,6 +307,7 @@
 .ud-card-title {
     font-weight: 900;
     font-size: 16px;
+    color: var(--text-main);
 }
 
 .ud-badge {
@@ -229,31 +315,33 @@
     border-radius: 999px;
     font-weight: 900;
     font-size: 12px;
+    color: #fff;
 }
 
 .ud-badge.pending {
-    background: #fff7ed;
-    color: #f59e0b;
+    background: var(--warn-bg);
+    color: var(--warn);
 }
 
 .ud-badge.accepted {
-    background: #ecfdf5;
-    color: #22c55e;
+    background: var(--ok-bg);
+    color: var(--ok);
 }
 
 .ud-badge.rejected {
-    background: #fef2f2;
-    color: #ef4444;
+    background: var(--err-bg);
+    color: var(--err);
 }
 
 .ud-card-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    color: #374151;
+    color: var(--text-muted);
     font-weight: 600;
 }
 
+/* ====== RESPONSIVE ====== */
 @media (max-width: 980px) {
     .ud-stats {
         grid-template-columns: 1fr 1fr;
@@ -262,6 +350,7 @@
     .ud-banner {
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
     }
 }
 

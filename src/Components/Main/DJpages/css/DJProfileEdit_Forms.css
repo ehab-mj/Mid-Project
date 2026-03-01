@@ -1,8 +1,8 @@
 .djedit-card {
-    background: #fff;
-    border: 1px solid #edf0f5;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 16px;
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     padding: 16px;
 }
 
@@ -16,19 +16,22 @@
     display: grid;
     gap: 6px;
     font-weight: 900;
+    color: #fff;
 }
 
 .djedit-grid input {
     padding: 11px 12px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, .12);
     border-radius: 12px;
     outline: none;
     font-weight: 800;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.45);
 }
 
 .djedit-grid input:focus {
-    border-color: #c4b5fd;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
 }
 
 .djedit-full {
@@ -41,10 +44,12 @@
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .djedit-title {
     font-weight: 900;
+    color: #fff;
 }
 
 .djedit-avatar {
@@ -58,8 +63,8 @@
 .djedit-avatar.empty {
     display: grid;
     place-items: center;
-    background: #f5f3ff;
-    border: 1px solid #ddd6fe;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     font-size: 24px;
 }
 

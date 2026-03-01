@@ -1,14 +1,18 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { addDoc, collection, getDocs, query, Timestamp, where } from "firebase/firestore";
+import React, { useContext, useMemo, useState } from "react";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../../../firebase/config";
 import { AuthContext } from "../../../../context/Context";
+
 import Steps from "./Steps";
 import EventInfoStep from "./EventInfoStep";
-import '../css/CreateBooking.css'
+
 import DjSelectStep from "../../../../Forms/DjSelectStep";
 import DecorationStep from "../../../../Forms/DecorationStep";
 import VenueStep from "../../../../Forms/VenueStep";
 import PackageCard from "../../../../Cards/PackageCard";
+
+import "../css/CreateBooking.css";
+import PhotographerStep from "../../../../Forms/PhotographerStep";
 
 export default function CreateBooking() {
     const { AuthUser } = useContext(AuthContext);
@@ -16,58 +20,70 @@ export default function CreateBooking() {
     const role = String(AuthUser?.role || "").toLowerCase();
     const isRegular = role === "regular" || role === "user";
 
-    const [djs, setDjs] = useState([]);
-    const [djEmail, setDjEmail] = useState("");
     const [step, setStep] = useState(1);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
     const [form, setForm] = useState({
+        // step 1
         eventType: "",
-        eventDate: "",     // yyyy-mm-dd
-        startTime: "",     // hh:mm
+        eventDate: "", // yyyy-mm-dd
+        startTime: "", // hh:mm
         durationHours: 4,
         numberOfGuests: 50,
         notes: "",
 
-        decorationId: "",   // step 3
-        decorationName: "",
-        decorationPrice: 0,
+        // step 2 DJ (single)
+        djId: "",
+        djName: "",
+        djEmail: "",
+        djPricePerHour: 0,
+        djLocation: "",
 
-        venueId: "",        // step 4
+        // step 3 Decorations (MULTI)
+        decorationIds: [],               // ["id1","id2"]
+        decorations: [],                 // [{id,name,price,image,...}]
+        decorationsTotal: 0,             // sum of prices
+
+        photoId: "",
+        photoName: "",
+        photoEmail: "",
+        photoPricePerHour: 0,
+        photoLocation: "",
+
+        // step 4 Venue (single)
+        venueId: "",
         venueName: "",
         venueLocation: "",
         venueCapacity: 0,
         venueAmenities: [],
         venuePricePerHour: 0,
     });
+
     const update = (patch) => setForm((prev) => ({ ...prev, ...patch }));
 
-    useEffect(() => {
-        async function fetchDJs() {
-            try {
-                const q = query(collection(db, "Users"),
-                    where("role", "==", "dj"));
-                const snap = await getDocs(q);
-                const list = snap.docs.map((d) =>
-                    ({ id: d.id, ...d.data() }));
-                setDjs(list);
-                if (!djEmail && list[0]?.email)
-                    setDjEmail(list[0].email);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-        if (AuthUser && isRegular) fetchDJs();
-    }, [AuthUser, isRegular]);
+    const venueCost = useMemo(() => {
+        return Number(form.venuePricePerHour || 0) * Number(form.durationHours || 0);
+    }, [form.venuePricePerHour, form.durationHours]);
 
-    const computedTotal = useMemo(() => {
-        const venueCost = Number(form.venuePricePerHour || 0) * Number(form.durationHours || 0);
-        const decorCost = Number(form.decorationPrice || 0);
-        return venueCost + decorCost;
-    }, [form.venuePricePerHour, form.durationHours, form.decorationPrice]);
+    const djCost = useMemo(() => {
+        return Number(form.djPricePerHour || 0) * Number(form.durationHours || 0);
+    }, [form.djPricePerHour, form.durationHours]);
 
-    function nextFromStep1() {
+    const decorCost = useMemo(() => {
+        return Number(form.decorationsTotal || 0);
+    }, [form.decorationsTotal]);
+
+    const photoCost = useMemo(() => {
+        return Number(form.photoPricePerHour || 0) * Number(form.durationHours || 0);
+    }, [form.photoPricePerHour, form.durationHours]);
+
+    const total = useMemo(
+        () => venueCost + djCost + decorCost + photoCost,
+        [venueCost, djCost, decorCost, photoCost]
+    );
+
+    function next() {
         setError("");
         setSuccess("");
 
@@ -76,79 +92,143 @@ export default function CreateBooking() {
             if (!form.eventDate) return setError("Choose event date.");
             if (!form.startTime) return setError("Choose start time.");
         }
-        if (step === 2) {
-            if (!djEmail) return setError("Choose a DJ.");
-        }
+
 
         if (step === 3) {
-            if (!form.decorationId) return setError("Choose a decoration package.");
+            if (!form.decorationIds.length) return setError("Choose at least 1 decoration.");
         }
 
         if (step === 4) {
+            if (!form.photoId) return setError("Choose a photographer.");
+        }
+
+        if (step === 5) {
             if (!form.venueId) return setError("Choose a venue.");
         }
-        setStep((s) => Math.min(s + 1, 5));
+
+        setStep((s) => Math.min(s + 1, 6));
     }
 
-
-
-    function editServices() {
-        setStep(2);
-    }
-
-    function goBack() {
+    function back() {
         setError("");
         setSuccess("");
         setStep((s) => Math.max(s - 1, 1));
     }
 
-    function removeService(type) {
+    function editServices() {
+        setStep(2);
+    }
+
+    function removeService(type, id) {
         setError("");
         setSuccess("");
 
-        if (type === "dj") setDjEmail("");
-        if (type === "decor") update({ decorationId: "", decorationName: "", decorationPrice: 0 });
-        if (type === "venue") update({
-            venueId: "",
-            venueName: "",
-            venueLocation: "",
-            venueCapacity: 0,
-            venueAmenities: [],
-            venuePricePerHour: 0,
-        });
+        if (type === "dj") {
+            update({
+                djId: "",
+                djName: "",
+                djEmail: "",
+                djPricePerHour: 0,
+                djLocation: "",
+            });
+        }
+
+        if (type === "photo") {
+            update({
+                photoId: "",
+                photoName: "",
+                photoEmail: "",
+                photoPricePerHour: 0,
+                photoLocation: "",
+            });
+        }
+
+        if (type === "venue") {
+            update({
+                venueId: "",
+                venueName: "",
+                venueLocation: "",
+                venueCapacity: 0,
+                venueAmenities: [],
+                venuePricePerHour: 0,
+            });
+        }
+
+        // remove ONE decoration by id
+        if (type === "decor" && id) {
+            const nextDecorations = form.decorations.filter((d) => d.id !== id);
+            const nextIds = nextDecorations.map((d) => d.id);
+            const nextTotal = nextDecorations.reduce((sum, d) => sum + Number(d.price || 0), 0);
+
+            update({
+                decorations: nextDecorations,
+                decorationIds: nextIds,
+                decorationsTotal: nextTotal,
+            });
+        }
     }
 
-    const submitBooking = async () => {
+    async function submitBooking() {
         try {
             setError("");
             setSuccess("");
 
-            if (!djEmail) return setError("Choose a DJ.");
+            // if (!form.djId) return setError("Choose a DJ.");
+            if (!form.decorationIds.length) return setError("Choose at least 1 decoration.");
+
+            if (!form.photoId) return setError("Choose a photographer.");
+
             if (!form.venueId) return setError("Choose a venue.");
-            if (!form.decorationId) return setError("Choose a decoration package.");
 
             const dateTimeISO = `${form.eventDate}T${form.startTime}`;
             const dateObj = new Date(dateTimeISO);
-
-            if (Number.isNaN(dateObj.getTime())) {
-                return setError("Invalid date/time.");
-            }
+            if (Number.isNaN(dateObj.getTime())) return setError("Invalid date/time.");
 
             const bookingData = {
+                // event
                 eventType: form.eventType,
                 eventDate: Timestamp.fromDate(dateObj),
+                startTime: form.startTime,
                 durationHours: Number(form.durationHours),
                 numberOfGuests: Number(form.numberOfGuests),
                 notes: form.notes,
+                status: "pending",
 
-                djId: djEmail,
+                // user
+                userId: AuthUser?.email || "unknown",
+                userEmail: AuthUser?.email || "",
 
-                decoration: {
-                    id: form.decorationId,
-                    name: form.decorationName,
-                    price: Number(form.decorationPrice || 0),
+                // DJ (single)
+                djId: form.djId,
+                djEmail: form.djEmail,
+                dj: {
+                    id: form.djId,
+                    name: form.djName,
+                    email: form.djEmail,
+                    pricePerHour: Number(form.djPricePerHour || 0),
+                    location: form.djLocation,
                 },
 
+                // Decorations (multi)
+                decorations: form.decorations.map((d) => ({
+                    id: d.id,
+                    name: d.name || d.title || "",
+                    price: Number(d.price || 0),
+                    image: d.image || d.photoURL || "",
+                })),
+                decorationsTotal: Number(form.decorationsTotal || 0),
+
+                photographyId: form.photoId,
+                photographyEmail: form.photoEmail,
+                photography: {
+                    id: form.photoId,
+                    name: form.photoName,
+                    email: form.photoEmail,
+                    pricePerHour: Number(form.photoPricePerHour || 0),
+                    location: form.photoLocation,
+                },
+
+                // Venue (single)
                 venue: {
                     id: form.venueId,
                     name: form.venueName,
@@ -158,24 +238,24 @@ export default function CreateBooking() {
                     pricePerHour: Number(form.venuePricePerHour || 0),
                 },
 
-                totalPrice: computedTotal,
-                status: "pending",
-
-                userId: AuthUser.email,
-                userEmail: AuthUser.email,
+                // totals
+                costs: {
+                    djCost,
+                    venueCost,
+                    decorCost,
+                    photoCost,
+                },
+                totalPrice: total,
             };
 
             const docRef = await addDoc(collection(db, "BOOKINGS"), bookingData);
-            setSuccess(`Saved Event Info. Booking ID: ${docRef.id}`);
-
-
+            setSuccess(`Booking sent ID: ${docRef.id}`);
         } catch (e) {
             setSuccess("");
             setError(e.message || "Failed to create booking");
         }
-    };
+    }
 
-    // Guards
     if (!AuthUser) {
         return (
             <div className="cb-page">
@@ -206,52 +286,73 @@ export default function CreateBooking() {
             </div>
 
             <div className="cb-card">
-                {step === 1 &&
-                    <EventInfoStep
-                        form={form}
-                        update={update}
-                    />}
+                {step === 1 && <EventInfoStep form={form} update={update} />}
+
                 {step === 2 && (
                     <DjSelectStep
-                        djs={djs}
-                        selectedDjEmail={djEmail}
-                        onSelectDjEmail={setDjEmail}
-                        onSkip={() => setDjEmail("")}
-                    />
-                )}
-                {step === 3 && (
-                    <DecorationStep
-                        selectedId={form.decorationId}
-                        onSelect={(pkg) =>
+                        selectedId={form.djId}
+                        onSelect={(dj) =>
                             update({
-                                decorationId: pkg.id,
-                                decorationName: pkg.name,
-                                decorationPrice: pkg.price,
+                                djId: dj?.id || "",
+                                djName: dj?.name || dj?.title || "",
+                                djEmail: dj?.email || "",
+                                djPricePerHour: dj?.pricePerHour || dj?.price || 0,
+                                djLocation: dj?.city || dj?.location || dj?.area || dj?.address || "",
                             })
                         }
                     />
                 )}
-                {step === 4 && (
-                    <VenueStep
-                        selectedId={form.venueId}
-                        onSelect={(v) =>
+
+                {step === 3 && (
+                    <DecorationStep
+                        selectedIds={form.decorationIds}
+                        onChange={(selectedPkgs) => {
+                            const ids = selectedPkgs.map((p) => p.id);
+                            const sum = selectedPkgs.reduce((s, p) => s + Number(p.price || 0), 0);
+
                             update({
-                                venueId: v.id,
-                                venueName: v.name,
-                                venueLocation: v.location,
-                                venueCapacity: v.capacity,
-                                venueAmenities: v.amenities,
-                                venuePricePerHour: v.pricePerHour,
+                                decorationIds: ids,
+                                decorations: selectedPkgs,
+                                decorationsTotal: sum,
+                            });
+                        }}
+                    />
+                )}
+                {step === 4 && (
+                    <PhotographerStep
+                        selectedId={form.photoId}
+                        onSelect={(p) =>
+                            update({
+                                photoId: p?.id || "",
+                                photoName: p?.name || p?.title || "",
+                                photoEmail: p?.email || "",
+                                photoPricePerHour: p?.pricePerHour || p?.price || 0,
+                                photoLocation: p?.city || p?.location || p?.area || p?.address || "",
                             })
                         }
                     />
                 )}
 
                 {step === 5 && (
+                    <VenueStep
+                        selectedId={form.venueId}
+                        onSelect={(v) =>
+                            update({
+                                venueId: v?.id || "",
+                                venueName: v?.name || v?.title || "",
+                                venueLocation: v?.location || v?.city || "",
+                                venueCapacity: v?.capacity || 0,
+                                venueAmenities: v?.amenities || [],
+                                venuePricePerHour: v?.pricePerHour || v?.price || 0,
+                            })
+                        }
+                    />
+                )}
+
+                {step === 6 && (
                     <PackageCard
                         form={form}
-                        djEmail={djEmail}
-                        total={computedTotal}
+                        total={total}
                         onRemove={removeService}
                         onNotesChange={(notes) => update({ notes })}
                     />
@@ -262,38 +363,43 @@ export default function CreateBooking() {
             {success && <p className="cb-success">{success}</p>}
 
             <div className="cb-actions">
-                <button
-                    className="cb-back"
-                    onClick={goBack}
-                    type="button"
-                    disabled={step === 1}
-                >
+                <button className="cb-back" onClick={back} type="button" disabled={step === 1}>
                     Back
                 </button>
 
-                {step < 5 ? (
+                {step === 2 && (
                     <button
-                        className="cb-continue"
-                        onClick={nextFromStep1}
                         type="button"
+                        className="cb-skip"
+                        onClick={() => {
+                            update({
+                                djId: "",
+                                djName: "",
+                                djEmail: "",
+                                djPricePerHour: 0,
+                                djLocation: "",
+                            });
+
+                            setError("");
+                            setSuccess("");
+                            setStep((s) => Math.min(s + 1, 6));
+                        }}
                     >
-                        {step === 4 ? "Review Package →" : "Next →"}
+                        Skip - choose later
+                    </button>
+                )}
+
+                {step < 6 ? (
+                    <button className="cb-continue" onClick={next} type="button">
+                        {step === 5 ? "Review Package →" : "Next →"}
                     </button>
                 ) : (
                     <>
-                        <button
-                            className="cb-edit"
-                            onClick={editServices}
-                            type="button"
-                        >
+                        <button className="cb-edit" onClick={editServices} type="button">
                             Edit Services
                         </button>
 
-                        <button
-                            className="cb-continue"
-                            onClick={submitBooking}
-                            type="button"
-                        >
+                        <button className="cb-continue" onClick={submitBooking} type="button">
                             Send Booking →
                         </button>
                     </>

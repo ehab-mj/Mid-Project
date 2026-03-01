@@ -1,15 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import './css/NavBar.css';
 import Search from './Search';
 import { useContext, useState } from 'react';
 import LoginModal from '../../Forms/LoginModal';
 import { AuthContext } from '../../context/Context';
 import UserNavProfile from './UserNavProfile';
+import logo from "../../assets/logo.png"
 
 export default function NavBar() {
     const { logout, login, AuthUser } = useContext(AuthContext)
     const [open, setOpen] = useState(false);
     const goHome = useNavigate();
+
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const role = String(AuthUser?.role || "").toLowerCase();
     const isRegular = role === "regular" || role === "user";
@@ -23,16 +27,29 @@ export default function NavBar() {
         login(newUser)
         setOpen(false);
     }
+
     return (
         <>
             <nav className="nav-bar">
-                <Link className="logo" to="/">Logo</Link>
+                <Link className="logo" to="/">
+                    <img src={logo} alt="EventTune Logo" />
+                </Link>
 
-                <div>
-                    <Link className="home" to="/">Home</Link>
-                    <Link className="services" to="/services">All Services</Link>
-
+                <div className='nav-menu'>
+                    <Link
+                        className={`home ${currentPath === "/" ? "active" : ""}`}
+                        to="/"
+                    >
+                        Home
+                    </Link>
+                    <Link
+                        className={`services ${currentPath.startsWith("/services") ? "active" : ""
+                            }`}
+                        to="/services"
+                    >All Services
+                    </Link>
                 </div>
+
 
                 {isRegular && (
                     <Link
@@ -43,7 +60,7 @@ export default function NavBar() {
                     </Link>
                 )}
 
-                {/* <Search /> */}
+                <Search />
 
                 <div>
                     {AuthUser ? (

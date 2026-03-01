@@ -1,5 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './css/HomePage.css'
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/Context';
+import UserNavProfile from '../Components/Header/UserNavProfile';
+import LoginModal from '../Forms/LoginModal';
+import UpcomingEvents from '../Cards/UpcomingEvents';
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -22,19 +27,16 @@ export default function HomePage() {
         "Personalized smart recommendations for you",
     ];
 
-
     return (
         <div>
+            <div className="home-bg" />
+            <div className="home-overlay" />
+
             <div className="welcome-section">
-                <h1>Your Complete Event Planning Solution</h1>
-                <p>
-                    Book DJs, decorations, staff, venues, and more.
-                    Create your perfect event package in minutes.
-                </p>
             </div>
 
             <section className="services-wrapper">
-                <h2 className="services-title">Browse Services</h2>
+                <h2 className="services-title"></h2>
 
                 <div className="services-grid">
                     <Link to="/music" className="service-card">
@@ -99,7 +101,17 @@ export default function HomePage() {
                 </div>
             </section>
 
-            <div className="upcoming-title">Upcoming Events</div>
+            <div className="home-social">
+                <span>◎</span>
+                <span>◉</span>
+                <span>♫</span>
+                <span>f</span>
+                <span>▶</span>
+                <span>in</span>
+            </div>
+
+
+            <UpcomingEvents mode="allSameDate" />
         </div>
     )
 }

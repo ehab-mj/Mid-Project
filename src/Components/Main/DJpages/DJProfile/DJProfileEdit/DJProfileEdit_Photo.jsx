@@ -1,6 +1,6 @@
 import React from 'react'
 import Pro_Card from '../Pro_Card'
-
+import DjIcon from "../../../../../assets/DJ-Icon.png"
 export default function DJProfileEdit_Photo({ form, setPhotoFile }) {
     return (
         <div>
@@ -11,7 +11,13 @@ export default function DJProfileEdit_Photo({ form, setPhotoFile }) {
                         <img className="djedit-avatar"
                             src={form.photoURL} alt=""
                         /> :
-                        <div className="djedit-avatar empty">🎧</div>}
+                        <div className="djedit-avatar empty">
+                            <img
+                                src={DjIcon}
+                                alt="Profile"
+                                className="nav-profile-img"
+                            />
+                        </div>}
                 </div>
 
                 <input

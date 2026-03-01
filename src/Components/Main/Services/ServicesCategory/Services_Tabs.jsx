@@ -1,4 +1,3 @@
-import React from "react";
 import "../css/Services_Tabs.css";
 
 export default function Services_Tabs({ items, selectedCategory, handleCategoryClick }) {
