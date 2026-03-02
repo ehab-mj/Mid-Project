@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import "./css/ServiceModalPackage.css";
 import { useNavigate } from "react-router-dom";
 
-export default function ServiceModalPackage({ item, category = "", onClose }) {
+export default function ServiceModalPackage({ item, category = "", onClose, onBooked }) {
     const navigate = useNavigate();
     const safeItem = item ?? {};
 
@@ -130,8 +130,21 @@ export default function ServiceModalPackage({ item, category = "", onClose }) {
                                 className="btnPrimary"
                                 type="button"
                                 onClick={() => {
-                                    onClose?.();
+                                    // ✅ CHANGE: close overlay (Search) BEFORE navigating
+                                    onBooked?.();
+
+                                    // ✅ CHANGE: navigate using id
+                                    if (!safeItem.id) {
+                                        console.log("❌ Book failed: missing id", safeItem);
+                                        alert("Book failed: missing service id. Check console.");
+                                        return;
+                                    }
+
+                                    // ✅ CHANGE: navigate first
                                     navigate(`/package/${safeItem.id}`);
+
+                                    // ✅ CHANGE: close modal after navigate
+                                    onClose?.();
                                 }}
                                 disabled={!isAvailable}
                                 title={!isAvailable ? "This service is busy" : "Book this service"}

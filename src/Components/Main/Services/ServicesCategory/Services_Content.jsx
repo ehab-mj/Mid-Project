@@ -12,8 +12,6 @@ export default function Services_Content({ selectedCategory, items, error }) {
         console.log("BOOK:", item);
     };
 
-    // const isMusicItem =
-    //     String(selected?.category || "").toLowerCase() === "music";
     const isMusicItem = String(selected?.category || "").toLowerCase() === "music";
 
     return (
@@ -26,7 +24,6 @@ export default function Services_Content({ selectedCategory, items, error }) {
                         key={item.id}
                         item={item}
                         category={selectedCategory}
-                        // onClick={() => setSelected(item)}
                         onClick={() => setSelected({ ...item, __cardId: item.id })}
                         onBookClick={() => setSelected(item)}
                     />
