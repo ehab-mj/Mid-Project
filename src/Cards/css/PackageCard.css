@@ -23,12 +23,17 @@
 
 .rp-body {
     padding: 16px;
-    background: #fff;
+    background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(124, 58, 237, 0.35), transparent 55%),
+        radial-gradient(900px 520px at 100% 20%, rgba(34, 211, 238, 0.15), transparent 52%),
+        linear-gradient(180deg, rgba(10, 14, 38, 0.95), rgba(8, 10, 22, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .rp-box {
-    background: #f7f7fb;
-    border: 1px solid #edf0f5;
+    background: rgba(12, 18, 55, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 14px;
 }
@@ -36,18 +41,19 @@
 .rp-box-title {
     font-weight: 900;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .rp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    color: #374151;
     font-weight: 600;
+    color: rgba(234, 240, 255, 0.75);
 }
 
 .rp-grid span {
-    color: #6b7280;
+    color: #fff;
     margin-right: 6px;
 }
 
@@ -67,15 +73,26 @@
 }
 
 .rp-service.venue {
-    background: #ecfdf5;
+    background: rgba(34, 197, 94, 0.10);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: #22c55e;
 }
 
 .rp-service.dj {
-    background: #f5f3ff;
+    background: rgba(124, 58, 237, 0.18);
+    border-color: #7c3aed;
+    color: #7c3aed;
+}
+
+.rp-service.photo {
+    background: rgba(11, 89, 245, 0.18);
+    border: 1px solid #0b4df5;
 }
 
 .rp-service.decor {
-    background: #fdf2f8;
+    background: rgba(198, 58, 237, 0.18);
+    border-color: #c03aed;
+    color: #c03aed;
 }
 
 .rp-icon {
@@ -85,7 +102,7 @@
     display: grid;
     place-items: center;
     font-weight: 900;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .rp-service-body {
@@ -111,19 +128,20 @@
 }
 
 .rp-notes {
-    width: 100%;
+    width: 97%;
     min-height: 90px;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(10, 14, 38, 0.55);
+    color: #ffffff;
     padding: 12px;
     outline: none;
     resize: vertical;
 }
-
 .rp-total {
     margin-top: 14px;
-    background: #eef2ff;
-    border: 1px solid #e0e7ff;
+    background: rgba(245, 158, 11, 0.18);
+    border: 1px solid #f59e0b;
     border-radius: 12px;
     padding: 16px;
     display: flex;
@@ -138,14 +156,14 @@
 }
 
 .rp-total-sub {
-    color: #6b7280;
+    color: #ffff;
     font-weight: 700;
     font-size: 12px;
 }
 
 .rp-total-price {
     font-weight: 900;
-    color: #7c3aed;
+    color: #f59e0b;
     font-size: 22px;
 }
 
@@ -159,6 +177,7 @@
     margin-left: 8px;
     padding: 8px 10px;
     border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid #e5e7eb;
     outline: none;
     width: 180px;

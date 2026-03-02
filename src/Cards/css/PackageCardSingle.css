@@ -22,6 +22,7 @@
     font-size: 28px;
     font-weight: 800;
     letter-spacing: 0.2px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .sng-header-sub {
@@ -49,6 +50,7 @@
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 18px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -65,6 +67,7 @@
     color: rgba(234, 240, 255, 0.75);
     margin-bottom: 8px;
     display: block;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -209,6 +212,7 @@
     font-size: 14px;
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .txt-textarea::placeholder {
@@ -224,6 +228,7 @@
 
 .ser-section-title,
 .note-section-title {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 800;
     margin: 26px 0 14px;
@@ -259,17 +264,20 @@
 }
 
 .se-service-title {
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 800;
     letter-spacing: 0.2px;
 }
 
 .se-service-sub {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: rgba(234, 240, 255, 0.68);
 }
 
 
 .t-total {
+    font-family: Arial, Helvetica, sans-serif;
     margin-top: 26px;
     padding: 22px;
     border-radius: 16px;
@@ -302,7 +310,6 @@
     font-weight: 900;
     letter-spacing: 0.3px;
 }
-
 
 .cb-continue {
     background: linear-gradient(90deg, #6d28d9, #7c3aed);
@@ -386,6 +393,7 @@
 
 
 @media (max-width: 768px) {
+
     .ed-row,
     .d-row {
         flex-direction: column;
