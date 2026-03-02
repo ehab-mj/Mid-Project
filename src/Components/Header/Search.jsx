@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import filterIcon from "./filter.png";
 import filterIcon from "../../assets/filter.png"
 import "./css/Search.css";
-import ShowSearch from "./Showsearch";
+import ShowSearch from "./ShowSearch";
 
 export default function Search() {
     const navigate = useNavigate();
