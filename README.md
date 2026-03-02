@@ -122,7 +122,8 @@ User gets the final status.
 ---
 
 ### Homepage
-![Homepage](assets/homepage.png)
+![Homepage](screenshots/homepage.png)
+<img src="screenshots/homepage.png" width="700" />
 
 ### Services Page
 ![Services](screenshots/services.png)
