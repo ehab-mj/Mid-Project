@@ -4,14 +4,12 @@ import Services_Tabs from '../Components/Main/Services/ServicesCategory/Services
 import { listenByCategory } from '../Components/Main/Services/ServicesCategory/Services_Category';
 import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
 import './css/ServicesPage.css'
-
-
 export default function ServicesPage() {
     const location = useLocation();
     const navigate = useNavigate();
 
     const [selectedCategory, setSelectedCategory] = useState("music");
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState([]);          // unified state — music OR decor OR photo ...
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -89,26 +87,23 @@ export default function ServicesPage() {
     };
 
     return (
-        <div className="sp-page">
-            <div className='sp-container'>
-                <header className='sp-header'>
-                    <h1 className="sp-title">All Event Services</h1>
-                    <p className="sp-subtitle">Browse our complete catalog of event services</p>
-                </header>
-                <Services_Tabs
-                    items={categories}
-                    selectedCategory={selectedCategory}
-                    handleCategoryClick={handleCategoryClick}
-                />
+        <div className="categories-wrapper">
+            <h1 className="title">All Event Services</h1>
+            <p className="subtitle">Browse our complete catalog of event services</p>
 
-                <Services_Content
-                    selectedCategory={selectedCategory}
-                    items={items}
-                    loading={loading}
-                    error={error}
-                    categoryItems={categories}
-                />
-            </div>
+            <Services_Tabs
+                items={categories}
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+            />
+
+            <Services_Content
+                selectedCategory={selectedCategory}
+                items={items}
+                loading={loading}
+                error={error}
+                categoryItems={categories}
+            />
         </div>
     );
 }
