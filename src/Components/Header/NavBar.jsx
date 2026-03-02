@@ -80,7 +80,6 @@ export default function NavBar() {
                 </div >
             </nav>
 
-
             {open && (
                 <LoginModal
                     onClose={() => setOpen(false)}
