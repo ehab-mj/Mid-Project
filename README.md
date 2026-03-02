@@ -119,23 +119,6 @@ User gets the final status.
 - Secure authentication
 - Real-time database integration
 
----
-
-## 🖥 Homepage
-<img src="screenshots/homepage.png" width="800" />
-
-### Services Page
-![Services](screenshots/services.png)
-
-### Booking / Package Review
-![Booking Review](screenshots/booking-review.png)
-
-### Provider Dashboard (DJ)
-![DJ Dashboard](screenshots/dj-dashboard.png)
-
-> Tip: Rename your images to match the names above for a clean README.
-
----
 
 ## 🧰 Tech Stack (Example)
 
