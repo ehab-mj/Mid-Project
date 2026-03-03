@@ -130,20 +130,16 @@ export default function ServiceModalPackage({ item, category = "", onClose, onBo
                                 className="btnPrimary"
                                 type="button"
                                 onClick={() => {
-                                    // ✅ CHANGE: close overlay (Search) BEFORE navigating
                                     onBooked?.();
 
-                                    // ✅ CHANGE: navigate using id
                                     if (!safeItem.id) {
                                         console.log("❌ Book failed: missing id", safeItem);
                                         alert("Book failed: missing service id. Check console.");
                                         return;
                                     }
 
-                                    // ✅ CHANGE: navigate first
                                     navigate(`/package/${safeItem.id}`);
 
-                                    // ✅ CHANGE: close modal after navigate
                                     onClose?.();
                                 }}
                                 disabled={!isAvailable}

@@ -4,12 +4,13 @@ import Services_Tabs from '../Components/Main/Services/ServicesCategory/Services
 import { listenByCategory } from '../Components/Main/Services/ServicesCategory/Services_Category';
 import Services_Content from '../Components/Main/Services/ServicesCategory/Services_Content';
 import './css/ServicesPage.css'
+import { listenDjUsersByRole } from '../Components/Main/Services/ServicesCategory/providers';
 export default function ServicesPage() {
     const location = useLocation();
     const navigate = useNavigate();
 
     const [selectedCategory, setSelectedCategory] = useState("music");
-    const [items, setItems] = useState([]);          // unified state — music OR decor OR photo ...
+    const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -27,7 +28,6 @@ export default function ServicesPage() {
         }));
     }, [items, selectedCategory]);
 
-    // Category definitions (used for tabs)
     const categories = useMemo(() => [
         { name: "DJs & Music", icon: "🎵", path: "/music", key: "music", count: counts.music },
         { name: "Decorations", icon: "🪅", path: "/decorations", key: "decoration", count: counts.decoration },
@@ -35,7 +35,6 @@ export default function ServicesPage() {
         { name: "Venues", icon: "🏛️", path: "/venues", key: "venue", count: counts.venue },
     ], [counts]);
 
-    // Get category from URL
     const categoryFromUrl = useMemo(() => {
         const path = location.pathname.replace(/^\//, "");
         const match = categories.find(c => c.path.replace(/^\//, "") === path);
@@ -58,9 +57,13 @@ export default function ServicesPage() {
         const keysToListen =
             selectedCategory === "music" ? ["music", "DJ"] : [selectedCategory];
 
-        const unsubscribers = keysToListen.map((key) =>
-            listenByCategory(
-                key,
+        const unsubscribers = keysToListen.map((key) => {
+            const subscribeFn =
+                String(key).toLowerCase() === "dj"
+                    ? listenDjUsersByRole
+                    : (cb, errCb) => listenByCategory(key, cb, errCb);
+
+            return subscribeFn(
                 (data) => {
                     setItems((prev) => {
                         const map = new Map(prev.map((x) => [x.id, x]));
@@ -73,8 +76,8 @@ export default function ServicesPage() {
                     setError(err.message || `Failed to load ${key} items`);
                     setLoading(false);
                 }
-            )
-        );
+            );
+        });
 
         return () => {
             unsubscribers.forEach((u) => u && u());

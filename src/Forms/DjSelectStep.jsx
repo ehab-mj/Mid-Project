@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css/Decor&Venue.css";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 export default function DjSelectStep({ selectedId = "", onSelect }) {
@@ -14,16 +14,27 @@ export default function DjSelectStep({ selectedId = "", onSelect }) {
                 setLoading(true);
                 setErrorMsg("");
 
-                const colRef = collection(db, "Collection");
-                const snapshot = await getDocs(colRef);
+                const q = query(collection(db, "Users"), where("role", "==", "dj"));
+                const snapshot = await getDocs(q);
 
-                const allDocs = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
+                const djUsers = snapshot.docs.map((docSnap) => {
+                    const u = docSnap.data() || {};
 
-                const djDocs = allDocs.filter((doc) => doc.category === "DJ");
-                setDjs(djDocs);
+                    return {
+                        id: docSnap.id,
+                        ...u,
+
+                        category: "dj",
+
+                        name: u.name || u.title || "DJ Package",
+                        title: u.title || u.name || "DJ Package",
+                        image: u.profileImage || u.image || u.photoURL || u.cover || "",
+                        pricePerHour: u.pricePerHour ?? u.price ?? 0,
+                        location: u.city || u.location || u.area || u.address || "—",
+                    };
+                });
+
+                setDjs(djUsers);
             } catch (err) {
                 setErrorMsg(err.message || "Failed to load DJs");
             } finally {
@@ -61,7 +72,7 @@ export default function DjSelectStep({ selectedId = "", onSelect }) {
 
                     const name = dj.name || dj.title || "DJ Package";
                     const desc = dj.description || dj.desc || dj.bio || "No description available";
-                    const price = dj.pricePerHour || dj.price || 0;
+                    const price = dj.pricePerHour ?? dj.price ?? 0;
                     const location = dj.city || dj.location || dj.area || dj.address || "—";
 
                     return (

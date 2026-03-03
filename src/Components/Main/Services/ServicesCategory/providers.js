@@ -14,6 +14,37 @@ export async function getProvidersByCategory(category) {
         ({ id: d.id, ...d.data() }));
 }
 
+
+export function listenDjUsersByRole(onData, onError) {
+    const q = query(collection(db, "Users"), where("role", "==", "dj"));
+
+    return onSnapshot(
+        q,
+        (snap) => {
+            const data = snap.docs.map((doc) => {
+                const u = doc.data() || {};
+                return {
+                    id: doc.id,
+
+                    category: "dj",
+
+                    title: u.name || u.title || "DJ",
+                    name: u.name || "",
+                    email: u.email || "",
+                    phone: u.phone || "",
+                    image: u.profileImage || u.image || u.photoURL || "",
+
+                    isAvailable: typeof u.isAvailable === "boolean" ? u.isAvailable : true,
+                    ...u,
+                };
+            });
+
+            onData?.(data);
+        },
+        (err) => onError?.(err)
+    );
+}
+
 export function listenProvidersByCategory(category, onData, onError) {
     const colRef = collection(db, "Collection");
     const q = query(colRef,

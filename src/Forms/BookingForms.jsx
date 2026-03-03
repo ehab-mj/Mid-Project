@@ -13,7 +13,6 @@ export default function BookingForms() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    // booking form fields (same style)
     const [form, setForm] = useState({
         eventType: "",
         eventDate: "",      // yyyy-mm-dd
@@ -29,18 +28,38 @@ export default function BookingForms() {
         async function fetchService() {
             try {
                 setError("");
+                setService(null);
+
                 const snap = await getDoc(doc(db, "Collection", serviceId));
-                if (!snap.exists()) {
-                    setError("Service not found.");
+                if (snap.exists()) {
+                    setService({ id: snap.id, ...snap.data() });
                     return;
                 }
-                setService({ id: snap.id, ...snap.data() });
+
+                const userSnap = await getDoc(doc(db, "Users", serviceId));
+                if (userSnap.exists()) {
+                    const u = userSnap.data() || {};
+
+                    setService({
+                        id: userSnap.id,
+                        ...u,
+                        category: "dj",
+                        title: u.title || u.name || "DJ",
+                        name: u.name || u.title || "DJ",
+                        image: u.profileImage || u.image || u.photoURL || "",
+                        isAvailable: typeof u.isAvailable === "boolean" ? u.isAvailable : true,
+                    });
+                    return;
+                }
+
+                setError("Service not found.");
             } catch (e) {
                 console.error(e);
                 setError(e?.message || "Failed to load service.");
             }
         }
-        fetchService();
+
+        if (serviceId) fetchService();
     }, [serviceId]);
 
     const servicePrice = useMemo(() => {
@@ -86,18 +105,15 @@ export default function BookingForms() {
             const dateObj = new Date(dateTimeISO);
             if (Number.isNaN(dateObj.getTime())) return setError("Invalid date/time.");
 
-            // ✅ host id (you said: "sent it to the card id")
             const hostId = service.id;
 
             const bookingData = stripUndefinedDeep({
-                // event info
                 eventType: form.eventType || "",
                 eventDate: Timestamp.fromDate(dateObj),
                 durationHours: Number(form.durationHours || 0),
                 numberOfGuests: Number(form.numberOfGuests || 0),
                 notes: form.notes || "",
 
-                // ✅ chosen service
                 service: {
                     id: service.id,
                     title: service.title || service.name || "Service",
@@ -106,14 +122,9 @@ export default function BookingForms() {
                 },
 
                 totalPrice: Number(total || 0),
-
-                // status
                 status: "pending",
-
-                // ✅ routing to provider/host
                 hostId: hostId,
 
-                // user
                 userId: AuthUser?.email || "",
                 userEmail: AuthUser?.email || "",
 
